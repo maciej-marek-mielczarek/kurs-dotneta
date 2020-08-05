@@ -1,0 +1,17 @@
+How to create your first C# program on a Linux.
+1. Install a ".NET Core SDK"
+2. Check that it's correctly installed: Type 'dotnet' in terminal.
+3. If it displays some info about dotnet, continue, else go back to step 1.
+4. Type 'dotnet new console -o myApp'.
+This creates a "Hello World" console application in a directory called myApp.
+5. cd myApp
+dotnet run
+It's just a "Hello World", but it still takes a while to run.
+
+How to create more programs:
+1. dotnet new console -o programName
+2. edit the file ./programName/Program.cs
+
+How to run them:
+1. go to directory 'programName'
+2. dotnet run

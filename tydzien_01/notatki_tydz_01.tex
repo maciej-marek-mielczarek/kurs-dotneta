@@ -1,0 +1,123 @@
+\documentclass[10pt]{article}
+
+\usepackage[utf8]{inputenc} % linux
+%\usepackage[cp1250]{inputenc} % windows
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{polski}
+\usepackage[polish]{babel}
+
+\setlength{\parskip}{1em}
+
+\title{Notatki do 1. tygodnia kursu Dotneta}
+\author{Maciek Mielczarek}
+
+\begin{document}
+
+\maketitle
+
+
+\section{Co ja czytam?}
+
+W tej serii dokumentów zamierzam opisywać drobne problemy pojawiające się podczas przerabiania kursu, w miarę możliwości razem z rozwiązaniami. Będą tu też opisy tego co robię inaczej na Linuxie niż na Windowsie. Staram się nie zakładać, że świetnie znasz język angielski.
+
+
+\section{Instalacja}
+
+Problem:
+\begin{itemize}
+\item Mam już zainstalowane Visual Studio Community i okazało się że to wersja demonstracyjna, tylko na 30 dni.
+\end{itemize}
+Rozwiązanie:
+\begin{itemize}
+\item Zaloguj się do swojego konta Microsoft w Visual Studiu, aby zmienić licencję. Odpowiednie miejsce do logowania to $"$Help -> About Microsoft Visual Studio -> License status (w górnym prawym rogu nowego okna)$"$. Jeśli nie masz konta Microsoft, to je stwórz.
+\end{itemize}
+
+
+Problem:
+\begin{itemize}
+\item Chcę przerabiać ten kurs na Linuxie (albo Macu), ale nie ma Visual Studia na Linuxa (ani Maca).
+\end{itemize}
+Rozwiązanie:
+\begin{itemize}
+\item Rzeczywiście, nie ma. Są jednak inne IDE, jak VS Code i Monodevelop. Mój główny system to Linux i na nim również (mam też dostęp do Windowsa) będę się starał wykonywać zadania z kursu i opisywać związane z tym problemy. Jeśli więc masz zamiar przerabiać kurs na Linuxie, to wiedz, że nie jesteś z tym sam(a). O Macach się nie wypowiadam, bo nie mam żadnego pod ręką żeby cokolwiek na nim sprawdzać.
+\end{itemize}
+
+Problem:
+\begin{itemize}
+\item To co w końcu mam zainstalować na Linuxie?
+\end{itemize}
+Rozwiązanie:
+\begin{itemize}
+\item VS Code,
+\item Monodevelop,
+\item Azure Data Studio (chyba mniejwięcej odpowiednik SQL Server Management Studio),
+\item Postman.
+\end{itemize}
+
+\section{Hello World}
+
+\subsection{...bez IDE}
+
+Jak stworzyć i uruchomić swój pierwszy program w C\# na Linuxie:
+\begin{enumerate}
+\item Zainstaluj $"$.NET Core SDK$"$
+\item Sprawdź, czy jest zainstalowane: Wpisz w terminalu $"$dotnet$"$.
+\item Jeśli wyświetlą się jakieś informacje o dotnecie, to kontynuuj, w przeciwnym przypadku wróć do kroku 1.
+\item Wpisz $"$dotnet new console -o myApp$"$.\\
+To stworzy aplikację konsolową $"$Hello World$"$ w folderze myApp.
+\item cd myApp\\
+dotnet run
+\end{enumerate}
+Trochę cierpliwości. To wprawdzie tylko $"$Hello World$"$, ale i tak uruchamianie chwilę trwa.
+
+Jak stworzyć więcej programów konsolowych:
+\begin{enumerate}
+\item dotnet new console -o nazwaProgramu
+\item Edytuj plik ./nazwaProgramu/Program.cs
+\end{enumerate}
+
+Jak je uruchomić:
+\begin{enumerate}
+\item Przejdź do folderu $"$nazwaProgramu$"$
+\item dotnet run
+\end{enumerate}
+
+\subsection{...w Monodevelopie}
+
+\begin{enumerate}
+\item Wejdź w File -> New Solution.
+\item Wybierz $"$App$"$ pod $"$.NET Core$"$.
+\item Wybierz $"$Console Application$"$ i kliknij next.
+\item Odznacz $"$Create a project directory within the solution directory$"$, aby uzyskać strukturę folderów taką jak na kursie. Kliknij create.
+\item Wybierz z menu Run -> Run without debugging.
+\end{enumerate}
+
+Jeśli program nie zadziała (to jest nie zobaczysz okienka z napisem $"$Hello World!$"$) i zobaczysz wiadomość podobną do tej:
+\begin{quote}
+It was not possible to find any compatible framework version\\
+The framework 'Microsoft.NETCore.App', version '1.1.2' was not found.\\
+\hspace*{2em}- The following frameworks were found:\\
+\hspace*{6em}3.1.6 at [/usr/share/dotnet/shared/Microsoft.NETCore.App],
+\end{quote}
+to kliknij File -> Close Solution, następnie otwórz plik /HelloWorld/HelloWorld.csproj i w linii:\\
+<TargetFramework>netcoreapp1.1</TargetFramework>\\
+zmień numer $"$1.1$"$ (bo w komunikacie o błędzie jest $"$wersja 1.1.coś nie została znaleziona$"$) na $"$3.1$"$ (bo w komunikacie zaraz potem jest $"$znaleziono (...) 3.1.coś$"$). Potem każ Monodevelopowi otworzyć zamknięte przed chwilą rozwiązanie i ponownie wykonaj ostatni krok (Run -> Run without debugging). Teraz powinno zadziałać.
+
+\section{Praca z IDE}
+
+W Monodevelopie tworzenie nowych, pustych klas przebiega tak jak w VS, natomiast w konsoli wśród komend $"$dotnet new...$"$ nie ma takiej tworzącej pustą klasę. Stworzenie odpowiedniego szablonu przypisującego  nowemu plikowi i klasie nazwę najwyraźniej nie jest trywialne. Jeśli będę tworzył dużo nowych, pustych klas, to może napiszę do tego jakiś skrypt w bashu.
+
+Breakpointy w Monodevelopie nie działają i nie udało mi się ich uruchomić. Gdy będę chciał poznać wartości jakichś zmiennych w jakimś miejscu programu, to zawsze mogę je wprost wypisać.
+
+Wracam do VS. Nie widziałem narzędzi diagnostycznych, ale kliknięcie w Debug -> Windows -> Show Diagnostic Tools podczas działania programu włącza je.
+
+\section{Kompilowanie}
+
+Ciekawe jak to wygląda z kompatybilnością? Sprawdzam... Pliki wykonywalne przenoszone między Windowsem a Linuxem oczywiście nie działają i Wine automagicznie tego nie zmienia. Projekty kopiowane między systemami otwierają i uruchamiają się natomiast bez problemów.
+
+\section{Debugowanie}
+
+Zauważyłem, że podczas debugowania widoczne są zmienne, które zostaną stworzone dopiero za kilka linijek. Sprawdziłem, że schowanie tych kolejnych linijek w nawiasie klamrowym chowa te zmienne przed debuggerem do momentu wejścia do środka tego nawiasu.
+
+\end{document}
