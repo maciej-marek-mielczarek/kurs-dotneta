@@ -1,0 +1,37 @@
+Na razie aplikacja konsolowa, bez grafiki.
+
+(?) - rzecz o dyskusyjnej sensowności albo do zrobienia ewentualnie później; w każdym razie do przemyślenia
+
+Potrzebne funkcjonalności:
+ - wyświetl stan planszy
+ - wczytaj ruch gracza ludzkiego
+ - wykonaj ruch
+ - wymyśl ruch gracza komputerowego (możliwe różne poziomy trudności)
+ - sprawdzaj warunki wygranej/przegranej/remisu
+ - wybierz rozmiar planszy(?)
+ - wybierz warunki wygranej(?) (np. plansza 5x5 ale potrzebna długość linii = 4)
+ - dodatkowe ograniczenia(?) (np. gra "connect 4")
+ - w razie nielegalnego ruchu spytaj ponownie o ruch i wyświetl podpowiedź
+ - zakończ program/rozpocznij kolejną rozgrywkę
+ - możliwość rozbudowy na większą liczbę graczy
+ - obserwowanie rozgrywki między komputerami
+ - wyświetlanie kolejnego ruchu w grze ai vs ai dopiero po interakcji z użytkownikiem albo od razu (opcje)
+ - wpisywanie nazwy gracza
+ - wyświetlanie tablicy wyników(?)
+ - zapisywanie i wczytywanie stanu gry(?)
+ - zapisywanie całej rozgrywki(?)
+ - cofanie ruchu(?)
+ - limit czasu na ruch(?)
+
+Potrzebne obiekty:
+ - gracz:
+  - człowiek
+  - komputer:
+   - łatwy
+   - trudny
+ - plansza
+ - gra - ma planszę, graczy i sędziego, w funkcji Main będą w pętli tworzone nowe gry aż użytkownik powie dość
+  - zapis rozgrywki(?)
+ - podpowiedź(?)
+ - sędzia(?) - sprawdza legalność ruchu (ewentualnie tworzy podpowiedź), sprawdza warunki wygranej, przegranej i remisu
+ - tablica wyników(?)
