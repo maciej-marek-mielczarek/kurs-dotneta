@@ -46,4 +46,12 @@ W tym projekcie na ekranie głównym nie widzę zapotrzebowania na enumy (kolejn
 Typ gracza komputerowego (łatwy/trudny) będzie enumem, więc pododaję klasy odpowiedzialne za typy graczy. Przy definiowaniu zależności między klasami jest parę słów kluczowych, których nie wiem czy dobrze używam, ale sprawdzę to przy okazji jakiegoś tematu o klasach. W VS łatwo tworzy się nowe klasy i interfejsy (kliknięcie na folder w Eksploratorze Rozwiązania -> dodaj nową pustą klasę/interfejs).
 
 Niemal równie łatwo zapomnieć zmienić aktywną gałąź przy zaczynaniu nowego tematu.
+\section{Typy referencyjne, stos i sterta}
+Wiedziałem co to są typy referencyjne, ale nie wiedziałem co to stos i sterta. Rzeczy do sprawdzenia za chwilę:
+\begin{itemize}
+\item jak długi string mogę stworzyć
+\item czy zarówno $\backslash$r$\backslash$n jak i $\backslash$n działają tak samo na Windowsie i Linuksie
+\end{itemize}
+
+Przy próbie stworzenia stringa długości $2^{30}$ program wywraca się z braku pamięci. W obu przypadkach $\backslash$r$\backslash$n i $\backslash$n przechodzą na początek nowej linii, a samo $\backslash$r wraca na początek bieżącej linii i kolejny napis nadpisuje początek tej linii. Czas na zadania.
 \end{document}
