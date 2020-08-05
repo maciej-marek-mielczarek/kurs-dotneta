@@ -30,4 +30,13 @@ Nie wiem co wybrać, więc rzucę kostką. Na początek właściwe losowanie prz
 Pierwszy rzut: 5. Drugi rzut: 3. To odpowiada liczbie 23, czyli grze w kółko i krzyżyk. To prawdopodobnie najprostszy temat, ale ponieważ istnieje wiele oczywistych wariantów tej gry, to będę mógł sprawdzić czy zaplanowałem i napisałem kod w taki sposób, żeby aplikację dało się rozwijać.
 
 Skoro już jestem przy temacie rzucania kostką, to sprawdzę jak się losuje liczby w C\# i odtworzę powyższą sytuację w kodzie. Pewnie wiele rzeczy jest nie na swoim miejscu lub zrobionych dziwnie, ale kod jest przetestowany i działa. Można go znaleźć \href{https://github.com/maciej-marek-mielczarek/kurs-dotneta/tree/master/tydzien\_02/Dices}{tutaj}.
+
+\section{Start projektu, ekran startowy}
+Projekt wybrany, czas stworzyć dla niego repozytorium na gicie i zacząć go robić. Do nauki lub przypomnienia sobie gita polecam \href{https://learngitbranching.js.org/}{to miejsce}.
+
+Na początku utworzyłem przy użyciu przeglądarki repozytorium do notatek i kodu z całego kursu. Następnie sklonowałem je i przeniosłem do stworzonego w ten sposób folderu już utworzone pliki. Następnie użyłem w tym folderze komendy $"$dotnet new gitignore$"$ (ktoś chyba o tym wspomniał w okolicach tego kursu) i dodałem do nowego pliku kilka linii odpowiadających plikom pośrednim LaTeX-a. Potem kilka komend żeby wrzucić wszystko na Githuba, w razie błędów git podpowiadał co jest nie tak. To na Linuksie.
+
+Na Windowsie klonowałem z poziomu Visual Studia. Zalogowałem się przy tym do Githuba z poziomu VS, dzięki czemu nie muszę wpisywać loginu i hasła przy każdym commicie. Następnie stworzyłem nowe Rozwiązanie (Solution) w pożądanym miejscu. Gdy już miałem otwarte w VS Rozwiązanie w folderze śledzonym przez Gita, to wszystko co Gitowe znalazłem w VS po środku prawej strony, po kliknięciu w napis $"$Team Explorer$"$ obok napisu $"$Solution Explorer$"$.
+
+W pierwszej wersji programu (lekcja 2.) jest tylko ekran startowy z którego można wyjść. Zadbałem o to, żeby były tam już jakieś zmienne i stałe. O, jednak nie muszę ręcznie zamieniać stringów na inty, tak jak to robiłem w zabawie z kostkami powyżej. Tak mi się wydawało, że gdzieś w C\# powinno być coś takiego jak Int32.Parse, czy tam TryParse, ale zanim to znalazłem, napisałem już swoją wersję (tylko bez obsługi błędów).
 \end{document}
