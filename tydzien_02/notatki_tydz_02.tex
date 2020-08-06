@@ -46,6 +46,7 @@ W tym projekcie na ekranie głównym nie widzę zapotrzebowania na enumy (kolejn
 Typ gracza komputerowego (łatwy/trudny) będzie enumem, więc pododaję klasy odpowiedzialne za typy graczy. Przy definiowaniu zależności między klasami jest parę słów kluczowych, których nie wiem czy dobrze używam, ale sprawdzę to przy okazji jakiegoś tematu o klasach. W VS łatwo tworzy się nowe klasy i interfejsy (kliknięcie na folder w Eksploratorze Rozwiązania -> dodaj nową pustą klasę/interfejs).
 
 Niemal równie łatwo zapomnieć zmienić aktywną gałąź przy zaczynaniu nowego tematu.
+
 \section{Typy referencyjne, stos i sterta}
 Wiedziałem co to są typy referencyjne, ale nie wiedziałem co to stos i sterta. Rzeczy do sprawdzenia za chwilę:
 \begin{itemize}
@@ -54,4 +55,57 @@ Wiedziałem co to są typy referencyjne, ale nie wiedziałem co to stos i sterta
 \end{itemize}
 
 Przy próbie stworzenia stringa długości $2^{30}$ program wywraca się z braku pamięci. W obu przypadkach $\backslash$r$\backslash$n i $\backslash$n przechodzą na początek nowej linii, a samo $\backslash$r wraca na początek bieżącej linii i kolejny napis nadpisuje początek tej linii. Czas na zadania.
+
+\section{Zadanie domowe z typów danych}
+Przy okazji tych zadań trochę sobie eksperymentuję. Zauważyłem, że gdy zaczynam nazwy folderów od cyfry, to automatycznie generowana przez dotneta przestrzeń nazw ma na początku znak $"$\_$"$. Może nie powinienem tego robić?
+
+Przypomnienie stylu (do sprawdzenia w zadaniu domowym) z lekcji 1.9: 
+
+Wielkości liter:
+\begin{itemize}
+\item stałe wielkimi literami, słowa oddzielone znakiem $"$\_$"$,
+\item pliki, klasy, przestrzenie nazw i metody(funkcje) z wielkiej litery,
+\item zmienne lokalne i elementy prywatne programu z małej litery,
+\item słowa zaczynające się w środku nazwy zawsze z wielkiej litery,
+\item cała reszta małymi literami.
+\end{itemize}
+Nie ma tu nic o zaczynaniu nazwy katalogu od cyfry.
+
+Inne:
+\begin{itemize}
+\item Początek nawiasu klamrowego od nowej linii.
+\item Max. jedna nowa linia między metodami/instrukcjami.
+\item Zawsze pisać modyfikator dostępu klas metod i pól (nie dotyczy zmiennych w metodach; tego pewnie w paru miejscach zapomniałem).
+\item Jedna klasa na plik.
+\item Brak typu zmiennej w nazwie, ale interfejsy zaczynają się od I.
+\end{itemize}
+
+\subsection{Zadanie 1.}
+Zamiana stringa na zbiór cyfr w moim wykonaniu wygląda dość topornie -- w pętli zajmuję się po kolei każdą cyfrą zamiast zawołać jakąś funkcję, która zrobiłaby to w 1 linijce. Zamiana chara na enuma też wygląda na dłuższą niż potrzeba.
+
+\subsection{Zadanie 2.}
+W zadaniu drugim chyba chodziło po prostu o 3 chary, ale nie byłem tego całkiem pewny, więc postanowiłem sprawdzić czy w C\# używa się wskaźników.
+
+Wygląda na to, że wszystkie użycia wskaźników trzeba oznaczyć jako kod niebezpieczny. Także raczej nie jest to szeroko stosowany element języka.
+
+W każdym razie, udało mi się stworzyć 3 zmienne $"$a$"$, wszystkie typu char (potem zapisać sobie ich adresy), a następnie wypisać dokładnie te zmienne (bez żadnego kopiowania wartości) w kolejności odwrotnej do kolejności tworzenia. Pomocne były tu nawiasy klamrowe, użyte do schowania jednych zmiennych przed drugimi.
+
+Przypuszczam, że takie dodatkowe nawiasy czasem się stosuje do ograniczenia czasu życia lokalnych zmiennych.
+
+\subsection{Zadanie 3.}
+Tym razem postanowiłem sprawdzić jak przekazuje się do programu argumenty wywołania.
+
+Przy wołaniu z linii komend po prostu wpisuje się je na końcu komendy wywołującej program, za dwoma średnikami. Znak ten oddziela argumenty dla dotneta od argumentów dla programu.
+
+W VS opcja ta jest dostępna we właściwościach projektu (Solution Explorer -> nazwa projektu -> Alt + Enter -> Debug). Okienko to zamyka się w górnym lewym rogu.
+
+\subsection{Zadanie 4.}
+W tych zadaniach zauważałem czasem działające typy podstawowe pisane zarówno z wielkiej jak i z małej litery. O co chodzi?
+
+Z tego co znalazłem, te pisane z małej to aliasy (inne nazwy) tych pisanych z wielkiej i z wyjątkiem typu enuma można ich używać zamiennie.
+
+\subsection{Zadanie 5.}
+Tutaj próbowałem powrzucać trochę kodu parsującego różne zmienne do jednej pętli, ale nie wychodziło mi używanie typu jako zmiennej. Poza tym, kod dla różnych typów zmiennych nie był taki sam bo parsowanie stringa do tablicy cyfr robi się inaczej niż do jednej liczby, a string w ogóle nie ma metody Parse (niezbyt zaskakujące, parsowanie stringa do stringa nie miałoby sensu).
+
+Udało się tylko wypisać dane w pętli (żeby nie powtarzać kodu). Pomogła tu możliwość wsadzenia różnych typów zmiennych do jednej tablicy, jako zmiennych uniwersalnego typu object (znanym też jako Object).
 \end{document}
