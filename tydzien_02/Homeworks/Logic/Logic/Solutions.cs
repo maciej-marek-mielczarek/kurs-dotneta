@@ -51,7 +51,31 @@ namespace Logic
 
         public static void Exercise04()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Write a year (number) and I'll tell you if it's a leap year.");
+            int year = int.Parse(Console.ReadLine());
+            if(year <= 1582 )
+            {
+                Console.WriteLine("I don't know by which Calendar. Gregorian Calendar did not exist until late 1582.");
+            }
+            else
+            {
+                int currentYear = DateTime.Today.Year;
+                bool isLeapYear;
+                if(year % 400 == 0)
+                {
+                    isLeapYear = true;
+                }
+                else if(year % 100 == 0)
+                {
+                    isLeapYear = false;
+                }
+                else
+                {
+                    isLeapYear = year % 4 == 0;
+                }
+                Console.Write($"{year} {(year < currentYear ? "was" : (year > currentYear ? "will" : "is"))} ");
+                Console.WriteLine($"{(isLeapYear ? "" : "not ")}{(year > currentYear ? "be " : "")}a leap year");
+            }
         }
 
         public static void Exercise03()
