@@ -66,7 +66,17 @@ namespace Logic
 
         public static void Exercise01()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Write 2 integer numbers and I'll check if they're equal.");
+            int a = int.Parse(Console.ReadLine()), b = int.Parse(Console.ReadLine());
+            Console.Write($"Numbers {a} and {b} are ");
+            if (a == b)
+            {
+                Console.WriteLine("equal.");
+            }
+            else
+            {
+                Console.WriteLine("not equal.");
+            }
         }
     }
 }
