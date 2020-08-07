@@ -108,4 +108,20 @@ Z tego co znalazłem, te pisane z małej to aliasy (inne nazwy) tych pisanych z 
 Tutaj próbowałem powrzucać trochę kodu parsującego różne zmienne do jednej pętli, ale nie wychodziło mi używanie typu jako zmiennej. Poza tym, kod dla różnych typów zmiennych nie był taki sam bo parsowanie stringa do tablicy cyfr robi się inaczej niż do jednej liczby, a string w ogóle nie ma metody Parse (niezbyt zaskakujące, parsowanie stringa do stringa nie miałoby sensu).
 
 Udało się tylko wypisać dane w pętli (żeby nie powtarzać kodu). Pomogła tu możliwość wsadzenia różnych typów zmiennych do jednej tablicy, jako zmiennych uniwersalnego typu object (znanym też jako Object).
+
+\section{Instrukcje warunkowe}
+Chyba wszystko tu działa jak w C++, więc ten materiał mam już przyswojony.
+
+Może warto później sprawdzić czy są $"$krótkie spięcia$"$ w \&\& i ||. I czy jest w C\# coś takiego jak Javovy try--catch z zasobami.
+
+Ify w naturalny sposób pojawią się w aplikacji. Warto upewnić się że przynajmniej raz będzie wybór między więcej niż dwoma opcjami, żeby pojawił się jakiś switch. Mam już 3 opcje w pierwszym menu, więc ta sprawa jest już załatwiona.
+
+O, czegoś takiego jak $"$przełącznik wyrażeniowy$"$ chyba nie widziałem jeszcze w żadnym języku. Prawdopodobnie konstrukcja ta będzie miała jakieś naturalne zastosowanie w aplikacji, wystarczy tylko pamiętać o jej istnieniu. Do przećwiczenia jeśli nie pojawi się w najbliższych zadaniach.
+
+\section{Operatory}
+Tu bez niespodzianek. $"$Krótkie spięcia$"$ istnieją, czyli nie będę potrzebował tego sprawdzać.
+
+Jeśli są w C\# operatory dla klas, to temat pewnie powróci przy klasach.
+
+Przy używaniu operatorów niematematycznych, takich jak kropka, nawias kwadratowy czy rzutowanie naturalne jest tworzenie nadmiaru nawiasów. Jak zobaczę jakiś nadmiar nawiasów, to sprawdzę czy VS proponuje posprzątanie tego bałaganu. Właściwie, to czy w C\# to też są operatory? Jestem prawie pewien że tak, (bo co innego miałoby to być) ale dopóki nie tworzę operatorów do własnych klas (o ile język to przewiduje), ta kwestia nie będzie istotna.
 \end{document}
