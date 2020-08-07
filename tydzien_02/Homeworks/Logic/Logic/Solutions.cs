@@ -56,12 +56,14 @@ namespace Logic
 
         public static void Exercise03()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Write 1 integer number and I'll check if it's positive or negative;");
+            int n = int.Parse(Console.ReadLine());
+            Console.WriteLine($"{n} is {(n > 0 ? "positive" : (n < 0 ? "negative" : "zero"))}");
         }
 
         public static void Exercise02()
         {
-            Console.WriteLine("Write 1 intege number and i'll check if it's odd or even.");
+            Console.WriteLine("Write 1 integer number and i'll check if it's odd or even.");
             int number = int.Parse(Console.ReadLine());
             Console.WriteLine($"{number} is {((number % 2) == 0 ? "even" : "odd")}");
         }
