@@ -26,7 +26,39 @@ namespace Logic
 
         public static void Exercise09()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("What temperature is it now?");
+            sbyte temp = GetSByte();
+            string response;
+            if(temp < 0)
+            {
+                response = "Cold as Hell!";
+            }
+            else if(temp < 10)
+            {
+                response = "Chill.";
+            }
+            else if(temp < 20)
+            {
+                response = "Cool.";
+            }
+            else if(temp < 30)
+            {
+                response = "Perfect.";
+            }
+            else if(temp < 40)
+            {
+                response = "I wish it wasn't so hot.";
+            }
+            else
+            {
+                response = "Screw this, I'm moving to Alaska.";
+            }
+            Console.WriteLine(response);
+        }
+
+        private static sbyte GetSByte()
+        {
+            return sbyte.Parse(Console.ReadLine());
         }
 
         public static void Exercise08()
@@ -35,11 +67,11 @@ namespace Logic
             Console.WriteLine("Write 0 if you didn't take an exam.");
             
             Console.Write("Mathematics: ");
-            byte math = getByte();
+            byte math = GetByte();
             Console.Write("Physics: ");
-            byte phys = getByte();
+            byte phys = GetByte();
             Console.Write("Chemistry: ");
-            byte chem = getByte();
+            byte chem = GetByte();
 
             if((math > 70 && phys > 55 && chem > 45 && math + phys + chem > 180) || (math + Math.Max(phys, chem) > 150))
             {
@@ -51,7 +83,7 @@ namespace Logic
             }
         }
 
-        private static byte getByte()
+        private static byte GetByte()
         {
             return byte.Parse(Console.ReadLine());
         }
@@ -59,7 +91,7 @@ namespace Logic
         public static void Exercise07()
         {
             Console.WriteLine("Give me 3 integer numbers and 'll check which is heighest.");
-            int a = getInt(), b = getInt(), c = getInt();
+            int a = GetInt(), b = GetInt(), c = GetInt();
             Console.WriteLine(Max3(a, b, c) + " is the heighest of them.");
         }
 
@@ -68,7 +100,7 @@ namespace Logic
             return (a > b ? (a > c ? a : c) : (b > c ? b : c));
         }
 
-        private static int getInt()
+        private static int GetInt()
         {
             return int.Parse(Console.ReadLine());
         }
