@@ -41,7 +41,24 @@ namespace Logic
 
         public static void Exercise06()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Tell me your height in centimeters and I'll tell you which height cathegory you're in.");
+            ushort height = ushort.Parse(Console.ReadLine());
+            string ans = "You're a ";
+            int[] limits = {10000, 300, 200, 120, 80, 0 };
+            string[] namesIfHeigherThanLimit = {"tower", "tree", "giant", "human", "dwarf", "gnome" };
+            for(int conditionNumber = 0; conditionNumber < limits.Length; ++conditionNumber)
+            {
+                if(height > limits[conditionNumber])
+                {
+                    ans += namesIfHeigherThanLimit[conditionNumber];
+                    break;
+                }
+            }
+            if(height == 0)
+            {
+                ans += "dot";
+            }
+            Console.WriteLine(ans + ".");
         }
 
         public static void Exercise05()
