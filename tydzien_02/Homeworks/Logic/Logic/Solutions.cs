@@ -31,7 +31,29 @@ namespace Logic
 
         public static void Exercise08()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Tell me your matura results and I'll check if you were admitted to studies.");
+            Console.WriteLine("Write 0 if you didn't take an exam.");
+            
+            Console.Write("Mathematics: ");
+            byte math = getByte();
+            Console.Write("Physics: ");
+            byte phys = getByte();
+            Console.Write("Chemistry: ");
+            byte chem = getByte();
+
+            if((math > 70 && phys > 55 && chem > 45 && math + phys + chem > 180) || (math + Math.Max(phys, chem) > 150))
+            {
+                Console.WriteLine("Yes, congratulations!");
+            }
+            else
+            {
+                Console.WriteLine("Sorry, not this time.");
+            }
+        }
+
+        private static byte getByte()
+        {
+            return byte.Parse(Console.ReadLine());
         }
 
         public static void Exercise07()
