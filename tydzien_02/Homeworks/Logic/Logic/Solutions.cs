@@ -177,29 +177,34 @@ namespace Logic
         public static void Exercise06()
         {
             Console.WriteLine("Tell me your height in centimeters and I'll tell you which height cathegory you're in.");
-            ushort height = ushort.Parse(Console.ReadLine());
+            ushort height = GetUShort();
             string ans = "You're a ";
-            int[] limits = {10000, 300, 200, 120, 80, 0 };
-            string[] namesIfHeigherThanLimit = {"tower", "tree", "giant", "human", "dwarf", "gnome" };
-            for(int conditionNumber = 0; conditionNumber < limits.Length; ++conditionNumber)
+            int[] limits = { 10000, 300, 200, 120, 80, 0 };
+            string[] namesIfHeigherThanLimit = { "tower", "tree", "giant", "human", "dwarf", "gnome" };
+            for (int conditionNumber = 0; conditionNumber < limits.Length; ++conditionNumber)
             {
-                if(height > limits[conditionNumber])
+                if (height > limits[conditionNumber])
                 {
                     ans += namesIfHeigherThanLimit[conditionNumber];
                     break;
                 }
             }
-            if(height == 0)
+            if (height == 0)
             {
                 ans += "dot";
             }
             Console.WriteLine(ans + ".");
         }
 
+        private static ushort GetUShort()
+        {
+            return ushort.Parse(Console.ReadLine());
+        }
+
         public static void Exercise05()
         {
             Console.WriteLine("Tell me your age and I'll tell you if you can become an MP, PM, Senator or President at this age.");
-            byte age = byte.Parse(Console.ReadLine());
+            byte age = GetByte();
             string rights = "become a Prime Minister";
             //Common sense says that you should probably be a Member of Parliment,
             //or at the very least be an adult to become a Prime Minister,
@@ -235,7 +240,7 @@ namespace Logic
         public static void Exercise04()
         {
             Console.WriteLine("Write a year (number) and I'll tell you if it's a leap year.");
-            int year = int.Parse(Console.ReadLine());
+            int year = GetInt();
             if(year <= 1582 )
             {
                 Console.WriteLine("I don't know by which Calendar. Gregorian Calendar did not exist until late 1582.");
@@ -264,21 +269,21 @@ namespace Logic
         public static void Exercise03()
         {
             Console.WriteLine("Write 1 integer number and I'll check if it's positive or negative;");
-            int n = int.Parse(Console.ReadLine());
+            int n = GetInt();
             Console.WriteLine($"{n} is {(n > 0 ? "positive" : (n < 0 ? "negative" : "zero"))}");
         }
 
         public static void Exercise02()
         {
             Console.WriteLine("Write 1 integer number and i'll check if it's odd or even.");
-            int number = int.Parse(Console.ReadLine());
+            int number = GetInt();
             Console.WriteLine($"{number} is {((number % 2) == 0 ? "even" : "odd")}");
         }
 
         public static void Exercise01()
         {
             Console.WriteLine("Write 2 integer numbers and I'll check if they're equal.");
-            int a = int.Parse(Console.ReadLine()), b = int.Parse(Console.ReadLine());
+            int a = GetInt(), b = GetInt();
             Console.Write($"Numbers {a} and {b} are ");
             if (a == b)
             {
