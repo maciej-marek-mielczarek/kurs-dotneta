@@ -6,7 +6,49 @@ namespace Logic
     {
         public static void Exercise13()
         {
-            throw new NotImplementedException();
+            Console.WriteLine($"This is a simple calculator. Write 2 real numbers, such as {5e-20} and {5d/4d}, and then pick an operation to do on them.");
+            double x = GetDouble(), y = GetDouble(), ans;
+            Console.WriteLine("Pick operation number:");
+            Console.WriteLine("1. Addition");
+            Console.WriteLine("2. Subtraction");
+            Console.WriteLine("3. Multiplication");
+            Console.WriteLine("4. Division");
+            Console.WriteLine("5. Exponentiation");
+            byte operationNum = GetByte();
+            switch (operationNum)
+            {
+                case 1:
+                    ans = x + y;
+                    break;
+                case 2:
+                    ans = x - y;
+                    break;
+                case 3:
+                    ans = x * y;
+                    break;
+                case 4:
+                    if (y == 0)
+                    {
+                        ans = double.NaN;
+                    }
+                    else
+                    {
+                        ans = x / y;
+                    }
+                    break;
+                case 5:
+                    ans = Math.Pow(x, y);
+                    break;
+                default:
+                    ans = double.NaN;
+                    break;
+            };
+            Console.WriteLine("The answer is " + ans);
+        }
+
+        private static double GetDouble()
+        {
+            return double.Parse(Console.ReadLine());
         }
 
         public static void Exercise12()
