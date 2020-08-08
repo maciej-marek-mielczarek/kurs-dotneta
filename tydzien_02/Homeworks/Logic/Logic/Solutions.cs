@@ -36,7 +36,19 @@ namespace Logic
 
         public static void Exercise07()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Give me 3 integer numbers and 'll check which is heighest.");
+            int a = getInt(), b = getInt(), c = getInt();
+            Console.WriteLine(Max3(a, b, c) + " is the heighest of them.");
+        }
+
+        private static int Max3(int a, int b, int c)
+        {
+            return (a > b ? (a > c ? a : c) : (b > c ? b : c));
+        }
+
+        private static int getInt()
+        {
+            return int.Parse(Console.ReadLine());
         }
 
         public static void Exercise06()
