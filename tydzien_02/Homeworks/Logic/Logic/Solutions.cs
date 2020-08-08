@@ -11,7 +11,20 @@ namespace Logic
 
         public static void Exercise12()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Tell me what is the number of today's weekday and I'll tell you its name.");
+            byte dayNum = GetByte();
+            string dayName = dayNum switch
+            {
+                1 => "Monday",
+                2 => "Tuesday",
+                3 => "Wednesday",
+                4 => "Thursday",
+                5 => "Friday",
+                6 => "Saturday",
+                7 => "Sunday",
+                _ => "What kind of Calendar has such days?!"
+            };
+            Console.WriteLine(dayName);
         }
 
         public static void Exercise11()
