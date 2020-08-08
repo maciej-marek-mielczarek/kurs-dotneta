@@ -16,9 +16,20 @@ namespace Logic
 
         public static void Exercise11()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("What mark did you get on The Test?");
+            byte mark = GetByte();
+            string descriptiveMark = mark switch
+            {
+                1 => "Insufficient",
+                2 => "Allowing",
+                3 => "Sufficient",
+                4 => "Good",
+                5 => "Very Good",
+                6 => "Excellent",
+                _ => "That's not a real mark."
+            };
+            Console.WriteLine(descriptiveMark);
         }
-
         public static void Exercise10()
         {
             Console.WriteLine("Give me 3 integer numbers and I'll tell you if you can build a triangle with those sides.");
