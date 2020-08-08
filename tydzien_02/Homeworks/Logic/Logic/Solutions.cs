@@ -21,7 +21,10 @@ namespace Logic
 
         public static void Exercise10()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Give me 3 integer numbers and I'll tell you if you can build a triangle with those sides.");
+            int a = GetInt(), b = GetInt(), c = GetInt();
+            //max smaller than the other 2 == 2*max smaller than all 3
+            Console.WriteLine($"{(2 * Max3(a, b, c) < a + b + c ? "Yes." : "No.")}");
         }
 
         public static void Exercise09()
