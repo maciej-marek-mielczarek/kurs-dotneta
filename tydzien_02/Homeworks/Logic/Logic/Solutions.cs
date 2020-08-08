@@ -46,7 +46,38 @@ namespace Logic
 
         public static void Exercise05()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Tell me your age and I'll tell you if you can become an MP, PM, Senator or President at this age.");
+            byte age = byte.Parse(Console.ReadLine());
+            string rights = "become a Prime Minister";
+            //Common sense says that you should probably be a Member of Parliment,
+            //or at the very least be an adult to become a Prime Minister,
+            //but the Constitution doesn't specify that.
+            //So... I guess the only thing protecting us from a 5-year-old PM is the President's and Parliment's sanity?
+            if(age < 18)
+            {
+                rights += ", but can't vote yet";
+            }
+            else
+            {
+                rights += ", can vote in elections and become a City Councilor";
+            }
+            if (age >= 21)
+            {
+                rights += " or a Member of Parliment or European Parliment";
+            }
+            if(age >= 25)
+            {
+                rights += " or a City Mayor";
+            }
+            if(age >= 30)
+            {
+                rights += " or a Senator";
+            }
+            if(age >= 35)
+            {
+                rights += " or a President";
+            }
+            Console.WriteLine("At this age, you can " + rights + ".");
         }
 
         public static void Exercise04()
