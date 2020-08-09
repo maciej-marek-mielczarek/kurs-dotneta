@@ -34,7 +34,18 @@ namespace Loops
 
         internal static void Ex02()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("I shall write all even numbers from 0 to 1000.");
+            ushort n = 0, max = 1000;
+            do
+            {
+                if (n % 2 == 0)
+                {
+                    Console.Write(n + (n == max ? "" : ", "));
+                }
+            } while (++n <= max);
+            //preincrement: first increase n,
+            //then check the condition with the increased n
+            Console.WriteLine();
         }
 
         internal static void Ex03()
