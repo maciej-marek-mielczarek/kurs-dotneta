@@ -209,7 +209,24 @@ namespace Loops
 
         internal static void Ex09()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Write a positive integer decimal number,\nand I'll return it's binary representation.");
+            Console.WriteLine("Please keep your number down to " + ulong.MaxValue);
+            ulong input = GetULong();
+            string output = "";
+            while(input > 0)
+            {
+                //probably much faster
+                //to add new chars on the other side and then reverse
+                //but the time of communicating with a human makes that irrelevant
+                output = (input % 2) + output;
+                input /= 2;
+            }
+            Console.WriteLine(output);
+        }
+
+        private static ulong GetULong()
+        {
+            return ulong.Parse(Console.ReadLine());
         }
 
         internal static void Ex10()
