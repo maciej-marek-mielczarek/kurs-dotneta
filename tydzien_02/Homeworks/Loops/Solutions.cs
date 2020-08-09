@@ -231,7 +231,44 @@ namespace Loops
 
         internal static void Ex10()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Give me 2 numbers and I'll find their lowest common multiple.");
+            Console.WriteLine("Your numbers should be non-negative and no larger than " + uint.MaxValue);
+            uint a = GetUInt(), b = GetUInt();
+            ulong lcm;
+            if (a == 0 && b == 0)
+            {
+                lcm = 0;
+            }
+            else
+            {
+                lcm = (ulong)a * (ulong)b / (ulong)GCD(a, b);
+            }
+            Console.WriteLine($"LCM of {a} and {b} is " + lcm);
+        }
+
+        private static uint GCD(uint a, uint b)
+        {
+            if (a == 1 || b == 1)
+            {
+                return 1;
+            }
+            else if (a == 0 || b == 0)
+            {
+                return a + b;
+            }
+            else if (a > b)
+            {
+                return GCD(b, a % b);
+            }
+            else
+            {
+                return GCD(a, b % a);
+            }
+        }
+
+        private static uint GetUInt()
+        {
+            return uint.Parse(Console.ReadLine());
         }
     }
 }
