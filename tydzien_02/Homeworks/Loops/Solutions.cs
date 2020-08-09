@@ -111,7 +111,17 @@ namespace Loops
 
         internal static void Ex05()
         {
-            throw new NotImplementedException();
+            const int min = 1, max = 20;
+            Console.WriteLine($"I shall display the cubes of numbers from {min} to {max}.");
+            for(int n = min; n <= max; ++n)
+            {
+                Console.WriteLine(Cube(n));
+            }
+        }
+
+        private static int Cube(int n)
+        {
+            return n * n * n;
         }
 
         internal static void Ex06()
