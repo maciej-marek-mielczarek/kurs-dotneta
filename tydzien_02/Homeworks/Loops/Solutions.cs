@@ -167,7 +167,44 @@ namespace Loops
 
         internal static void Ex08()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Please write something and I'll write it back in reverse.");
+            string input = Console.ReadLine(), output = "";
+            if (input.Length < 2)
+            {
+                output = input;
+            }
+            else
+            {
+                //There arre special rules for 1st and last char
+                char firstChar = input[0], lastChar = input[input.Length - 1];
+                if (char.IsLower(lastChar) && char.IsUpper(firstChar))
+                {
+                    //if input started with a Capital Letter,
+                    //don't let output start with a lowercase letter
+                    output += char.ToUpper(lastChar);
+                }
+                else
+                {
+                    output += lastChar;
+                }
+                for (int idx = input.Length - 2; idx > 0; --idx)
+                {
+                    //skip 1st and last char,
+                    //they get special treatment outside the loop
+                    output += input[idx];
+                }
+                if (char.IsUpper(firstChar) && char.IsLower(lastChar))
+                {
+                    //if input endee with a lowercase letter
+                    //don't let output end with a Capital Letter
+                    output += char.ToLower(firstChar);
+                }
+                else
+                {
+                    output += firstChar;
+                }
+            }
+            Console.WriteLine(output);
         }
 
         internal static void Ex09()
