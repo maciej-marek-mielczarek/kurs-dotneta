@@ -139,7 +139,30 @@ namespace Loops
 
         internal static void Ex07()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("I shall draw a diamond. What should be its size?");
+            Console.WriteLine("Note that if you pick a size greater than 20, it probably won't look pretty in your console.");
+            byte size = GetByte();
+            for (int floorNumber = 1; floorNumber <= size; floorNumber++)
+            {
+                DrawFloor(size, floorNumber);
+            }
+            for (int floorNumber = size - 1; floorNumber >= 1; floorNumber--)
+            {
+                DrawFloor(size, floorNumber);
+            }
+        }
+
+        private static void DrawFloor(byte size, int floorNumber)
+        {
+            string floor = "";
+            int numberOfStars = (floorNumber * 2) - 1;
+            //from start of the line to one space after the final star
+            int floorSize = (size * 2) + (2 * (floorNumber - 1));
+            floor = floor
+            .PadRight(numberOfStars)//create the correct number of characters
+            .Replace(" ", "* ")//now make them the correct type
+                .PadLeft(floorSize);//and add the spaces to the front
+            Console.WriteLine(floor);
         }
 
         internal static void Ex08()
