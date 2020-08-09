@@ -126,7 +126,15 @@ namespace Loops
 
         internal static void Ex06()
         {
-            throw new NotImplementedException();
+            const int min = 0, max = 20;
+            Console.WriteLine($"I shall calculate the sum of a series 1/(n+1) for n from {min} to {max}");
+            //basically, unless it represents money, it doesn't need to be decimal
+            double sum = 0;
+            for (int n = min; n <= max; ++n)
+            {
+                sum += 1 / (n + 1d);//+1d also does the conversion to double
+            }
+            Console.WriteLine("Result = " + sum);
         }
 
         internal static void Ex07()
