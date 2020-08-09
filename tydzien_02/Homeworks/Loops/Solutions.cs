@@ -81,7 +81,32 @@ namespace Loops
 
         internal static void Ex04()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("I shall draw a pyramid. What should be its height?");
+            Console.WriteLine("Please note that I don't know how much horizontal space you have.");
+            byte maxHeight = GetByte();
+            const byte reasonableHeightLimit = 20;
+            if(maxHeight > reasonableHeightLimit)
+            {
+                Console.WriteLine("That's unlikely to fit in your console, but whatever you wish.");
+            }
+            //ints, because calculations on bytes go through ints anyway
+            //biggest numer in the pyramid:
+            int maxBlock = maxHeight * (maxHeight + 1) / 2;
+            //how many digits it has, plus one space between numbers (for alignment)
+            int blockSize = (int)Math.Ceiling(Math.Log10(maxBlock)) + 1;
+            int currentBlockNumber = 0;
+            for(byte currentHeight = 1; currentHeight <= maxHeight; currentHeight++)
+            {
+                string floor = "";
+                for(byte floorWidth = 1; floorWidth <= currentHeight; floorWidth++)
+                {//print next block
+                    currentBlockNumber++;
+                    string block = "" + currentBlockNumber;
+                    block = block.PadRight(blockSize);
+                    floor += block;
+                }
+                Console.WriteLine(floor);
+            }
         }
 
         internal static void Ex05()
