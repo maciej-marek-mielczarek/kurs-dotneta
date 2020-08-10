@@ -11,24 +11,27 @@ namespace Loops
 
         internal static void Ex01()
         {
-            Console.WriteLine("I shall check how many prime numbers there are in the interval 0-100.");
-            byte max = 100;
-            bool[] isComposite = new bool[101];//Erathosteneses Sieve
+            const byte max = 100;
+            Console.WriteLine($"I shall check how many prime numbers there are in the interval 0-{max}.");
+            byte sqrtOfMax = (byte) Math.Sqrt(max);
+            bool[] isComposite = new bool[max+1];//Erathosteneses Sieve
             byte primesInRange = 0;
             for(byte divisor = 2; divisor <= max; ++divisor)
             {
                 if (!isComposite[divisor])
                 {
                     primesInRange++;
-                    for (byte checkedNumber = (byte)(divisor + 1); checkedNumber <= max; ++checkedNumber)
-                    {// if a and b are bytes, then a+b actually means (int)a+(int)b
-                        if (!isComposite[checkedNumber] && checkedNumber % divisor == 0)
-                        {
-                            isComposite[checkedNumber] = true;
+                    if (divisor <= sqrtOfMax)
+                    {//every composite number <= n has a prime divisor <= sqrt(n)
+                        //so don't check divisors greater than sqrt(n)
+                        for (byte multipleOfDivisor = (byte)(divisor * divisor); multipleOfDivisor <= max; multipleOfDivisor += divisor)
+                        {//no overflow in squaring, because divisor is at most sqrt(n)
+                            isComposite[multipleOfDivisor] = true;
                         }
                     }
                 }
             }
+
             Console.WriteLine("There are " + primesInRange + " primes in range 0-" + max);
         }
 
