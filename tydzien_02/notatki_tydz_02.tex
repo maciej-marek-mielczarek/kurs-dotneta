@@ -164,5 +164,8 @@ Do sprawdzenia może kiedyś: Czy pod enumem zawsze kryje się int, czy czasem b
 
 O, niedziela ma domyślnie numer 0.
 
+\section{Klasy}
+Klasa reprezentująca dane z bazy raczej nie powinna mieć metod. Dorabiamy do niej osobną klasę serwisową, która zajmie się manipulacją tymi danymi.
 
+Statycznych klas pomocniczych używamy do robienia obliczeń i walidacji danych. Nie używać ich do manipulacji obiektami. Zresztą i tak chyba nie da się zmienić, odczytać czy wywołać pól i metod nie--statycznych z metod statycznych. 
 \end{document}
