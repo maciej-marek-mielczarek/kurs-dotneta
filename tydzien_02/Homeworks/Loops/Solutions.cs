@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 namespace Loops
 {
     public class Solutions
@@ -14,7 +16,7 @@ namespace Loops
             const byte max = 100;
             Console.WriteLine($"I shall check how many prime numbers there are in the interval 0-{max}.");
             byte sqrtOfMax = (byte) Math.Sqrt(max);
-            bool[] isComposite = new bool[max+1];//Erathosteneses Sieve
+            List<bool> isComposite = new List<bool>(new bool[max + 1]);//Erathosteneses Sieve
             byte primesInRange = 0;
             for(byte divisor = 2; divisor <= max; ++divisor)
             {
@@ -23,11 +25,14 @@ namespace Loops
                     primesInRange++;
                     if (divisor <= sqrtOfMax)
                     {//every composite number <= n has a prime divisor <= sqrt(n)
-                        //so don't check divisors greater than sqrt(n)
-                        for (byte multipleOfDivisor = (byte)(divisor * divisor); multipleOfDivisor <= max; multipleOfDivisor += divisor)
-                        {//no overflow in squaring, because divisor is at most sqrt(n)
-                            isComposite[multipleOfDivisor] = true;
-                        }
+                     //so don't check divisors greater than sqrt(n)
+                     //count how many numbers between divisor^2 and max, inclusive, are divisible by divisor:
+                        int dividendsCount = (int)(Math.Floor(max * 1d / divisor) - divisor + 1);
+                        //now, mark those numbers as composite
+                        Enumerable
+                        .Range(divisor, dividendsCount)
+                            .ToList()
+                        .ForEach((arg) => isComposite[arg * divisor] = true);
                     }
                 }
             }
