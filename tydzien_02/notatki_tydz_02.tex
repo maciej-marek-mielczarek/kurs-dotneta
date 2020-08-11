@@ -16,6 +16,8 @@
 
 \maketitle
 
+\tableofcontents
+
 \section{Wstęp}
 Na ten tydzień zaplanowane są podstawy języka C\#. Najprawdopodobniej będę porównywał wprowadzane elementy do tego co znam z C++ albo Javy.
 
@@ -203,4 +205,25 @@ Dobrać odpowiedni typ do danych. Pytanie pomocnicze: co to jest w świecie rzec
 Sprawdzać czy użytkownik podał dane dobrego typu.
 
 Uważać żeby nie robić wykluczających się warunków.
+
+\section{Robienie projektu}
+Zaczynamy od wypisania i rozpisania funkcjonalności w komentarzach, razem z pod--opcjami.
+
+Potem zaczynamy je implementować i wykreślać to co już jest zrobione. Klasa MenuAction z listą akcji w odpowiadającym jej serwisie to prawdopodobnie dobry pomysł. Ciekawe gdzie będą same dane. Aha, w metodzie Initialize, w tej samej klasie co Main.
+
+Do wyboru menu będzie Console.ReadKey(), a nie Console.ReadLine().
+
+Widzę zamianę chara na inta przez TryParse, czyli prawdopodobnie tak to się $"$ładnie$"$ robi zamiast odejmowania znaku 0, a albo A.
+
+Nie widzę dodatkowych nawiasów klamrowych w różnych gałęziach switcha, ale prawdopodobnie będę chciał je stosować żeby kompilator wiedział, że zmienne lokalne jednej gałęzi (case) nie są widoczne dla kodu z innej. Chodzi mi o nawias klamrowy zaczynający się zaraz za linią zaczynającą case i kończący się zaraz przed albo za jego instrukcją break.
+
+Do sprawdzenia później: Czy można kończyć funkcję nic nie zwracającą instrukcją $"$return;$"$? Czy mogę wyczyścić konsolę z poziomu programu i czy mogę przejść do wcześniejszej linii?
+
+Widzę sprawdzenie działania programu przez przejście przez niego linia po linii (breakpoint, step, step, step...).
+
+Najpierw użycie funkcji, a potem pozwolenie IDE żeby ją stworzyło oszczędza nieco czasu, ale trzeba skontrolować wszystkie typy.
+
+Uwaga żeby nie zadeklarować w środku pętli zmiennej która ma przeżywać przejście do nowego obrotu pętli.
+
+Widzę słowa kluczowe this i params, które jeszcze się nie pojawiły. Pewnie niedługo dowiemy się między innymi o użyciu tych słów.
 \end{document}
