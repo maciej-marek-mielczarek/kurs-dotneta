@@ -16,6 +16,8 @@
 
 \maketitle
 
+\tableofcontents
+
 \section{Wstęp}
 Na ten tydzień zaplanowane są podstawy języka C\#. Najprawdopodobniej będę porównywał wprowadzane elementy do tego co znam z C++ albo Javy.
 
@@ -108,4 +110,120 @@ Z tego co znalazłem, te pisane z małej to aliasy (inne nazwy) tych pisanych z 
 Tutaj próbowałem powrzucać trochę kodu parsującego różne zmienne do jednej pętli, ale nie wychodziło mi używanie typu jako zmiennej. Poza tym, kod dla różnych typów zmiennych nie był taki sam bo parsowanie stringa do tablicy cyfr robi się inaczej niż do jednej liczby, a string w ogóle nie ma metody Parse (niezbyt zaskakujące, parsowanie stringa do stringa nie miałoby sensu).
 
 Udało się tylko wypisać dane w pętli (żeby nie powtarzać kodu). Pomogła tu możliwość wsadzenia różnych typów zmiennych do jednej tablicy, jako zmiennych uniwersalnego typu object (znanym też jako Object).
+
+\section{Instrukcje warunkowe}
+Chyba wszystko tu działa jak w C++, więc ten materiał mam już przyswojony.
+
+Może warto później sprawdzić czy są $"$krótkie spięcia$"$ w \&\& i ||. I czy jest w C\# coś takiego jak Javovy try--catch z zasobami.
+
+Ify w naturalny sposób pojawią się w aplikacji. Warto upewnić się że przynajmniej raz będzie wybór między więcej niż dwoma opcjami, żeby pojawił się jakiś switch. Mam już 3 opcje w pierwszym menu, więc ta sprawa jest już załatwiona.
+
+O, czegoś takiego jak $"$przełącznik wyrażeniowy$"$ chyba nie widziałem jeszcze w żadnym języku. Prawdopodobnie konstrukcja ta będzie miała jakieś naturalne zastosowanie w aplikacji, wystarczy tylko pamiętać o jej istnieniu. Do przećwiczenia jeśli nie pojawi się w najbliższych zadaniach.
+
+\section{Operatory}
+Tu bez niespodzianek. $"$Krótkie spięcia$"$ istnieją, czyli nie będę potrzebował tego sprawdzać.
+
+Jeśli są w C\# operatory dla klas, to temat pewnie powróci przy klasach.
+
+Przy używaniu operatorów niematematycznych, takich jak kropka, nawias kwadratowy czy rzutowanie naturalne jest tworzenie nadmiaru nawiasów. Jak zobaczę jakiś nadmiar nawiasów, to sprawdzę czy VS proponuje posprzątanie tego bałaganu. Właściwie, to czy w C\# to też są operatory? Jestem prawie pewien że tak, (bo co innego miałoby to być) ale dopóki nie tworzę operatorów do własnych klas (o ile język to przewiduje), ta kwestia nie będzie istotna.
+
+\section{Zadania 2}
+Zdecydowałem się umieścić rozwiązania w metodach i sprawdzać je w pętli, żeby nie odpalać aplikacji od nowa za każdym sprawdzeniem.
+
+VS podpowiada, że ?: w interpolowanym napisie trzeba wziąć w nawias. To chyba z powodu innych metod interpolacji, ale nie jestem pewien.
+
+W temacie podpowiedzi VS-a, to czasem mogę je akceptować enterem albo tabem, a czasem tylko tabem. Co chwila próbuję zaakceptować dokończenie kodu enterem i zamiast tego przechodzę do nowej linii.
+
+Jakoś udało się uniknąć zagłębiania w temat $"$co było przed kalendarzem Gregoriańskim$"$.
+
+Zostawiłem też chwilowo czytanie kilku zmiennych w jednej linii. Natomiast w zadaniu 11 udało się w końcu znaleźć zastosowanie dla tego nowego switcha.
+
+Zauważyłem, że zakończenie nawiasu klamrowego w VS automatycznie naprawia wcięcia w tym nawiasie. I dodaje dodatkowe spacje dookoła operatorów po zakończeniu linii średnikiem. Warto mieć te fakty w pamięci, żeby nie robić czegoś, co za chwilę zrobi za nas VS.
+
+\section{Pętle i zadania 3}
+Pętle działają tak jak je pamiętam z C++ (ostatnio jest tam nawet pętla foreach, tyle że z nieco inną składnią). Prawdopodobnie warto natomiast przyswoić sobie skrót klawiaturowy $"$zakomentuj/odkomentuj linię lub linie kodu$"$ (Ctrl+k+c/Ctrl+k+u). Aha, instrukcja break do wychodzenia z pętli też działa.
+
+Dla szybszego sprawdzania wstawiłem do funkcji Main pętlę wołającą rozwiązania z możliwością wyboru numeru zadania i zakończeniem dopiero po wpisaniu 0 zamiast tego numeru. Dobrze byłoby sprawdzić jak w tym temacie próbowała sobie upraszczać życie reszta grupy.
+
+\section{Instrukcje skoku}
+Domyśliłem się że break i continue działają w C\# i już używałem ich w zadaniach. Na wspomnienie goto w tym momencie kursu byłem nieco zaskoczony... przez te parę sekund które minęło do wspomnienia że się jej nie używa.
+
+\section{Tablice i Listy}
+Chyba wszystko działa albo tak jak pamiętam z innych języków albo jak już się domyśliłem i sprawdziłem przy robieniu zadań.
+
+Jednak nie wszystko. Nie zauważyłem wcześniej klasy Array i jej przydatnych metod. Przy najbliższym użyciu którejś z metod tej klasy zapewne przejrzę listę dostępnych tam funkcji (Wyświetlą się po wpisaniu Array.). Bardzo przydatną własnością IDE jest w tym miejscu wyświetlanie krótkiego opisu każdej metody. Po wybraniu konkretnej metody można jeszcze poruszać się strzałkami w górę i w dół, aby poznać różne warianty tej funkcji.
+
+Zapomniałem wcześniej wspomnieć, że wpisanie w IDE pierwszych liter metody/klasy/zmiennej itp. spowoduje domyślenie się przez IDE tego elementu.
+
+Pisząc o IDE mam w tym rozdziale na myśli zarówno VS jaki i Monodevelopa.
+
+Aha, czyli tablic chcę używać tylko gdy mam określoną liczbę obiektów i wolę poświęcić dodatkowe możliwości metod klasy List na rzecz szybkości działania programu.
+
+\section{Enum}
+Typ czegoś = enum. Fakt że enumy domyślnie konwertują się do stringów może się przydać.
+
+Do sprawdzenia może kiedyś: Czy pod enumem zawsze kryje się int, czy czasem bywa to inny typ?
+
+O, niedziela ma domyślnie numer 0.
+
+\section{Klasy}
+Klasa reprezentująca dane z bazy raczej nie powinna mieć metod. Dorabiamy do niej osobną klasę serwisową, która zajmie się manipulacją tymi danymi.
+
+Statycznych klas pomocniczych używamy do robienia obliczeń i walidacji danych. Nie używać ich do manipulacji obiektami. Zresztą i tak chyba nie da się zmienić, odczytać czy wywołać pól i metod nie--statycznych z metod statycznych.
+
+\section{Parametry Metod}
+Przekazywanie do metody więcej niż 7 parametrów = stwórz z nich nową klasę.
+
+Parametry domyślne dajemy na końcu.
+
+Przy wywołaniu metody można podać wartości parametrów razem z nazwami i wtedy można zmienić kolejność parametrów.
+
+Nowe słowa kluczowe: ref i out.
+out przy parametrze pisać i w deklaracji i w wywołaniu. To taka forma przekazania parametru przez referencję.
+ref to to samo co out, tylko nie pozwala na przekazywanie niezainicjalizowanej zmiennej jako argumentu.
+Raczej się ich nie używa, bo funkcja powinna zwracać jedną rzecz. A jednak out używa się do konwersji typów, w metodach TryParse.
+
+\section{Pola i właściwości}
+Właściwość to pole prywatne z getterem i setterem. Modyfikator dostępu przed właściwością odnosi się do jej gettera i settera. W setterze jest słowo kluczowe value, oznaczające przekazany argument. Można robić właściwości tylko do odczytu, albo przez niewpisywanie settera, albo przez $"$=> wartość do zwrócenia w getterze$"$ od razu za nazwą właściwości.
+
+\section{Zakresy widoczności}
+Jeśli chcę mieć zależność między projektami, to klikam w solution manager -> projekt -> ppm na dependency -> add project reference.
+
+public -- Jak public w innych językach. Dostępne wszędzie gdzie widać daną klasę. Jeśli nie widzisz klasy, to dodaj using ta klasa, ewentualnie referencję w zależnościach.
+
+private -- Jak private w innych językach. Dostępne tylko z tej samej klasy.
+
+protected -- Dostępne z tej klasy i jej potomków.
+
+internal -- Dostępne w obrębie projektu. Domyślny dla klas.
+
+\section{Częste błędy - podsumowanie}
+Nie za dużo argumentów metod.
+
+Dobrać odpowiedni typ do danych. Pytanie pomocnicze: co to jest w świecie rzeczywistym.
+
+Sprawdzać czy użytkownik podał dane dobrego typu.
+
+Uważać żeby nie robić wykluczających się warunków.
+
+\section{Robienie projektu}
+Zaczynamy od wypisania i rozpisania funkcjonalności w komentarzach, razem z pod--opcjami.
+
+Potem zaczynamy je implementować i wykreślać to co już jest zrobione. Klasa MenuAction z listą akcji w odpowiadającym jej serwisie to prawdopodobnie dobry pomysł. Ciekawe gdzie będą same dane. Aha, w metodzie Initialize, w tej samej klasie co Main.
+
+Do wyboru menu będzie Console.ReadKey(), a nie Console.ReadLine().
+
+Widzę zamianę chara na inta przez TryParse, czyli prawdopodobnie tak to się $"$ładnie$"$ robi zamiast odejmowania znaku 0, a albo A.
+
+Nie widzę dodatkowych nawiasów klamrowych w różnych gałęziach switcha, ale prawdopodobnie będę chciał je stosować żeby kompilator wiedział, że zmienne lokalne jednej gałęzi (case) nie są widoczne dla kodu z innej. Chodzi mi o nawias klamrowy zaczynający się zaraz za linią zaczynającą case i kończący się zaraz przed albo za jego instrukcją break.
+
+Do sprawdzenia później: Czy można kończyć funkcję nic nie zwracającą instrukcją $"$return;$"$? Czy mogę wyczyścić konsolę z poziomu programu i czy mogę przejść do wcześniejszej linii?
+
+Widzę sprawdzenie działania programu przez przejście przez niego linia po linii (breakpoint, step, step, step...).
+
+Najpierw użycie funkcji, a potem pozwolenie IDE żeby ją stworzyło oszczędza nieco czasu, ale trzeba skontrolować wszystkie typy.
+
+Uwaga żeby nie zadeklarować w środku pętli zmiennej która ma przeżywać przejście do nowego obrotu pętli.
+
+Widzę słowa kluczowe this i params, które jeszcze się nie pojawiły. Pewnie niedługo dowiemy się między innymi o użyciu tych słów.
 \end{document}

@@ -437,6 +437,7 @@ $RECYCLE.BIN/
 *.log
 *.out
 *.synctex.gz
+*.toc
 
 # Don't ignore pdf files (uncomment the next line to ignore them)
 # *.pdf
