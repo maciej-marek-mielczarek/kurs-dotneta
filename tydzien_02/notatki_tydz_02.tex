@@ -167,5 +167,40 @@ O, niedziela ma domyślnie numer 0.
 \section{Klasy}
 Klasa reprezentująca dane z bazy raczej nie powinna mieć metod. Dorabiamy do niej osobną klasę serwisową, która zajmie się manipulacją tymi danymi.
 
-Statycznych klas pomocniczych używamy do robienia obliczeń i walidacji danych. Nie używać ich do manipulacji obiektami. Zresztą i tak chyba nie da się zmienić, odczytać czy wywołać pól i metod nie--statycznych z metod statycznych. 
+Statycznych klas pomocniczych używamy do robienia obliczeń i walidacji danych. Nie używać ich do manipulacji obiektami. Zresztą i tak chyba nie da się zmienić, odczytać czy wywołać pól i metod nie--statycznych z metod statycznych.
+
+\section{Parametry Metod}
+Przekazywanie do metody więcej niż 7 parametrów = stwórz z nich nową klasę.
+
+Parametry domyślne dajemy na końcu.
+
+Przy wywołaniu metody można podać wartości parametrów razem z nazwami i wtedy można zmienić kolejność parametrów.
+
+Nowe słowa kluczowe: ref i out.
+out przy parametrze pisać i w deklaracji i w wywołaniu. To taka forma przekazania parametru przez referencję.
+ref to to samo co out, tylko nie pozwala na przekazywanie niezainicjalizowanej zmiennej jako argumentu.
+Raczej się ich nie używa, bo funkcja powinna zwracać jedną rzecz. A jednak out używa się do konwersji typów, w metodach TryParse.
+
+\section{Pola i właściwości}
+Właściwość to pole prywatne z getterem i setterem. Modyfikator dostępu przed właściwością odnosi się do jej gettera i settera. W setterze jest słowo kluczowe value, oznaczające przekazany argument. Można robić właściwości tylko do odczytu, albo przez niewpisywanie settera, albo przez $"$=> wartość do zwrócenia w getterze$"$ od razu za nazwą właściwości.
+
+\section{Zakresy widoczności}
+Jeśli chcę mieć zależność między projektami, to klikam w solution manager -> projekt -> ppm na dependency -> add project reference.
+
+public -- Jak public w innych językach. Dostępne wszędzie gdzie widać daną klasę. Jeśli nie widzisz klasy, to dodaj using ta klasa, ewentualnie referencję w zależnościach.
+
+private -- Jak private w innych językach. Dostępne tylko z tej samej klasy.
+
+protected -- Dostępne z tej klasy i jej potomków.
+
+internal -- Dostępne w obrębie projektu. Domyślny dla klas.
+
+\section{Częste błędy - podsumowanie}
+Nie za dużo argumentów metod.
+
+Dobrać odpowiedni typ do danych. Pytanie pomocnicze: co to jest w świecie rzeczywistym.
+
+Sprawdzać czy użytkownik podał dane dobrego typu.
+
+Uważać żeby nie robić wykluczających się warunków.
 \end{document}
