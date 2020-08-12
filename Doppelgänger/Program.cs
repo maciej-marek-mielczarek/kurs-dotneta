@@ -6,28 +6,42 @@ namespace Doppelgänger
 {
     class Program
     {
+        private static Texts texts;
         static void Main(string[] args)
         {
             MenuActionService menuActionService = new MenuActionService();
-            Initialize(menuActionService);
-            Texts texts;
+            InitializeLang(menuActionService);
+
             Console.WriteLine("Doppelgänger, a puzzle/rpg game.");
 
             {
-                Console.Write("Please choose your language:");
+                Console.Write("Please choose your language: ");
                 List<MenuAction> actions = menuActionService.GetActionsForMenu("Lang");
                 string possibleChoices = "";
                 foreach (var action in actions)
                 {
-                    Console.Write(action.ActionName);
+                    Console.Write('[' + action.ActionName + ']');
                     possibleChoices += action.KeyToChoose;
                 }
                 char languageCode = Helpers.GetChar(possibleChoices);
                 Helpers.ClearLine();
                 texts = new Texts(languageCode);
+                Initialize(menuActionService);
             }
             texts.Welcome();
 
+            {
+                List<MenuAction> actions = menuActionService.GetActionsForMenu("Main");
+                string possibleChoices = "";
+                foreach (var action in actions)
+                {
+                    Console.Write('[' + action.ActionName + ']');
+                    possibleChoices += action.KeyToChoose;
+                }
+                char menuChoice = Helpers.GetChar(possibleChoices);
+                Helpers.ClearLine();
+                Console.WriteLine("Your menu choice: " + menuChoice);
+            }
             //2. main menu
             ///2a. new game: generate enemies and go to fight menu, choose ally submenu
 
@@ -80,10 +94,17 @@ namespace Doppelgänger
             ///2c. exit
         }
 
+        private static void InitializeLang(MenuActionService menuActionService)
+        {
+            menuActionService.AddNewAction('p', "(p)l", "Lang");
+            menuActionService.AddNewAction('e', "(e)ng", "Lang");
+        }
+
         private static void Initialize(MenuActionService menuActionService)
         {
-            menuActionService.AddNewAction('p', " (p)l", "Lang");
-            menuActionService.AddNewAction('e', " (e)ng", "Lang");
+            menuActionService.AddNewAction('n', texts.NewGame(), "Main");
+            menuActionService.AddNewAction('i', texts.Instructions(), "Main");
+            menuActionService.AddNewAction('x', texts.Exit(), "Main");
         }
     }
 }
