@@ -6,7 +6,8 @@ namespace Doppelgänger
     {
         static void Main(string[] args)
         {
-            //0. Display program name and type (puzzle/rpg game)
+            Console.WriteLine("Doppelgänger, a puzzle/rpg game.");
+
             //1. Choose language menu
             ///1a. pl
             ///1b. eng
