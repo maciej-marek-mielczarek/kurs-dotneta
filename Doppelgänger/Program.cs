@@ -13,36 +13,10 @@ namespace Doppelgänger
             InitializeLang(menuActionService);
 
             Console.WriteLine("Doppelgänger, a puzzle/rpg game.");
-
-            {
-                Console.Write("Please choose your language: ");
-                List<MenuAction> actions = menuActionService.GetActionsForMenu("Lang");
-                string possibleChoices = "";
-                foreach (var action in actions)
-                {
-                    Console.Write('[' + action.ActionName + ']');
-                    possibleChoices += action.KeyToChoose;
-                }
-                char languageCode = Helpers.GetChar(possibleChoices);
-                Helpers.ClearLine();
-                texts = new Texts(languageCode);
-                Initialize(menuActionService);
-            }
+            LanguageMenu(menuActionService);
             texts.Welcome();
+            MainMenu(menuActionService);
 
-            {
-                List<MenuAction> actions = menuActionService.GetActionsForMenu("Main");
-                string possibleChoices = "";
-                foreach (var action in actions)
-                {
-                    Console.Write('[' + action.ActionName + ']');
-                    possibleChoices += action.KeyToChoose;
-                }
-                char menuChoice = Helpers.GetChar(possibleChoices);
-                Helpers.ClearLine();
-                Console.WriteLine("Your menu choice: " + menuChoice);
-            }
-            //2. main menu
             ///2a. new game: generate enemies and go to fight menu, choose ally submenu
 
             ////2a1. fight menu:
@@ -90,8 +64,184 @@ namespace Doppelgänger
             /////you will keep their stats, you will not fight this opp
             ///// - choose opp: start a fight with chosen opponent
             ///// - fight: continue for n turns or retreat
+        }
 
-            ///2c. exit
+        private static void InstructionsMenu(MenuActionService menuActionService)
+        {
+            //Instructions Menu
+            List<MenuAction> actions = menuActionService.GetActionsForMenu("Instructions");
+            string possibleChoices = "";
+            Console.Write(texts.GetInfoOn());
+            foreach (var action in actions)
+            {
+                Console.Write(" [" + action.ActionName + "] ");
+                possibleChoices += action.KeyToChoose;
+            }
+            char menuChoice = Helpers.GetChar(possibleChoices);
+            Helpers.ClearLine();
+            switch (menuChoice)
+            {
+                case 'a':
+                    ActionsInfo(menuActionService);
+                    break;
+                case 's':
+                    StatsInfo(menuActionService);
+                    break;
+                case 'b':
+                    MainMenu(menuActionService);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private static void StatsInfo(MenuActionService menuActionService)
+        {
+            //Stats Info Menu
+            List<MenuAction> actions = menuActionService.GetActionsForMenu("StatsInfo");
+            string possibleChoices = "";
+            Console.Write(texts.GetInfoOn());
+            foreach (var action in actions)
+            {
+                Console.Write(" [" + action.ActionName + "] ");
+                possibleChoices += action.KeyToChoose;
+            }
+            char menuChoice = Helpers.GetChar(possibleChoices);
+            Helpers.ClearLine();
+            switch (menuChoice)
+            {
+                case 'a':
+                    AttackInfo(menuActionService);
+                    break;
+                case 'h':
+                    HpInfo(menuActionService);
+                    break;
+                case 's':
+                    SpeedInfo(menuActionService);
+                    break;
+                case 'b':
+                    InstructionsMenu(menuActionService);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private static void SpeedInfo(MenuActionService menuActionService)
+        {
+            Console.Write("SpeedInfo");
+            throw new NotImplementedException();
+        }
+
+        private static void HpInfo(MenuActionService menuActionService)
+        {
+            Console.Write("HpInfo");
+            throw new NotImplementedException();
+        }
+
+        private static void AttackInfo(MenuActionService menuActionService)
+        {
+            Console.Write("AttackInfo");
+            throw new NotImplementedException();
+        }
+
+        private static void ActionsInfo(MenuActionService menuActionService)
+        {
+            //Actions Info Menu
+            List<MenuAction> actions = menuActionService.GetActionsForMenu("ActionsInfo");
+            string possibleChoices = "";
+            Console.Write(texts.GetInfoOn());
+            foreach (var action in actions)
+            {
+                Console.Write(" [" + action.ActionName + "] ");
+                possibleChoices += action.KeyToChoose;
+            }
+            char menuChoice = Helpers.GetChar(possibleChoices);
+            Helpers.ClearLine();
+            switch (menuChoice)
+            {
+                case 'a':
+                    PickAllyInfo(menuActionService);
+                    break;
+                case 'o':
+                    PickOpponentInfo(menuActionService);
+                    break;
+                case 'f':
+                    FightInfo(menuActionService);
+                    break;
+                case 'b':
+                    InstructionsMenu(menuActionService);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private static void FightInfo(MenuActionService menuActionService)
+        {
+            Console.Write("FightInfo");
+            throw new NotImplementedException();
+        }
+
+        private static void PickOpponentInfo(MenuActionService menuActionService)
+        {
+            Console.Write("PickOpponentInfo");
+            throw new NotImplementedException();
+        }
+
+        private static void PickAllyInfo(MenuActionService menuActionService)
+        {
+            Console.Write("PickAllyInfo");
+            throw new NotImplementedException();
+        }
+
+        private static void MainMenu(MenuActionService menuActionService)
+        {
+            //Main Menu
+            List<MenuAction> actions = menuActionService.GetActionsForMenu("Main");
+            string possibleChoices = "";
+            foreach (var action in actions)
+            {
+                Console.Write(" [" + action.ActionName + "] ");
+                possibleChoices += action.KeyToChoose;
+            }
+            char menuChoice = Helpers.GetChar(possibleChoices);
+            Helpers.ClearLine();
+            switch (menuChoice)
+            {
+                case 'n':
+                    NewGameMenu(menuActionService);
+                    break;
+                case 'i':
+                    InstructionsMenu(menuActionService);
+                    break;
+                case 'x':
+                default:
+                    break;
+            }
+        }
+
+        private static void NewGameMenu(MenuActionService menuActionService)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void LanguageMenu(MenuActionService menuActionService)
+        {
+
+            //Language Choice Menu
+            Console.Write("Please choose your language: ");
+            List<MenuAction> actions = menuActionService.GetActionsForMenu("Lang");
+            string possibleChoices = "";
+            foreach (var action in actions)
+            {
+                Console.Write(" [" + action.ActionName + "] ");
+                possibleChoices += action.KeyToChoose;
+            }
+            char languageCode = Helpers.GetChar(possibleChoices);
+            Helpers.ClearLine();
+            texts = new Texts(languageCode);
+            Initialize(menuActionService);
         }
 
         private static void InitializeLang(MenuActionService menuActionService)
@@ -105,6 +255,20 @@ namespace Doppelgänger
             menuActionService.AddNewAction('n', texts.NewGame(), "Main");
             menuActionService.AddNewAction('i', texts.Instructions(), "Main");
             menuActionService.AddNewAction('x', texts.Exit(), "Main");
+
+            menuActionService.AddNewAction('s', texts.Stats(), "Instructions");
+            menuActionService.AddNewAction('a', texts.Actions(), "Instructions");
+            menuActionService.AddNewAction('b', texts.Back(), "Instructions");
+
+            menuActionService.AddNewAction('a', texts.Attack(), "StatsInfo");
+            menuActionService.AddNewAction('h', texts.HP(), "StatsInfo");
+            menuActionService.AddNewAction('s', texts.Speed(), "StatsInfo");
+            menuActionService.AddNewAction('b', texts.Back(), "StatsInfo");
+
+            menuActionService.AddNewAction('a', texts.PickAlly(), "ActionsInfo");
+            menuActionService.AddNewAction('o', texts.PickOpponent(), "ActionsInfo");
+            menuActionService.AddNewAction('f', texts.Fight(), "ActionsInfo");
+            menuActionService.AddNewAction('b', texts.Back(), "ActionsInfo");
         }
     }
 }
