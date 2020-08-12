@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Translations;
 
 namespace Doppelgänger
 {
@@ -20,13 +21,11 @@ namespace Doppelgänger
                 Console.Write(action.ActionName);
                 possibleChoices += action.KeyToChoose;
             }
-            char chosenAction = Helpers.GetChar(possibleChoices);
-            Console.WriteLine("\rYou chose: " + chosenAction + "                                   ");
-            //1. Choose language menu
-            ///1a. pl
-            ///1b. eng
-            //all text after will be displayed in that language
-            //display starting message
+            char languageCode = Helpers.GetChar(possibleChoices);
+            Helpers.ClearLine();
+            Texts texts = new Texts(languageCode);
+            texts.Welcome();
+
             //2. main menu
             ///2a. new game: generate enemies and go to fight menu, choose ally submenu
 
