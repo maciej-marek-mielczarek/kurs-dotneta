@@ -10,20 +10,22 @@ namespace Doppelgänger
         {
             MenuActionService menuActionService = new MenuActionService();
             Initialize(menuActionService);
-
+            Texts texts;
             Console.WriteLine("Doppelgänger, a puzzle/rpg game.");
 
-            Console.Write("Please choose your language:");
-            List<MenuAction> actions = menuActionService.GetActionsForMenu("Lang");
-            string possibleChoices = "";
-            foreach (var action in actions)
             {
-                Console.Write(action.ActionName);
-                possibleChoices += action.KeyToChoose;
+                Console.Write("Please choose your language:");
+                List<MenuAction> actions = menuActionService.GetActionsForMenu("Lang");
+                string possibleChoices = "";
+                foreach (var action in actions)
+                {
+                    Console.Write(action.ActionName);
+                    possibleChoices += action.KeyToChoose;
+                }
+                char languageCode = Helpers.GetChar(possibleChoices);
+                Helpers.ClearLine();
+                texts = new Texts(languageCode);
             }
-            char languageCode = Helpers.GetChar(possibleChoices);
-            Helpers.ClearLine();
-            Texts texts = new Texts(languageCode);
             texts.Welcome();
 
             //2. main menu
