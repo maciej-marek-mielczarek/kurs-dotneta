@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Doppelgänger
 {
@@ -6,8 +7,21 @@ namespace Doppelgänger
     {
         static void Main(string[] args)
         {
+            MenuActionService menuActionService = new MenuActionService();
+            Initialize(menuActionService);
+
             Console.WriteLine("Doppelgänger, a puzzle/rpg game.");
 
+            Console.Write("Please choose your language:");
+            List<MenuAction> actions = menuActionService.GetActionsForMenu("Lang");
+            string possibleChoices = "";
+            foreach (var action in actions)
+            {
+                Console.Write(action.ActionName);
+                possibleChoices += action.KeyToChoose;
+            }
+            char chosenAction = Helpers.GetChar(possibleChoices);
+            Console.WriteLine("\rYou chose: " + chosenAction + "                                   ");
             //1. Choose language menu
             ///1a. pl
             ///1b. eng
@@ -63,6 +77,12 @@ namespace Doppelgänger
             ///// - fight: continue for n turns or retreat
 
             ///2c. exit
+        }
+
+        private static void Initialize(MenuActionService menuActionService)
+        {
+            menuActionService.AddNewAction('p', " (p)l", "Lang");
+            menuActionService.AddNewAction('e', " (e)ng", "Lang");
         }
     }
 }
