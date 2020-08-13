@@ -26,11 +26,6 @@ namespace Doppelgänger
 
             ///generate enemy: choose random stats within reaonable intervals
 
-            ////2a1. fight menu:
-            //// display start fight message
-            //// display opponents' invariant stats ans keep them on screen
-            //// go to choose ally submenu
-
             /////2a1a. choose ally submenu:
             ///// pick one opp to replace (0-9) (keep their stats),
             ///// x to exit
