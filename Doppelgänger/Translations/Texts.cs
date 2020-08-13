@@ -471,5 +471,23 @@ namespace Translations
             }
             return pickAlly;
         }
+
+        internal string YourScoreIs()
+        {
+            string yourScoreIs = "";
+            switch (languageCode)
+            {
+                case 'p':
+                    yourScoreIs = "Twój wynik to: ";
+                    break;
+                case 'e':
+                    yourScoreIs = "Your score is: ";
+                    break;
+                default:
+                    break;
+            }
+            return yourScoreIs;
+        }
+
     }
 }

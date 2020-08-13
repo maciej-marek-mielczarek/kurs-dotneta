@@ -43,13 +43,6 @@ namespace Doppelgänger
             /////opp dies, some opps left -> turn into him, go to choose opp submenu
             ///// 0 disengage and go back to choose opp submenu
 
-            //////2a2. end game menu
-            //////display score (roughly % of everyone's hp missing),
-            //////(1 point for each fully defeated opp, max 10 score, min 0)
-            //////(2 decimal places after .)
-            ////// go to new line
-            //////start new game (n)
-            //////end program (x)
 
         }
 
@@ -385,9 +378,8 @@ namespace Doppelgänger
 
         private static void EndGameMenu(MenuActionService menuActionService)
         {
-            //display score
-            //ask if another game or exit
-            throw new NotImplementedException();
+            Console.WriteLine(texts.YourScoreIs()+Helpers.CalculateScore(creatures)+"%");
+            MainMenu(menuActionService);
         }
 
         private static void PickOppMenu(MenuActionService menuActionService)

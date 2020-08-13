@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Doppelgänger
 {
@@ -41,6 +42,25 @@ namespace Doppelgänger
             {
                 return v;
             }
+        }
+
+        internal static int CalculateScore(List<Creature> creatures)
+        {
+            int score = 0;
+            foreach (var creature in creatures)
+            {
+                int creatureScore = 0;
+                if (creature is Ally)
+                {
+                    creatureScore = (int)Math.Round(10m - 10m * ((decimal)((Ally)creature).CurrentHP) / (decimal)creature.MaxHP);
+                }
+                else if (creature is Opponent)
+                {
+                    creatureScore = (int)Math.Round(10m - 10m * ((decimal)((Opponent)creature).CurrentHP) / (decimal)creature.MaxHP);
+                }
+                score += creatureScore;
+            }
+            return score;
         }
     }
 }
