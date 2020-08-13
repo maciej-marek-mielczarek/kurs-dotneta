@@ -7,6 +7,8 @@ namespace Doppelgänger
     class Program
     {
         private static Texts texts;
+        private const byte NUMBER_OF_OPPS = 10;
+        private static List<Creature> creatures;
         static void Main(string[] args)
         {
             MenuActionService menuActionService = new MenuActionService();
@@ -14,15 +16,17 @@ namespace Doppelgänger
 
             Console.WriteLine("Doppelgänger, a puzzle/rpg game.");
             LanguageMenu(menuActionService);
+            Console.WriteLine();
             texts.Welcome();
+            Console.WriteLine();
             MainMenu(menuActionService);
 
-            ///2a. new game: generate enemies and go to fight menu, choose ally submenu
+            ///generate enemy: choose random stats within reaonable intervals
 
             ////2a1. fight menu:
-            //// display opponents' invariant stats
-            //// and do sth in last line
-            //// x to end game and go to end game submenu (e is too close to numbers on keyboard)
+            //// display start fight message
+            //// display opponents' invariant stats ans keep them on screen
+            //// go to choose ally submenu
 
             /////2a1a. choose ally submenu:
             ///// pick one opp to replace (0-9) (keep their stats),
@@ -54,18 +58,6 @@ namespace Doppelgänger
             //////start new game (n)
             //////end program (x)
 
-            ///2b. instructions: display all instructions:
-            ////2b1. explain what each stat does
-            /////attack damage done per hit
-            /////current hp decreases when you're hit
-            /////speed number of turns between hits
-            ////2b2. explain possible actions in each submenu:
-            ///// - fight: x to end current game and see your score,
-            /////other actions based on combat phase
-            ///// - choose ally: choose 1 opponent to turn into,
-            /////you will keep their stats, you will not fight this opp
-            ///// - choose opp: start a fight with chosen opponent
-            ///// - fight: continue for n turns or retreat
         }
 
         private static void InstructionsMenu(MenuActionService menuActionService)
@@ -308,7 +300,7 @@ namespace Doppelgänger
             switch (menuChoice)
             {
                 case 'n':
-                    NewGameMenu(menuActionService);
+                    NewGame(menuActionService);
                     break;
                 case 'i':
                     InstructionsMenu(menuActionService);
@@ -319,14 +311,24 @@ namespace Doppelgänger
             }
         }
 
-        private static void NewGameMenu(MenuActionService menuActionService)
+        private static void NewGame(MenuActionService menuActionService)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < NUMBER_OF_OPPS; i++)
+            {
+                creatures.Add(new Creature());
+            }
+            FightMenu(menuActionService);
+        }
+
+        private static void FightMenu(MenuActionService menuActionService)
+        {
+            Console.WriteLine(texts.WelcomeToFight());
+            //display invariant stats
+            //go to pick ally submenu
         }
 
         private static void LanguageMenu(MenuActionService menuActionService)
         {
-
             //Language Choice Menu
             Console.Write("Please choose your language: ");
             List<MenuAction> actions = menuActionService.GetActionsForMenu("Lang");
@@ -371,6 +373,8 @@ namespace Doppelgänger
             menuActionService.AddNewAction('b', texts.Back(), "ActionsInfo");
 
             menuActionService.AddNewAction('b', texts.Back(), "ActionInfo");
+
+            creatures = new List<Creature>();
         }
     }
 }

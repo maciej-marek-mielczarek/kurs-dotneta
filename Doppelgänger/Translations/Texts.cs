@@ -352,5 +352,22 @@ namespace Translations
             }
             return allyInfo;
         }
+
+        internal string WelcomeToFight()
+        {
+            string welcomeToFight = "";
+            switch(languageCode)
+            {
+                case 'p':
+                    welcomeToFight = "Rozpoczynamy Test!";
+                    break;
+                case 'e':
+                    welcomeToFight = "Let The Test begin!";
+                    break;
+                default:
+                    break;
+            }
+            return welcomeToFight;
+        }
     }
 }
