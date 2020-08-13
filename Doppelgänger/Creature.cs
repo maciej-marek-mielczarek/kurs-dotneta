@@ -11,7 +11,7 @@ namespace Doppelgänger
         private const byte MAX_SPEED = 10;
 
         private const byte MIN_MAXHP = 10;
-        private const byte MAX_MAXHP = 100;
+        private const byte MAX_MAXHP = 99;
 
         private static readonly Random numberGenerator = new Random();
 
@@ -22,11 +22,12 @@ namespace Doppelgänger
             MaxHP = (byte)numberGenerator.Next(MIN_MAXHP, MAX_MAXHP + 1);
         }
 
-        internal Creature(byte attack, byte speed, byte maxHP)
+        internal Creature(byte attack, byte speed, byte maxHP, byte currentHP)
         {
             Attack = attack;
             Speed = speed;
             MaxHP = maxHP;
+            CurrentHP = currentHP;
         }
 
         internal byte Attack { get; }
@@ -34,5 +35,7 @@ namespace Doppelgänger
         internal byte Speed { get; }
 
         internal byte MaxHP { get; }
+
+        internal byte CurrentHP { get; set; }
     }
 }

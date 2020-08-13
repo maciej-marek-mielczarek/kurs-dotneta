@@ -489,5 +489,38 @@ namespace Translations
             return yourScoreIs;
         }
 
+        internal string FightWhom()
+        {
+            string fightWhom = "";
+            switch (languageCode)
+            {
+                case 'p':
+                    fightWhom = " Kogo bić?";
+                    break;
+                case 'e':
+                    fightWhom = " Fight who?";
+                    break;
+                default:
+                    break;
+            }
+            return fightWhom;
+        }
+
+        internal string StayHowLong()
+        {
+            string stayHowLong = "";
+            switch (languageCode)
+            {
+                case 'p':
+                    stayHowLong = "Jak długo bić?";
+                    break;
+                case 'e':
+                    stayHowLong = "Stay how long?";
+                    break;
+                default:
+                    break;
+            }
+            return stayHowLong;
+        }
     }
 }

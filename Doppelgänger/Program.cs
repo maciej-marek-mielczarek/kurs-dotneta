@@ -10,7 +10,7 @@ namespace Doppelgänger
         private const byte NUMBER_OF_OPPS = 10;
         private const byte FIRST_COLUMN_WIDTH = 14;
         private static List<Creature> creatures;
-        private static int OTHER_COLUMNS_WIDTH = 6;
+        private static int OTHER_COLUMNS_WIDTH = 5;
 
         static void Main(string[] args)
         {
@@ -26,22 +26,12 @@ namespace Doppelgänger
 
             ///balance: choose good intervals for creature stat limits
 
-            /////2a1b. choose opponent submenu:
-            /////display everyones' current hp
-            /////mark which is you next to curr hp
-            /////display 'choose next opp (0-9)' at line's end
-            /////x to exit
-            //////2a1b1. choose opponent (0-9)
 
-            /////2a1c. fight submenu:
-            ///// display everyones' curr hp,
-            ///// mark the fighters
-            ///// display turn number
-            ///// (1-9) continue fight for another 1-9 turns
+            /////combat simulation: continue fight for another 1-9 turns
             /////or until somebody dies, whichever's first
             /////you die or last opp dies -> go to end game menu
             /////opp dies, some opps left -> turn into him, go to choose opp submenu
-            ///// 0 disengage and go back to choose opp submenu
+
 
 
         }
@@ -379,16 +369,86 @@ namespace Doppelgänger
         private static void EndGameMenu(MenuActionService menuActionService)
         {
             Console.WriteLine(texts.YourScoreIs()+Helpers.CalculateScore(creatures)+"%");
+            creatures = new List<Creature>();
             MainMenu(menuActionService);
         }
 
         private static void PickOppMenu(MenuActionService menuActionService)
         {
-            //display current healths and statuses(ally)
-            //display "pick opp"
-            //get opp choice
-            //go to fight menu
-            throw new NotImplementedException();
+            Console.Write(texts.HP().PadRight(FIRST_COLUMN_WIDTH));
+            foreach (var creature in creatures)
+            {
+                Console.Write(("|" + creature.CurrentHP + (creature is Ally ? "*" : "")).PadRight(OTHER_COLUMNS_WIDTH));
+            }
+
+            Console.Write(texts.FightWhom());
+            string possibleChoices = "x";
+            for (int i = 0; i < NUMBER_OF_OPPS; i++)
+            {
+                possibleChoices += i;
+            }
+
+            char choice = Helpers.GetChar(possibleChoices);
+            Helpers.ClearLine();
+
+            if (choice != 'x')
+            {
+                int chosenOppId = Helpers.CharDigitToInt(choice);
+                FightSubMenu(menuActionService, chosenOppId, 0);
+            }
+            else
+            {
+                EndGameMenu(menuActionService);
+            }
+        }
+
+        private static void FightSubMenu(MenuActionService menuActionService, int chosenOppId, int combatTurn)
+        {
+            Console.Write(texts.HP().PadRight(FIRST_COLUMN_WIDTH));
+            for (int i = 0; i < NUMBER_OF_OPPS; ++i)
+            {
+                Console.Write(("|"
+                + creatures[i].CurrentHP
+                + (creatures[i] is Ally ? "*" : "")
+                + (i == chosenOppId ? "x" : ""))
+                .PadRight(OTHER_COLUMNS_WIDTH));
+            }
+            Console.Write(texts.StayHowLong());
+            string possibleChoices = "x";
+            for (int i = 0; i < NUMBER_OF_OPPS; i++)
+            {
+                possibleChoices += i;
+            }
+            char choice = Helpers.GetChar(possibleChoices);
+            Helpers.ClearLine();
+
+            if (choice == 'x')
+            {
+                EndGameMenu(menuActionService);
+            }
+            else if(choice == '0')
+            {
+                PickOppMenu(menuActionService);
+            }
+            else
+            {
+                int chosenFightLength = Helpers.CharDigitToInt(choice);
+                FightSimulation(menuActionService, chosenFightLength, combatTurn);
+            }
+        }
+
+        private static void FightSimulation(MenuActionService menuActionService, int chosenFightLength, int combatTurn)
+        {
+            //register hits in this combat turn,
+            //see is anyone died
+            ///if ally died, go to end game screen
+            ///else if opp died, 
+            //// if this was last opp, go to end game screen
+            //// else change ally and go to choose opp screen
+            //else(no one died this turn)
+            ///if  chosenFightLength was 1, go back to fight sumbenu
+            ///else call combat simulation with combat turn 1 higher
+            ///and simulation length 1 lower
         }
 
         private static void LanguageMenu(MenuActionService menuActionService)
