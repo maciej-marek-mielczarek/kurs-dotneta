@@ -24,12 +24,7 @@ namespace Doppelgänger
             Console.WriteLine();
             MainMenu(menuActionService);
 
-            ///generate enemy: choose random stats within reaonable intervals
-
-            /////2a1a. choose ally submenu:
-            ///// pick one opp to replace (0-9) (keep their stats),
-            ///// x to exit
-            ///// then go to choose opp submenu
+            ///balance: choose good intervals for creature stat limits
 
             /////2a1b. choose opponent submenu:
             /////display everyones' current hp
@@ -313,7 +308,7 @@ namespace Doppelgänger
         {
             for (int i = 0; i < NUMBER_OF_OPPS; i++)
             {
-                creatures.Add(new Opponent());
+                creatures.Add(new Creature());
             }
             FightMenu(menuActionService);
         }
@@ -355,6 +350,52 @@ namespace Doppelgänger
 
         private static void PickAllyMenu(MenuActionService menuActionService)
         {
+            Console.Write(texts.PickAlly());
+            string possibleChoices = "x";
+            for (int i = 0; i < NUMBER_OF_OPPS; i++)
+            {
+                possibleChoices += i;
+            }
+
+            char choice = Helpers.GetChar(possibleChoices);
+            Helpers.ClearLine();
+
+            if (choice != 'x')
+            {
+                int chosenAlly = Helpers.CharDigitToInt(choice);
+                for (int i = 0; i < NUMBER_OF_OPPS; i++)
+                {
+                    if (i == chosenAlly)
+                    {
+                        creatures[i] = new Ally(creatures[i]);
+                    }
+                    else
+                    {
+                        creatures[i] = new Opponent(creatures[i]);
+                    }
+                }
+
+                PickOppMenu(menuActionService);
+            }
+            else
+            {
+                EndGameMenu(menuActionService);
+            }
+        }
+
+        private static void EndGameMenu(MenuActionService menuActionService)
+        {
+            //display score
+            //ask if another game or exit
+            throw new NotImplementedException();
+        }
+
+        private static void PickOppMenu(MenuActionService menuActionService)
+        {
+            //display current healths and statuses(ally)
+            //display "pick opp"
+            //get opp choice
+            //go to fight menu
             throw new NotImplementedException();
         }
 
@@ -398,9 +439,9 @@ namespace Doppelgänger
 
             menuActionService.AddNewAction('b', texts.Back(), "StatInfo");
 
-            menuActionService.AddNewAction('a', texts.PickAlly(), "ActionsInfo");
-            menuActionService.AddNewAction('o', texts.PickOpponent(), "ActionsInfo");
-            menuActionService.AddNewAction('f', texts.Fight(), "ActionsInfo");
+            menuActionService.AddNewAction('a', texts.PickAllyButton(), "ActionsInfo");
+            menuActionService.AddNewAction('o', texts.PickOpponentButton(), "ActionsInfo");
+            menuActionService.AddNewAction('f', texts.FightButton(), "ActionsInfo");
             menuActionService.AddNewAction('b', texts.Back(), "ActionsInfo");
 
             menuActionService.AddNewAction('b', texts.Back(), "ActionInfo");

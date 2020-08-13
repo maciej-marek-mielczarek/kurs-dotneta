@@ -217,7 +217,7 @@ namespace Translations
             return speedInfo;
         }
 
-        internal string PickAlly()
+        internal string PickAllyButton()
         {
             string pickAlly = "(a)";
             switch (languageCode)
@@ -251,7 +251,7 @@ namespace Translations
             return hpInfo;
         }
 
-        internal string PickOpponent()
+        internal string PickOpponentButton()
         {
             string pickOpp = "(o)";
             switch (languageCode)
@@ -268,7 +268,7 @@ namespace Translations
             return pickOpp;
         }
 
-        internal string Fight()
+        internal string FightButton()
         {
             string fight = "(f)";
             switch (languageCode)
@@ -453,6 +453,23 @@ namespace Translations
                     break;
             }
             return maxHP;
+        }
+
+        internal string PickAlly()
+        {
+            string pickAlly = "";
+            switch(languageCode)
+            {
+                case 'p':
+                    pickAlly = "Wybierz w którego przeciwnika chcesz się zmienić.";
+                    break;
+                case 'e':
+                    pickAlly = "Please choose an opponent to turn into.";
+                    break;
+                default:
+                    break;
+            }
+            return pickAlly;
         }
     }
 }

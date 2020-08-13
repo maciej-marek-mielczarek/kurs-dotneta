@@ -22,5 +22,25 @@ namespace Doppelgänger
             string enoughSpaces = new string(' ', lineLength);
             Console.Write('\r' + enoughSpaces + '\r');
         }
+
+        internal static int CharDigitToInt(char v)
+        {
+            if (v >= '0' && v <= '9')
+            {
+                return v - '0';
+            }
+            else if (v >= 'a' && v <= 'z')
+            {
+                return v - 'a' + 10;
+            }
+            else if (v >= 'A' && v <= 'Z')
+            {
+                return v - 'A' + 10;
+            }
+            else
+            {
+                return v;
+            }
+        }
     }
 }

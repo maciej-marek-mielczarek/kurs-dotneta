@@ -15,11 +15,18 @@ namespace Doppelgänger
 
         private static readonly Random numberGenerator = new Random();
 
-        public Creature()
+        internal Creature()
         {
             Attack = (byte)numberGenerator.Next(MIN_ATTACK, MAX_ATTACK + 1);
             Speed = (byte)numberGenerator.Next(MIN_SPEED, MAX_SPEED + 1);
             MaxHP = (byte)numberGenerator.Next(MIN_MAXHP, MAX_MAXHP + 1);
+        }
+
+        internal Creature(byte attack, byte speed, byte maxHP)
+        {
+            Attack = attack;
+            Speed = speed;
+            MaxHP = maxHP;
         }
 
         internal byte Attack { get; }
