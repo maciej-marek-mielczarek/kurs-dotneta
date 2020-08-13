@@ -26,12 +26,14 @@ namespace Doppelgänger
 
             /////2a1a. choose ally submenu:
             ///// pick one opp to replace (0-9) (keep their stats),
+            ///// x to exit
             ///// then go to choose opp submenu
 
             /////2a1b. choose opponent submenu:
             /////display everyones' current hp
             /////mark which is you next to curr hp
             /////display 'choose next opp (0-9)' at line's end
+            /////x to exit
             //////2a1b1. choose opponent (0-9)
 
             /////2a1c. fight submenu:
@@ -129,20 +131,68 @@ namespace Doppelgänger
 
         private static void SpeedInfo(MenuActionService menuActionService)
         {
-            Console.Write("SpeedInfo");
-            throw new NotImplementedException();
+            Console.Write(texts.SpeedInfo());
+            List<MenuAction> actions = menuActionService.GetActionsForMenu("ActionInfo");
+            string possibleChoices = "";
+            foreach (var action in actions)
+            {
+                Console.Write(" [" + action.ActionName + "] ");
+                possibleChoices += action.KeyToChoose;
+            }
+            char menuChoice = Helpers.GetChar(possibleChoices);
+            Helpers.ClearLine();
+            switch (menuChoice)
+            {
+                case 'b':
+                    StatsInfo(menuActionService);
+                    break;
+                default:
+                    break;
+            }
         }
 
         private static void HpInfo(MenuActionService menuActionService)
         {
-            Console.Write("HpInfo");
-            throw new NotImplementedException();
+            Console.Write(texts.HPInfo());
+            List<MenuAction> actions = menuActionService.GetActionsForMenu("ActionInfo");
+            string possibleChoices = "";
+            foreach (var action in actions)
+            {
+                Console.Write(" [" + action.ActionName + "] ");
+                possibleChoices += action.KeyToChoose;
+            }
+            char menuChoice = Helpers.GetChar(possibleChoices);
+            Helpers.ClearLine();
+            switch (menuChoice)
+            {
+                case 'b':
+                    StatsInfo(menuActionService);
+                    break;
+                default:
+                    break;
+            }
         }
 
         private static void AttackInfo(MenuActionService menuActionService)
         {
-            Console.Write("AttackInfo");
-            throw new NotImplementedException();
+            Console.Write(texts.AttackInfo());
+            List<MenuAction> actions = menuActionService.GetActionsForMenu("ActionInfo");
+            string possibleChoices = "";
+            foreach (var action in actions)
+            {
+                Console.Write(" [" + action.ActionName + "] ");
+                possibleChoices += action.KeyToChoose;
+            }
+            char menuChoice = Helpers.GetChar(possibleChoices);
+            Helpers.ClearLine();
+            switch (menuChoice)
+            {
+                case 'b':
+                    StatsInfo(menuActionService);
+                    break;
+                default:
+                    break;
+            }
         }
 
         private static void ActionsInfo(MenuActionService menuActionService)
@@ -179,20 +229,68 @@ namespace Doppelgänger
 
         private static void FightInfo(MenuActionService menuActionService)
         {
-            Console.Write("FightInfo");
-            throw new NotImplementedException();
+            Console.Write(texts.FightInfo());
+            List<MenuAction> actions = menuActionService.GetActionsForMenu("ActionInfo");
+            string possibleChoices = "";
+            foreach (var action in actions)
+            {
+                Console.Write(" [" + action.ActionName + "] ");
+                possibleChoices += action.KeyToChoose;
+            }
+            char menuChoice = Helpers.GetChar(possibleChoices);
+            Helpers.ClearLine();
+            switch (menuChoice)
+            {
+                case 'b':
+                    ActionsInfo(menuActionService);
+                    break;
+                default:
+                    break;
+            }
         }
 
         private static void PickOpponentInfo(MenuActionService menuActionService)
         {
-            Console.Write("PickOpponentInfo");
-            throw new NotImplementedException();
+            Console.Write(texts.PickOpponentInfo());
+            List<MenuAction> actions = menuActionService.GetActionsForMenu("ActionInfo");
+            string possibleChoices = "";
+            foreach (var action in actions)
+            {
+                Console.Write(" [" + action.ActionName + "] ");
+                possibleChoices += action.KeyToChoose;
+            }
+            char menuChoice = Helpers.GetChar(possibleChoices);
+            Helpers.ClearLine();
+            switch (menuChoice)
+            {
+                case 'b':
+                    ActionsInfo(menuActionService);
+                    break;
+                default:
+                    break;
+            }
         }
 
         private static void PickAllyInfo(MenuActionService menuActionService)
         {
-            Console.Write("PickAllyInfo");
-            throw new NotImplementedException();
+            Console.Write(texts.PickAllyInfo());
+            List<MenuAction> actions = menuActionService.GetActionsForMenu("ActionInfo");
+            string possibleChoices = "";
+            foreach (var action in actions)
+            {
+                Console.Write(" [" + action.ActionName + "] ");
+                possibleChoices += action.KeyToChoose;
+            }
+            char menuChoice = Helpers.GetChar(possibleChoices);
+            Helpers.ClearLine();
+            switch (menuChoice)
+            {
+                case 'b':
+                    ActionsInfo(menuActionService);
+                    break;
+                default:
+                    break;
+            }
         }
 
         private static void MainMenu(MenuActionService menuActionService)
@@ -265,10 +363,14 @@ namespace Doppelgänger
             menuActionService.AddNewAction('s', texts.Speed(), "StatsInfo");
             menuActionService.AddNewAction('b', texts.Back(), "StatsInfo");
 
+            menuActionService.AddNewAction('b', texts.Back(), "StatInfo");
+
             menuActionService.AddNewAction('a', texts.PickAlly(), "ActionsInfo");
             menuActionService.AddNewAction('o', texts.PickOpponent(), "ActionsInfo");
             menuActionService.AddNewAction('f', texts.Fight(), "ActionsInfo");
             menuActionService.AddNewAction('b', texts.Back(), "ActionsInfo");
+
+            menuActionService.AddNewAction('b', texts.Back(), "ActionInfo");
         }
     }
 }

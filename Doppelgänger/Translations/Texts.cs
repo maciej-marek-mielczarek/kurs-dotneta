@@ -200,6 +200,23 @@ namespace Translations
             return back;
         }
 
+        internal string SpeedInfo()
+        {
+            string speedInfo = "";
+            switch(languageCode)
+            {
+                case 'p':
+                    speedInfo = "Liczba tur między atakami.";
+                    break;
+                case 'e':
+                    speedInfo = "Number of turns between attacks.";
+                    break;
+                default:
+                    break;
+            }
+            return speedInfo;
+        }
+
         internal string PickAlly()
         {
             string pickAlly = "(a)";
@@ -215,6 +232,23 @@ namespace Translations
                     break;
             }
             return pickAlly;
+        }
+
+        internal string HPInfo()
+        {
+            string hpInfo = "";
+            switch (languageCode)
+            {
+                case 'p':
+                    hpInfo = "Ilość obrażeń jakie Ty lub przeciwnik możesz przyjąć.";
+                    break;
+                case 'e':
+                    hpInfo = "Amount of damage you or your opponent can take.";
+                    break;
+                default:
+                    break;
+            }
+            return hpInfo;
         }
 
         internal string PickOpponent()
@@ -249,6 +283,74 @@ namespace Translations
                     break;
             }
             return fight;
+        }
+
+        internal string AttackInfo()
+        {
+            string attackInfo = "";
+            switch (languageCode)
+            {
+                case 'p':
+                    attackInfo = "Obrażenia zadawane w jednym ataku.";
+                    break;
+                case 'e':
+                    attackInfo = "Damage done per attack.";
+                    break;
+                default:
+                    break;
+            }
+            return attackInfo;
+        }
+
+        internal string FightInfo()
+        {
+            string fightInfo = "";
+            switch (languageCode)
+            {
+                case 'p':
+                    fightInfo = "Wciśnij 1-9 by kontynuować walkę przez 1-9 tur, 0 by uciec.";
+                    break;
+                case 'e':
+                    fightInfo = "Press 1-9 to keep fighting for 1-9 turns, 0 to run.";
+                    break;
+                default:
+                    break;
+            }
+            return fightInfo;
+        }
+
+        internal string PickOpponentInfo()
+        {
+            string oppInfo = "";
+            switch (languageCode)
+            {
+                case 'p':
+                    oppInfo = "Wciśnij 0-9 by walczyć z potworem numer 0-9, x by skończyć grę.";
+                    break;
+                case 'e':
+                    oppInfo = "Press 0-9 to fight creature number 0-9, x to end the game.";
+                    break;
+                default:
+                    break;
+            }
+            return oppInfo;
+        }
+
+        internal string PickAllyInfo()
+        {
+            string allyInfo = "";
+            switch (languageCode)
+            {
+                case 'p':
+                    allyInfo = "Wciśnij 0-9 by zacząć jako potwór numer 0-9, x by skończyć grę.";
+                    break;
+                case 'e':
+                    allyInfo = "Press 0-9 to start as creature number 0-9, x to end the game.";
+                    break;
+                default:
+                    break;
+            }
+            return allyInfo;
         }
     }
 }
