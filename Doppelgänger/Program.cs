@@ -331,7 +331,6 @@ namespace Doppelgänger
 
             char choice = Helpers.GetChar(possibleChoices);
             Helpers.ClearLine();
-
             if (choice != 'x')
             {
                 int chosenAlly = Helpers.CharDigitToInt(choice);
@@ -346,7 +345,6 @@ namespace Doppelgänger
                         creatures[i] = new Opponent(creatures[i]);
                     }
                 }
-
                 PickOppMenu(menuActionService);
             }
             else
@@ -379,10 +377,9 @@ namespace Doppelgänger
             }
 
             char choice = Helpers.GetChar(possibleChoices);
-            Helpers.ClearLine();
-
             if (choice != 'x')
             {
+                Helpers.ClearLine();
                 int chosenOppId = Helpers.CharDigitToInt(choice);
                 if (creatures[chosenOppId].CurrentHP == 0)
                 {
@@ -395,6 +392,7 @@ namespace Doppelgänger
             }
             else
             {
+                Console.WriteLine();
                 EndGameMenu(menuActionService);
             }
         }
@@ -417,14 +415,14 @@ namespace Doppelgänger
                 possibleChoices += i;
             }
             char choice = Helpers.GetChar(possibleChoices);
-            Helpers.ClearLine();
-
             if (choice == 'x')
             {
+                Console.WriteLine();
                 EndGameMenu(menuActionService);
             }
             else if (choice == '0')
             {
+                Helpers.ClearLine();
                 PickOppMenu(menuActionService);
             }
             else
@@ -438,6 +436,7 @@ namespace Doppelgänger
         {
             if (chosenFightLength == 0)
             {
+                Helpers.ClearLine();
                 FightSubMenu(menuActionService, chosenOppId, combatTurn);
             }
             else
@@ -487,6 +486,10 @@ namespace Doppelgänger
                             creatures[creatureId].CurrentHP = 0;
                             deadOppsCount++;
                             oppDied = true;
+                            if(creatures[creatureId] is Ally)
+                            {
+                                playerDied = true;
+                            }
                         }
                         else
                         {
@@ -496,12 +499,14 @@ namespace Doppelgänger
                 }
                 if (playerDied)
                 {
+                    Console.WriteLine();
                     EndGameMenu(menuActionService);
                 }
                 else if (oppDied)
                 {
                     if (deadOppsCount + 1 == NUMBER_OF_OPPS)
                     {
+                        Console.WriteLine();
                         EndGameMenu(menuActionService);
                     }
                     else
@@ -526,6 +531,7 @@ namespace Doppelgänger
                                 break;
                             }
                         }
+                        Helpers.ClearLine();
                         PickOppMenu(menuActionService);
                     }
                 }
@@ -533,6 +539,7 @@ namespace Doppelgänger
                 {
                     if (chosenFightLength == 1)
                     {
+                        Helpers.ClearLine();
                         FightSubMenu(menuActionService, chosenOppId, combatTurn);
                     }
                     else

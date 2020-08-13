@@ -52,11 +52,11 @@ namespace Doppelgänger
                 int creatureScore = 0;
                 if (creature is Ally)
                 {
-                    creatureScore = (int)Math.Round(10m - 10m * ((decimal)((Ally)creature).CurrentHP) / (decimal)creature.MaxHP);
+                    creatureScore = (int)Math.Floor(10m - 10m * ((decimal)((Ally)creature).CurrentHP) / (decimal)creature.MaxHP);
                 }
                 else if (creature is Opponent)
                 {
-                    creatureScore = (int)Math.Round(10m - 10m * ((decimal)((Opponent)creature).CurrentHP) / (decimal)creature.MaxHP);
+                    creatureScore = (int)Math.Floor(10m - 10m * ((decimal)((Opponent)creature).CurrentHP) / (decimal)creature.MaxHP);
                 }
                 score += creatureScore;
             }
