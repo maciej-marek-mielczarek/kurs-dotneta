@@ -8,7 +8,10 @@ namespace Doppelgänger
     {
         private static Texts texts;
         private const byte NUMBER_OF_OPPS = 10;
+        private const byte FIRST_COLUMN_WIDTH = 14;
         private static List<Creature> creatures;
+        private static int OTHER_COLUMNS_WIDTH = 6;
+
         static void Main(string[] args)
         {
             MenuActionService menuActionService = new MenuActionService();
@@ -315,7 +318,7 @@ namespace Doppelgänger
         {
             for (int i = 0; i < NUMBER_OF_OPPS; i++)
             {
-                creatures.Add(new Creature());
+                creatures.Add(new Opponent());
             }
             FightMenu(menuActionService);
         }
@@ -323,8 +326,41 @@ namespace Doppelgänger
         private static void FightMenu(MenuActionService menuActionService)
         {
             Console.WriteLine(texts.WelcomeToFight());
-            //display invariant stats
-            //go to pick ally submenu
+
+            Console.Write(texts.Id().PadRight(FIRST_COLUMN_WIDTH));
+            for (int i = 0; i < NUMBER_OF_OPPS; i++)
+            {
+                Console.Write(("|" + i).PadRight(OTHER_COLUMNS_WIDTH));
+            }
+            Console.WriteLine();
+
+            Console.Write(texts.Attack().PadRight(FIRST_COLUMN_WIDTH));
+            for (int i = 0; i < NUMBER_OF_OPPS; i++)
+            {
+                Console.Write(("|" + creatures[i].Attack).PadRight(OTHER_COLUMNS_WIDTH));
+            }
+            Console.WriteLine();
+
+            Console.Write(texts.Speed().PadRight(FIRST_COLUMN_WIDTH));
+            for (int i = 0; i < NUMBER_OF_OPPS; i++)
+            {
+                Console.Write(("|" + creatures[i].Speed).PadRight(OTHER_COLUMNS_WIDTH));
+            }
+            Console.WriteLine();
+
+            Console.Write(texts.MaxHP().PadRight(FIRST_COLUMN_WIDTH));
+            for (int i = 0; i < NUMBER_OF_OPPS; i++)
+            {
+                Console.Write(("|" + creatures[i].MaxHP).PadRight(OTHER_COLUMNS_WIDTH));
+            }
+            Console.WriteLine();
+
+            PickAllyMenu(menuActionService);
+        }
+
+        private static void PickAllyMenu(MenuActionService menuActionService)
+        {
+            throw new NotImplementedException();
         }
 
         private static void LanguageMenu(MenuActionService menuActionService)
@@ -360,9 +396,9 @@ namespace Doppelgänger
             menuActionService.AddNewAction('a', texts.Actions(), "Instructions");
             menuActionService.AddNewAction('b', texts.Back(), "Instructions");
 
-            menuActionService.AddNewAction('a', texts.Attack(), "StatsInfo");
-            menuActionService.AddNewAction('h', texts.HP(), "StatsInfo");
-            menuActionService.AddNewAction('s', texts.Speed(), "StatsInfo");
+            menuActionService.AddNewAction('a', texts.AttackButton(), "StatsInfo");
+            menuActionService.AddNewAction('h', texts.HPButton(), "StatsInfo");
+            menuActionService.AddNewAction('s', texts.SpeedButton(), "StatsInfo");
             menuActionService.AddNewAction('b', texts.Back(), "StatsInfo");
 
             menuActionService.AddNewAction('b', texts.Back(), "StatInfo");

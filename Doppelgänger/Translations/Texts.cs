@@ -132,7 +132,7 @@ namespace Translations
             return getInfoOn;
         }
 
-        internal string Attack()
+        internal string AttackButton()
         {
             string attack = "(a)";
             switch (languageCode)
@@ -149,7 +149,7 @@ namespace Translations
             return attack;
         }
 
-        internal string HP()
+        internal string HPButton()
         {
             string hp = "(h)";
             switch (languageCode)
@@ -166,7 +166,7 @@ namespace Translations
             return hp;
         }
 
-        internal string Speed()
+        internal string SpeedButton()
         {
             string speed = "(s)";
             switch (languageCode)
@@ -368,6 +368,91 @@ namespace Translations
                     break;
             }
             return welcomeToFight;
+        }
+
+        internal string Id()
+        {
+            string id = "";
+            switch(languageCode)
+            {
+                case 'p':
+                    id = "Id";
+                    break;
+                case 'e':
+                    id = "Id";
+                    break;
+                default:
+                    break;
+            }
+            return id;
+        }
+
+        internal string Attack()
+        {
+            string attack = "";
+            switch (languageCode)
+            {
+                case 'p':
+                    attack = "Atak";
+                    break;
+                case 'e':
+                    attack = "Attack";
+                    break;
+                default:
+                    break;
+            }
+            return attack;
+        }
+
+        internal string Speed()
+        {
+            string speed = "";
+            switch (languageCode)
+            {
+                case 'p':
+                    speed = "Szybkość";
+                    break;
+                case 'e':
+                    speed = "Speed";
+                    break;
+                default:
+                    break;
+            }
+            return speed;
+        }
+
+        internal string HP()
+        {
+            string hp = "";
+            switch (languageCode)
+            {
+                case 'p':
+                    hp = "Zdrowie";
+                    break;
+                case 'e':
+                    hp = "Health";
+                    break;
+                default:
+                    break;
+            }
+            return hp;
+        }
+
+        internal string MaxHP()
+        {
+            string maxHP = "";
+            switch (languageCode)
+            {
+                case 'p':
+                    maxHP = "Maks. Zdrowie";
+                    break;
+                case 'e':
+                    maxHP = "Max Health";
+                    break;
+                default:
+                    break;
+            }
+            return maxHP;
         }
     }
 }
