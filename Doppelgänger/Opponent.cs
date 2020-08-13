@@ -6,7 +6,9 @@
         internal Opponent(Creature cr) : base(cr.Attack, cr.Speed, cr.MaxHP, cr.MaxHP)
         {
         }
-
-        //public static implicit operator Ally(Opponent opp) => new Ally(opp);
+        internal Opponent(Ally ally) : base(ally.Attack, ally.Speed, ally.MaxHP, 0)
+        {
+        }
+        public static implicit operator Ally(Opponent opp) => new Ally(opp);
     }
 }

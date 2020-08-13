@@ -10,7 +10,7 @@ namespace Doppelgänger
         private const byte NUMBER_OF_OPPS = 10;
         private const byte FIRST_COLUMN_WIDTH = 14;
         private static List<Creature> creatures;
-        private static int OTHER_COLUMNS_WIDTH = 5;
+        private const int OTHER_COLUMNS_WIDTH = 5;
 
         static void Main(string[] args)
         {
@@ -18,22 +18,11 @@ namespace Doppelgänger
             InitializeLang(menuActionService);
 
             Console.WriteLine("Doppelgänger, a puzzle/rpg game.");
-            LanguageMenu(menuActionService);
             Console.WriteLine();
+            LanguageMenu(menuActionService);
             texts.Welcome();
             Console.WriteLine();
             MainMenu(menuActionService);
-
-            ///balance: choose good intervals for creature stat limits
-
-
-            /////combat simulation: continue fight for another 1-9 turns
-            /////or until somebody dies, whichever's first
-            /////you die or last opp dies -> go to end game menu
-            /////opp dies, some opps left -> turn into him, go to choose opp submenu
-
-
-
         }
 
         private static void InstructionsMenu(MenuActionService menuActionService)
@@ -368,7 +357,8 @@ namespace Doppelgänger
 
         private static void EndGameMenu(MenuActionService menuActionService)
         {
-            Console.WriteLine(texts.YourScoreIs()+Helpers.CalculateScore(creatures)+"%");
+            Console.WriteLine(texts.YourScoreIs() + Helpers.CalculateScore(creatures) + "%");
+            Console.WriteLine();
             creatures = new List<Creature>();
             MainMenu(menuActionService);
         }
@@ -394,7 +384,14 @@ namespace Doppelgänger
             if (choice != 'x')
             {
                 int chosenOppId = Helpers.CharDigitToInt(choice);
-                FightSubMenu(menuActionService, chosenOppId, 0);
+                if (creatures[chosenOppId].CurrentHP == 0)
+                {
+                    PickOppMenu(menuActionService);
+                }
+                else
+                {
+                    FightSubMenu(menuActionService, chosenOppId, 0);
+                }
             }
             else
             {
@@ -426,29 +423,125 @@ namespace Doppelgänger
             {
                 EndGameMenu(menuActionService);
             }
-            else if(choice == '0')
+            else if (choice == '0')
             {
                 PickOppMenu(menuActionService);
             }
             else
             {
                 int chosenFightLength = Helpers.CharDigitToInt(choice);
-                FightSimulation(menuActionService, chosenFightLength, combatTurn);
+                FightSimulation(menuActionService, chosenOppId, chosenFightLength, combatTurn);
             }
         }
 
-        private static void FightSimulation(MenuActionService menuActionService, int chosenFightLength, int combatTurn)
+        private static void FightSimulation(MenuActionService menuActionService, int chosenOppId, int chosenFightLength, int combatTurn)
         {
-            //register hits in this combat turn,
-            //see is anyone died
-            ///if ally died, go to end game screen
-            ///else if opp died, 
-            //// if this was last opp, go to end game screen
-            //// else change ally and go to choose opp screen
-            //else(no one died this turn)
-            ///if  chosenFightLength was 1, go back to fight sumbenu
-            ///else call combat simulation with combat turn 1 higher
-            ///and simulation length 1 lower
+            if (chosenFightLength == 0)
+            {
+                FightSubMenu(menuActionService, chosenOppId, combatTurn);
+            }
+            else
+            {
+                ++combatTurn;
+                byte playersStrike = 0, oppsStrike = 0;
+                for (int creatureId = 0; creatureId < NUMBER_OF_OPPS; ++creatureId)
+                {
+                    if (creatures[creatureId] is Ally)
+                    {
+                        if (combatTurn % creatures[creatureId].Speed == 0)
+                        {
+                            playersStrike = creatures[creatureId].Attack;
+                        }
+                    }
+                    else if (creatureId == chosenOppId && combatTurn % creatures[creatureId].Speed == 0)
+                    {
+                        oppsStrike = creatures[creatureId].Attack;
+                    }
+                }
+                bool playerDied = false, oppDied = false;
+                byte deadOppsCount = 0;
+                for (int creatureId = 0; creatureId < NUMBER_OF_OPPS; ++creatureId)
+                {
+                    if (creatures[creatureId] is Ally)
+                    {
+                        var playersHP = creatures[creatureId].CurrentHP;
+                        if (playersHP <= oppsStrike)
+                        {
+                            creatures[creatureId].CurrentHP = 0;
+                            playerDied = true;
+                        }
+                        else
+                        {
+                            creatures[creatureId].CurrentHP -= oppsStrike;
+                        }
+                    }
+                    else if (creatures[creatureId].CurrentHP == 0)
+                    {
+                        deadOppsCount++;
+                    }
+                    if (creatureId == chosenOppId)
+                    {
+                        var oppsHP = creatures[creatureId].CurrentHP;
+                        if (oppsHP <= playersStrike)
+                        {
+                            creatures[creatureId].CurrentHP = 0;
+                            deadOppsCount++;
+                            oppDied = true;
+                        }
+                        else
+                        {
+                            creatures[creatureId].CurrentHP -= playersStrike;
+                        }
+                    }
+                }
+                if (playerDied)
+                {
+                    EndGameMenu(menuActionService);
+                }
+                else if (oppDied)
+                {
+                    if (deadOppsCount + 1 == NUMBER_OF_OPPS)
+                    {
+                        EndGameMenu(menuActionService);
+                    }
+                    else
+                    {
+                        float previousAllysHPPercent = ((float)(creatures.Find(cr => cr is Ally).CurrentHP)) / ((float)(creatures.Find(cr => cr is Ally).MaxHP));
+                        bool leftOldAlly = false, assumedNewShape = false;
+                        for (int creatureId = 0; creatureId < NUMBER_OF_OPPS; creatureId++)
+                        {
+                            if (!leftOldAlly && creatures[creatureId] is Ally)
+                            {
+                                Opponent oldAlly = (Ally)creatures[creatureId];
+                                creatures[creatureId] = oldAlly;
+                            }
+                            if (!assumedNewShape && creatureId == chosenOppId)
+                            {
+                                Ally newAlly = (Opponent)creatures[creatureId];
+                                newAlly.CurrentHP = (byte)Math.Ceiling(newAlly.MaxHP * previousAllysHPPercent);
+                                creatures[creatureId] = newAlly;
+                            }
+                            if (assumedNewShape && leftOldAlly)
+                            {
+                                break;
+                            }
+                        }
+                        PickOppMenu(menuActionService);
+                    }
+                }
+                else
+                {
+                    if (chosenFightLength == 1)
+                    {
+                        FightSubMenu(menuActionService, chosenOppId, combatTurn);
+                    }
+                    else
+                    {
+                        chosenFightLength--;
+                        FightSimulation(menuActionService, chosenOppId, chosenFightLength, combatTurn);
+                    }
+                }
+            }
         }
 
         private static void LanguageMenu(MenuActionService menuActionService)
