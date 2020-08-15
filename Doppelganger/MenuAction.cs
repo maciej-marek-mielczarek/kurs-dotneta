@@ -1,4 +1,4 @@
-﻿namespace Doppelgänger
+﻿namespace Doppelganger
 {
     internal class MenuAction
     {

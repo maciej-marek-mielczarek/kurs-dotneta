@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Doppelgänger
+namespace Doppelganger
 {
     internal static class Helpers
     {

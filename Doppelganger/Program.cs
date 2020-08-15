@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Translations;
 
-namespace Doppelgänger
+namespace Doppelganger
 {
     class Program
     {

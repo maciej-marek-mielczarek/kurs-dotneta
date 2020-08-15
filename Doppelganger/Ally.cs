@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Doppelgänger
+namespace Doppelganger
 {
     internal class Ally : Creature
     {
