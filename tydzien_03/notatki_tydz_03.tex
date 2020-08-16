@@ -95,4 +95,34 @@ Definiujemy jak inne klasy, tylko z $"$<T>$"$ od razu za nazwą klasy. W środku
 
 Aby ograniczyć w naszej klasie generycznej możliwe typy T, piszemy zaraz za nazwą klasy (i za <T>) $"$where T jakiś warunek$"$, np. $"$where T: IFoo$"$, czyli akceptujemy tylko typy implementujące interfejs IFoo albo $"$where T: class$"$, czyli T musi być klasą (a nie typem prostym).
 
+\section{Refaktor}
+Do zrobienia (jeśli ma to sens w mojej aplikacji):
+\begin{enumerate}
+\item \label{Podzial} Podział rozwiązania na więcej niż 1 projekt.
+\item \label{Interfejsy} Dodanie interfejsów do serwisów.
+\item \label{Elementy Bazowe} Dodanie serwisu i modelu bazowego.
+\end{enumerate}
+
+W moim projekcie jest raczej wystarczający bałagan, żeby chwilowo robienie nowych funkcjonalności odłożyć na później.
+
+\subsection{Ad.\ref{Podzial}}
+Dodatkowe projekty to prawdopodobnie powinny byś biblioteki (Class Library (.Net Standard)). Po stworzeniu projektu usunąć przykładową klasę, dodać zależność projektu głównego od biblioteki i ustawić $"$Target Framework$"$ w nowej bibliotece (w pliku csproj) na pożądaną wartość (zapewne taką jak w projekcie głównym).
+
+Jedna z bibliotek (App) do trzymania serwisów i sterowania logiką aplikacji. W środku folder Abstract do interfejsów i Concrete do implementujących je klas. Miejsce metody inicjalizującej jakiś serwis jest w tym serwisie. Folder App.Managers i w środku Managery (Kontrolery) do komunikacji z użytkownikiem, wołania metod serwisów i decydowania co się dzieje w programie. W programowaniu internetowym serwisów będzie więcej.
+
+Jedna z bibliotek (Domain) do trzymania Modeli, czyli wszystkich klas reprezentujących obiekty, które mogą w przyszłości zostać wrzucone do lub pobrane z bazy danych.
+
+Przy przenoszeniu plików między projektami pamiętać żeby zmienić nazwę przestrzeni nazw.
+
+Folder Helpers zostaje w głównej części projektu.
+
+\subsection{Ad.\ref{Elementy Bazowe}}
+Typy bazowe robimy, w miarę możliwości, generyczne.
+
+Folder App.Common do trzymania serwisu bazowego.
+
+Domain.Common do trzymania modelu bazowego (BaseEntity) i AuditableModel z poprzednich lekcji.
+
+Domain.Entity do trzymania reszty modeli.
+
 \end{document}
