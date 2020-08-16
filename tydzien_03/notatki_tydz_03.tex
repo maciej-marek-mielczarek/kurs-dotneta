@@ -41,5 +41,16 @@ W C\# każda klasa może dziedziczyć tylko po 1 klasie.
 W programowaniu sieciowym często spotyka się klasę bazową AuditableModel z właściwościami mówiącymi kto i kiedy ją stworzył i zmodyfikował. Po tej klasie dziedziczy wszystko co chcemy zapisywać do bazy danych.
 
 \section{Polimorfizm}
+Statyczny -- przeciążanie funkcji i wybieranie wprost liczbą i typem argumentów która ma być wołana. Program wybiera funkcję na etapie kompilacji.
+
+Dynamiczny -- decyzja który kod zostanie wykonany jest odkładana do momentu wykonania kodu. Do nadpisywania metod z klas bazowych używamy modyfikatorów virtual -- przy metodzie (w klasie bazowej) do nadpisania i override przy metodzie (w klasie potomnej) nadpisującej.
+
+Jak to włożyć do swojego projektu? Zrobić klasę bazową z metodą wirtualną i 2 klasy dziedziczące po niej, nadpisujące tą metodę. Następnie trzymać obiekty typów potomnych w zmiennej (prawdopodobnie tablicy zmiennych) zadeklarowanej jako bazowa. Potem wołać tą wspólną metodę i użyć faktu, że dla obiektów każdej z klas potomnych będzie wołana jej wersja funkcji. Czyli jeśli mam w projekcie jakąś metodą wirtualną, to prawdopodobnie używam tego konceptu.
+
+Aha, nie jestem pewien czy było to powiedziane wprost, ale obiekty typów pochodnych można trzymać w zmiennej typu bazowego.
+
+new zamiast override mówi, że to jest nowa metoda, nie związana z metodą w klasie bazowej. To znaczy jeśli mamy obiekt typu pochodnego w zmiennej typu bazowego i wołamy tą $"$wspólną$"$ metodę, wtedy, przy braku powiązania metody bazowej z pochodną, zostanie wywołana metoda z klasy bazowej.
+
+\section{Hermetyzacja}
 
 \end{document}
