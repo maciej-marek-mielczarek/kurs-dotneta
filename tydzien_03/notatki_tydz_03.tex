@@ -16,6 +16,8 @@
 
 \maketitle
 
+\tableofcontents
+
 \section{Wstęp. Stan aplikacji po 2. tygodniu}
 U mnie jak i u przynajmniej kilkorga innych kursantów aplikacja ma przynajmniej 1 plik który ma kilkaset linii. Prawdopodobnie można to uznać za wyznacznik bałaganu, potrzeby refactoru i powtarzającego się kodu. Aplikacje jednak w jakimś stopniu działają.
 
@@ -84,6 +86,13 @@ Standardowo najpierw piszemy interfejsy, a potem klasy.
 
 Można implementować w klasie metodę wymaganą przez interfejs jako wirtualną.
 
+Nazwy interfejsów zaczynamy od $"$I$"$.
+
 \section{Typy generyczne}
+Znane w C++ jako szablony (templates), np List<JakiśTyp>. Często wykorzystywane w operacjach typu CRUD (create, read, update, delete).
+
+Definiujemy jak inne klasy, tylko z $"$<T>$"$ od razu za nazwą klasy. W środku naszej klasy generycznej tego T możemy używać jako typu.
+
+Aby ograniczyć w naszej klasie generycznej możliwe typy T, piszemy zaraz za nazwą klasy (i za <T>) $"$where T jakiś warunek$"$, np. $"$where T: IFoo$"$, czyli akceptujemy tylko typy implementujące interfejs IFoo albo $"$where T: class$"$, czyli T musi być klasą (a nie typem prostym).
 
 \end{document}
