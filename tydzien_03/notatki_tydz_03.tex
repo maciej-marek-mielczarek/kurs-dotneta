@@ -55,5 +55,16 @@ new zamiast override mówi, że to jest nowa metoda, nie związana z metodą w k
 Niektóre pola (albo tylko ich settery) i metody są wewnętrznymi sprawami klasy bądź projektu, więc nie powinny być dostępne z zewnątrz. Hermetyzacja albo inaczej enkapsulacja polega właśnie na takim ustawieniu modyfikatorów dostępu, żeby sprawy wewnętrzne pozostawały wewnątrz.
 
 \section{Klasy abstrakcyjne}
+Modyfikator abstract przy klasie mówi, że nie da się tworzyć obiektów danej klasy. Służą one do tego, żeby po nich dziedziczyć, a więc po to żeby trzymać tam pola, właściwości i metody wspólne dla klas potomnych.
+
+Modyfikator abstract przy metodzie mówi, że tej metody nie da się używać, służy ona tylko do tego, żeby ją nadpisywać w klasach potomnych. Czyli chcemy, żeby wszystkie klasy potomne miały metodę o danej nazwie i sygnaturze (czyli typach przyjmowanych i zwracanych), ale każda z nich może być inna.
+
+Metoda abstrakcyjna nie może mieć ciała.
+
+Nie nadpisanie metody abstrakcyjnej w klasie pochodnej zostanie wychwycone przez kompilator jako błąd.
+
+Modyfikator sealed przy klasie mówi, że nie można po niej dziedziczyć. Ta możliwość jest stosowana bardzo rzadko.
+
+\section{Interfejsy}
 
 \end{document}
