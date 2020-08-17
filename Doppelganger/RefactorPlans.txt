@@ -1,0 +1,56 @@
+library App - services and application logic
+	App.Abstract - interfaces
+	App.Concrete - classes - services, every service's initializer method is in that service
+
+OldClass:
+OldClass's contents
+OldClass's contents
+	modifiers NewClass1: what NewClass1 inherits from and implements
+	... NewClass2: ...
+		text saying which parts of OldClass the NewClass2 gets
+			elements of NewClass2
+	... NewClass3: ...
+	... NewInterface1: ...
+	...
+
+Translations.Texts:
+text strings in pl and eng: welcome texts, menu texts, buttons, stat info texts, menu info texts, stat names
+methods to return those strings based on language, some strings are kind-of-buttons - they have one letter in parentheses
+one method to write strings instead of returning based on language -> change it like the other ones,
+field char languageCode,
+ctor takeing char languageCode
+
+texts in Domain, services in App pick the correct classes to serve from in initializers
+service has list of items
+	public class Domain.Entity.WelcomeTexts: Texts
+		pl and eng welcome texts
+			private const Dictionary<enum WelcomeTexts, string> PlDic - textIds->plTextStrings
+                        private const Dictionary<enum WelcomeTexts, string> EnDic - textIds->enTextStrings
+			public readonly Dictionary<enum WelcomeTexts, string> Dic - inherited
+			ctor(enum lang) - Dic is assigned Dic from const based on chosen lang
+			ctor(Dictionary<enum WelcomeTexts, string>) - Dic entries are assigned strings from given Dinctionary, probably from db (new feature, later)
+	public class Domain.Entity.MenuTexts: Texts
+same
+	public class Domain.Entity.StatInfoTexts: Texts
+same
+	public class Domain.Entity.MenuInfoTexts: Texts
+same
+        public class Domain.Entity.MechanicsInfoTexts: Texts (new feature, later)
+same
+	public class Domain.Entity.StatNameTexts: Texts
+same
+	public class Domain.Entity.ButtonTexts: Texts
+same, just the words, Domain knows nothing about key presses
+	public class Domain.Common.Texts: AuditableModel
+		this is the base entity for text classes
+                        public readonly Dictionary<enum WelcomeTexts, string> Dic
+	public class Domain.Common.AuditableModel
+same sa Kajetan's
+	file Domain.Common.TextLists
+			enums welcome texts, menu texts, buttons (probably not this one?), stat info texts, menu info texts, stat names
+	public static string Helpers.Helpers.Buttonize(string, char)
+		turning words + chars into buttons
+			make a button-string with the char in parentheses out of a string
+	other changes:
+		buttons and strings are in a different place
+			change button-getting and string-getting calls
