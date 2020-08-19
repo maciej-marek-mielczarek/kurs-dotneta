@@ -13,7 +13,7 @@ namespace Doppelganger.App.Concrete
         {
             var dictionaries = new Dictionary<TextCathegories, TextsBase>();
             
-            dictionaries.Add(TextCathegories.ButtonTexts, new ButtonTexts(language));
+            dictionaries.Add(TextCathegories.GenericButtonTexts, new GenericButtonTexts(language));
             dictionaries.Add(TextCathegories.MenuTexts, new MenuTexts(language));
             dictionaries.Add(TextCathegories.WelcomeTexts, new WelcomeTexts(language));
             dictionaries.Add(TextCathegories.MechanicsInfoTexts, new MechanicsInfoTexts(language));
@@ -47,6 +47,21 @@ namespace Doppelganger.App.Concrete
         public string Exit()
         {
             return GetText(TextCathegories.MenuTexts, TextLists.MenuTexts.Exit);
+        }
+
+        public string Stats()
+        {
+            return GetText(TextCathegories.MenuInfoTexts, TextLists.MenuInfoTexts.Stats);
+        }
+
+        public string Actions()
+        {
+            return GetText(TextCathegories.MenuInfoTexts, TextLists.MenuInfoTexts.Actions);
+        }
+
+        public string Back()
+        {
+            return GetText(TextCathegories.GenericButtonTexts, TextLists.GenericButtonTexts.Back);
         }
     }
 }

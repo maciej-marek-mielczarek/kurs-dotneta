@@ -2,7 +2,7 @@ namespace Doppelganger.Domain.Common
 {
     public enum TextCathegories
     {
-        ButtonTexts,
+        GenericButtonTexts,
         MechanicsInfoTexts,
         MenuInfoTexts,
         MenuTexts,

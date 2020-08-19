@@ -6,5 +6,8 @@ namespace Doppelganger.App.Abstract
         public string NewGame();
         public string Instructions();
         public string Exit();
+        public string Stats();
+        public string Actions();
+        public string Back();
     }
 }

@@ -586,23 +586,23 @@ namespace Doppelganger
             menuActionService.AddNewAction('i', textService.Instructions(), "Main");
             menuActionService.AddNewAction('x', textService.Exit(), "Main");
 
-            menuActionService.AddNewAction('s', texts.Stats(), "Instructions");
-            menuActionService.AddNewAction('a', texts.Actions(), "Instructions");
-            menuActionService.AddNewAction('b', texts.Back(), "Instructions");
+            menuActionService.AddNewAction('s', textService.Stats(), "Instructions");
+            menuActionService.AddNewAction('a', textService.Actions(), "Instructions");
+            menuActionService.AddNewAction('b', textService.Back(), "Instructions");
 
             menuActionService.AddNewAction('a', texts.AttackButton(), "StatsInfo");
             menuActionService.AddNewAction('h', texts.HPButton(), "StatsInfo");
             menuActionService.AddNewAction('s', texts.SpeedButton(), "StatsInfo");
-            menuActionService.AddNewAction('b', texts.Back(), "StatsInfo");
+            menuActionService.AddNewAction('b', textService.Back(), "StatsInfo");
 
-            menuActionService.AddNewAction('b', texts.Back(), "StatInfo");
+            menuActionService.AddNewAction('b', textService.Back(), "StatInfo");
 
             menuActionService.AddNewAction('a', texts.PickAllyButton(), "ActionsInfo");
             menuActionService.AddNewAction('o', texts.PickOpponentButton(), "ActionsInfo");
             menuActionService.AddNewAction('f', texts.FightButton(), "ActionsInfo");
-            menuActionService.AddNewAction('b', texts.Back(), "ActionsInfo");
+            menuActionService.AddNewAction('b', textService.Back(), "ActionsInfo");
 
-            menuActionService.AddNewAction('b', texts.Back(), "ActionInfo");
+            menuActionService.AddNewAction('b', textService.Back(), "ActionInfo");
 
             creatures = new List<Creature>();
         }

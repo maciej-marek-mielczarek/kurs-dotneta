@@ -9,40 +9,6 @@
             this.languageCode = languageCode;
         }
 
-        internal string Stats()
-        {
-            string stats = "(s)";
-            switch (languageCode)
-            {
-                case 'p':
-                    stats = "Statystyki";
-                    break;
-                case 'e':
-                    stats = "Stats";
-                    break;
-                default:
-                    break;
-            }
-            return stats;
-        }
-
-        internal string Actions()
-        {
-            string actions = "(a)";
-            switch (languageCode)
-            {
-                case 'p':
-                    actions = "Akcje";
-                    break;
-                case 'e':
-                    actions = "Actions";
-                    break;
-                default:
-                    break;
-            }
-            return actions;
-        }
-
         internal string GetInfoOn()
         {
             string getInfoOn = "";
@@ -109,23 +75,6 @@
                     break;
             }
             return speed;
-        }
-
-        internal string Back()
-        {
-            string back = "(b)";
-            switch (languageCode)
-            {
-                case 'p':
-                    back = "Wstecz";
-                    break;
-                case 'e':
-                    back = "Back";
-                    break;
-                default:
-                    break;
-            }
-            return back;
         }
 
         internal string SpeedInfo()

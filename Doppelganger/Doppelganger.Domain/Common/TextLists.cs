@@ -16,7 +16,7 @@ namespace Doppelganger.Domain.Common
             Exit
         }
 
-        public enum ButtonTexts
+        public enum GenericButtonTexts
         {
             Back
         }
@@ -27,6 +27,8 @@ namespace Doppelganger.Domain.Common
 
         public enum MenuInfoTexts
         {
+            Stats,
+            Actions,
         }
 
         public enum StatNames
