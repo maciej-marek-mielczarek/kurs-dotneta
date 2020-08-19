@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Doppelganger
 {
-    internal static class Helpers
+    public static class Helpers
     {
         internal static char GetChar(string possibleChoices)
         {//Not "try to get a correct char", rather "try until you get a correct char".
@@ -42,6 +42,28 @@ namespace Doppelganger
             {
                 return v;
             }
+        }
+
+        public static string Buttonize(string buttonText, char buttonKey)
+        {
+            int indexOfKey;
+            if (buttonText.Contains(char.ToUpper(buttonKey)))
+            {
+                indexOfKey = buttonText.IndexOf(char.ToUpper(buttonKey));
+            }
+            else if(buttonText.Contains(char.ToLower(buttonKey)))
+            {
+                indexOfKey = buttonText.IndexOf(char.ToLower(buttonKey));
+            }
+            else
+            {
+                buttonText += " " + buttonKey;
+                indexOfKey = buttonText.Length - 1;
+            }
+            buttonText = buttonText.Insert(indexOfKey + 1, ")");
+            buttonText = buttonText.Insert(indexOfKey, "(");
+
+            return " [" + buttonText + "] ";
         }
 
         internal static int CalculateScore(List<Creature> creatures)

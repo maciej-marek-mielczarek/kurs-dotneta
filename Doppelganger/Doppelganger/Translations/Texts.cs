@@ -15,10 +15,10 @@
             switch (languageCode)
             {
                 case 'p':
-                    newGame = "(N)owa Gra";
+                    newGame = "Nowa Gra";
                     break;
                 case 'e':
-                    newGame = "(N)ew Game";
+                    newGame = "New Game";
                     break;
                 default:
                     break;
@@ -32,10 +32,10 @@
             switch (languageCode)
             {
                 case 'p':
-                    instructions = "(I)nstrukcje";
+                    instructions = "Instrukcje";
                     break;
                 case 'e':
-                    instructions = "(I)nstructions";
+                    instructions = "Instructions";
                     break;
                 default:
                     break;
@@ -49,10 +49,10 @@
             switch (languageCode)
             {
                 case 'p':
-                    exit = "Wyjście (x)";
+                    exit = "Wyjście";
                     break;
                 case 'e':
-                    exit = "E(x)it";
+                    exit = "Exit";
                     break;
                 default:
                     break;
@@ -66,10 +66,10 @@
             switch (languageCode)
             {
                 case 'p':
-                    stats = "(S)tatystyki";
+                    stats = "Statystyki";
                     break;
                 case 'e':
-                    stats = "(S)tats";
+                    stats = "Stats";
                     break;
                 default:
                     break;
@@ -83,10 +83,10 @@
             switch (languageCode)
             {
                 case 'p':
-                    actions = "(A)kcje";
+                    actions = "Akcje";
                     break;
                 case 'e':
-                    actions = "(A)ctions";
+                    actions = "Actions";
                     break;
                 default:
                     break;
@@ -117,10 +117,10 @@
             switch (languageCode)
             {
                 case 'p':
-                    attack = "(A)tak";
+                    attack = "Atak";
                     break;
                 case 'e':
-                    attack = "(A)ttack";
+                    attack = "Attack";
                     break;
                 default:
                     break;
@@ -134,10 +134,10 @@
             switch (languageCode)
             {
                 case 'p':
-                    hp = "Zdrowie (h)";
+                    hp = "Zdrowie";
                     break;
                 case 'e':
-                    hp = "(H)ealth";
+                    hp = "Health";
                     break;
                 default:
                     break;
@@ -151,10 +151,10 @@
             switch (languageCode)
             {
                 case 'p':
-                    speed = "(S)zybkość";
+                    speed = "Szybkość";
                     break;
                 case 'e':
-                    speed = "(S)peed";
+                    speed = "Speed";
                     break;
                 default:
                     break;
@@ -168,10 +168,10 @@
             switch (languageCode)
             {
                 case 'p':
-                    back = "Wstecz (b)";
+                    back = "Wstecz";
                     break;
                 case 'e':
-                    back = "(B)ack";
+                    back = "Back";
                     break;
                 default:
                     break;
@@ -202,10 +202,10 @@
             switch (languageCode)
             {
                 case 'p':
-                    pickAlly = "Sojuszniku (a)";
+                    pickAlly = "Sojuszniku";
                     break;
                 case 'e':
-                    pickAlly = "(A)lly";
+                    pickAlly = "Ally";
                     break;
                 default:
                     break;
@@ -236,10 +236,10 @@
             switch (languageCode)
             {
                 case 'p':
-                    pickOpp = "Przeciwniku (o)";
+                    pickOpp = "Przeciwniku";
                     break;
                 case 'e':
-                    pickOpp = "(O)pponent";
+                    pickOpp = "Opponent";
                     break;
                 default:
                     break;
@@ -253,10 +253,10 @@
             switch (languageCode)
             {
                 case 'p':
-                    fight = "Walka (f)";
+                    fight = "Walka";
                     break;
                 case 'e':
-                    fight = "(F)ight";
+                    fight = "Fight";
                     break;
                 default:
                     break;

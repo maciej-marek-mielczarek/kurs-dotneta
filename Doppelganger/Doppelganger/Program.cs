@@ -36,7 +36,7 @@ namespace Doppelganger
             Console.Write(texts.GetInfoOn());
             foreach (var action in actions)
             {
-                Console.Write(" [" + action.ActionName + "] ");
+                Console.Write(Helpers.Buttonize(action.ActionName, action.KeyToChoose));
                 possibleChoices += action.KeyToChoose;
             }
             char menuChoice = Helpers.GetChar(possibleChoices);
@@ -65,7 +65,7 @@ namespace Doppelganger
             Console.Write(texts.GetInfoOn());
             foreach (var action in actions)
             {
-                Console.Write(" [" + action.ActionName + "] ");
+                Console.Write(Helpers.Buttonize(action.ActionName,action.KeyToChoose));
                 possibleChoices += action.KeyToChoose;
             }
             char menuChoice = Helpers.GetChar(possibleChoices);
@@ -96,7 +96,7 @@ namespace Doppelganger
             string possibleChoices = "";
             foreach (var action in actions)
             {
-                Console.Write(" [" + action.ActionName + "] ");
+                Console.Write(Helpers.Buttonize(action.ActionName,action.KeyToChoose));
                 possibleChoices += action.KeyToChoose;
             }
             char menuChoice = Helpers.GetChar(possibleChoices);
@@ -118,7 +118,7 @@ namespace Doppelganger
             string possibleChoices = "";
             foreach (var action in actions)
             {
-                Console.Write(" [" + action.ActionName + "] ");
+                Console.Write(Helpers.Buttonize(action.ActionName,action.KeyToChoose));
                 possibleChoices += action.KeyToChoose;
             }
             char menuChoice = Helpers.GetChar(possibleChoices);
@@ -140,7 +140,7 @@ namespace Doppelganger
             string possibleChoices = "";
             foreach (var action in actions)
             {
-                Console.Write(" [" + action.ActionName + "] ");
+                Console.Write(Helpers.Buttonize(action.ActionName,action.KeyToChoose));
                 possibleChoices += action.KeyToChoose;
             }
             char menuChoice = Helpers.GetChar(possibleChoices);
@@ -163,7 +163,7 @@ namespace Doppelganger
             Console.Write(texts.GetInfoOn());
             foreach (var action in actions)
             {
-                Console.Write(" [" + action.ActionName + "] ");
+                Console.Write(Helpers.Buttonize(action.ActionName,action.KeyToChoose));
                 possibleChoices += action.KeyToChoose;
             }
             char menuChoice = Helpers.GetChar(possibleChoices);
@@ -194,7 +194,7 @@ namespace Doppelganger
             string possibleChoices = "";
             foreach (var action in actions)
             {
-                Console.Write(" [" + action.ActionName + "] ");
+                Console.Write(Helpers.Buttonize(action.ActionName,action.KeyToChoose));
                 possibleChoices += action.KeyToChoose;
             }
             char menuChoice = Helpers.GetChar(possibleChoices);
@@ -216,7 +216,7 @@ namespace Doppelganger
             string possibleChoices = "";
             foreach (var action in actions)
             {
-                Console.Write(" [" + action.ActionName + "] ");
+                Console.Write(Helpers.Buttonize(action.ActionName,action.KeyToChoose));
                 possibleChoices += action.KeyToChoose;
             }
             char menuChoice = Helpers.GetChar(possibleChoices);
@@ -238,7 +238,7 @@ namespace Doppelganger
             string possibleChoices = "";
             foreach (var action in actions)
             {
-                Console.Write(" [" + action.ActionName + "] ");
+                Console.Write(Helpers.Buttonize(action.ActionName,action.KeyToChoose));
                 possibleChoices += action.KeyToChoose;
             }
             char menuChoice = Helpers.GetChar(possibleChoices);
@@ -260,7 +260,7 @@ namespace Doppelganger
             string possibleChoices = "";
             foreach (var action in actions)
             {
-                Console.Write(" [" + action.ActionName + "] ");
+                Console.Write(Helpers.Buttonize(action.ActionName,action.KeyToChoose));
                 possibleChoices += action.KeyToChoose;
             }
             char menuChoice = Helpers.GetChar(possibleChoices);
@@ -562,7 +562,7 @@ namespace Doppelganger
             string possibleChoices = "";
             foreach (var action in actions)
             {
-                Console.Write(" [" + action.ActionName + "] ");
+                Console.Write(Helpers.Buttonize(action.ActionName,action.KeyToChoose));
                 possibleChoices += action.KeyToChoose;
             }
             char languageCode = Helpers.GetChar(possibleChoices);
@@ -574,8 +574,8 @@ namespace Doppelganger
 
         private static void InitializeLang(MenuActionService menuActionService)
         {
-            menuActionService.AddNewAction('p', "(p)l", "Lang");
-            menuActionService.AddNewAction('e', "(e)ng", "Lang");
+            menuActionService.AddNewAction('p', "pl", "Lang");
+            menuActionService.AddNewAction('e', "eng", "Lang");
         }
 
         private static void Initialize(MenuActionService menuActionService)
