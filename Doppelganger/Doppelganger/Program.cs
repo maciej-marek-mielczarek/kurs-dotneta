@@ -15,6 +15,8 @@ namespace Doppelganger
         private static List<Creature> creatures;
         private const int OTHER_COLUMNS_WIDTH = 5;
 
+        private static ITextService textService;
+
         static void Main(string[] args)
         {
             MenuActionService menuActionService = new MenuActionService();
@@ -22,7 +24,7 @@ namespace Doppelganger
 
             Console.WriteLine("Doppelgänger, a puzzle/rpg game.");
             Console.WriteLine();
-            ITextService textService = new TextService(LanguageMenu(menuActionService));
+            LanguageMenu(menuActionService);
             Console.WriteLine(textService.Welcome());
             Console.WriteLine();
             MainMenu(menuActionService);
@@ -554,7 +556,7 @@ namespace Doppelganger
             }
         }
 
-        private static Language LanguageMenu(MenuActionService menuActionService)
+        private static void LanguageMenu(MenuActionService menuActionService)
         {
             //Language Choice Menu
             Console.Write("Please choose your language: ");
@@ -568,8 +570,8 @@ namespace Doppelganger
             char languageCode = Helpers.GetChar(possibleChoices);
             Helpers.ClearLine();
             texts = new Texts(languageCode);
+            textService = new TextService(languageCode == 'p' ? Language.Polish : Language.English);
             Initialize(menuActionService);
-            return languageCode == 'p' ? Language.Polish : Language.English;
         }
 
         private static void InitializeLang(MenuActionService menuActionService)
@@ -580,9 +582,9 @@ namespace Doppelganger
 
         private static void Initialize(MenuActionService menuActionService)
         {
-            menuActionService.AddNewAction('n', texts.NewGame(), "Main");
-            menuActionService.AddNewAction('i', texts.Instructions(), "Main");
-            menuActionService.AddNewAction('x', texts.Exit(), "Main");
+            menuActionService.AddNewAction('n', textService.NewGame(), "Main");
+            menuActionService.AddNewAction('i', textService.Instructions(), "Main");
+            menuActionService.AddNewAction('x', textService.Exit(), "Main");
 
             menuActionService.AddNewAction('s', texts.Stats(), "Instructions");
             menuActionService.AddNewAction('a', texts.Actions(), "Instructions");

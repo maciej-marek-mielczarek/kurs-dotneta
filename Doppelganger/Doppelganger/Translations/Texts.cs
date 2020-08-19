@@ -9,57 +9,6 @@
             this.languageCode = languageCode;
         }
 
-        internal string NewGame()
-        {
-            string newGame = "(n)";
-            switch (languageCode)
-            {
-                case 'p':
-                    newGame = "Nowa Gra";
-                    break;
-                case 'e':
-                    newGame = "New Game";
-                    break;
-                default:
-                    break;
-            }
-            return newGame;
-        }
-
-        internal string Instructions()
-        {
-            string instructions = "(i)";
-            switch (languageCode)
-            {
-                case 'p':
-                    instructions = "Instrukcje";
-                    break;
-                case 'e':
-                    instructions = "Instructions";
-                    break;
-                default:
-                    break;
-            }
-            return instructions;
-        }
-
-        internal string Exit()
-        {
-            string exit = "(x)";
-            switch (languageCode)
-            {
-                case 'p':
-                    exit = "Wyjście";
-                    break;
-                case 'e':
-                    exit = "Exit";
-                    break;
-                default:
-                    break;
-            }
-            return exit;
-        }
-
         internal string Stats()
         {
             string stats = "(s)";

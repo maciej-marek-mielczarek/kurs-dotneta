@@ -11,6 +11,9 @@ namespace Doppelganger.Domain.Common
 
         public enum MenuTexts
         {
+            NewGame,
+            Instructions,
+            Exit
         }
 
         public enum ButtonTexts

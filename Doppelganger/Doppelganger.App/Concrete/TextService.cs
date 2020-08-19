@@ -24,9 +24,29 @@ namespace Doppelganger.App.Concrete
             _allTexts = new AllTexts(dictionaries);
         }
 
+        private string GetText(TextCathegories cathegory, Enum message)
+        {
+            return _allTexts.Dictionaries[cathegory].Dict[message];
+        }
+
         public string Welcome()
         {
-            return _allTexts.Dictionaries[TextCathegories.WelcomeTexts].Dict[TextLists.WelcomeTexts.WelcomeToGame];
+            return GetText(TextCathegories.WelcomeTexts, TextLists.WelcomeTexts.WelcomeToGame);
+        }
+
+        public string NewGame()
+        {
+            return GetText(TextCathegories.MenuTexts,TextLists.MenuTexts.NewGame);
+        }
+
+        public string Instructions()
+        {
+            return GetText(TextCathegories.MenuTexts,TextLists.MenuTexts.Instructions);
+        }
+
+        public string Exit()
+        {
+            return GetText(TextCathegories.MenuTexts, TextLists.MenuTexts.Exit);
         }
     }
 }
