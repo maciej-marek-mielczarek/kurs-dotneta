@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Doppelganger.App.Abstract;
+using Doppelganger.App.Concrete;
+using Doppelganger.Domain.Common;
 using Translations;
 
 namespace Doppelganger
@@ -19,8 +22,8 @@ namespace Doppelganger
 
             Console.WriteLine("Doppelgänger, a puzzle/rpg game.");
             Console.WriteLine();
-            LanguageMenu(menuActionService);
-            texts.Welcome();
+            ITextService textService = new TextService(LanguageMenu(menuActionService));
+            Console.WriteLine(textService.Welcome());
             Console.WriteLine();
             MainMenu(menuActionService);
         }
@@ -551,7 +554,7 @@ namespace Doppelganger
             }
         }
 
-        private static void LanguageMenu(MenuActionService menuActionService)
+        private static Language LanguageMenu(MenuActionService menuActionService)
         {
             //Language Choice Menu
             Console.Write("Please choose your language: ");
@@ -566,6 +569,7 @@ namespace Doppelganger
             Helpers.ClearLine();
             texts = new Texts(languageCode);
             Initialize(menuActionService);
+            return languageCode == 'p' ? Language.Polish : Language.English;
         }
 
         private static void InitializeLang(MenuActionService menuActionService)
