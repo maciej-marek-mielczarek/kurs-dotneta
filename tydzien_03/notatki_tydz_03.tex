@@ -106,7 +106,7 @@ Do zrobienia (jeśli ma to sens w mojej aplikacji):
 W moim projekcie jest raczej wystarczający bałagan, żeby chwilowo robienie nowych funkcjonalności odłożyć na później.
 
 \subsection{Ad.\ref{Podzial}}
-Dodatkowe projekty to prawdopodobnie powinny byś biblioteki (Class Library (.Net Standard)). Po stworzeniu projektu usunąć przykładową klasę, dodać zależność projektu głównego od biblioteki i ustawić $"$Target Framework$"$ w nowej bibliotece (w pliku csproj) na pożądaną wartość (zapewne taką jak w projekcie głównym).
+Dodatkowe projekty to prawdopodobnie powinny byś biblioteki (Class Library (.Net Standard)). Po stworzeniu projektu usunąć przykładową klasę, dodać zależność projektu głównego od biblioteki i prawdopodobnie zostawić w spokoju $"$Target Framework$"$ w nowej bibliotece (w pliku csproj). W szczególności nie ustawiać Frameworku bibliotek na ten sam co w projekcie głównym, ponieważ Framework do bibliotek ma nieco inną nazwę i numerację.
 
 Jedna z bibliotek (App) do trzymania serwisów i sterowania logiką aplikacji. W środku folder Abstract do interfejsów i Concrete do implementujących je klas. Miejsce metody inicjalizującej jakiś serwis jest w tym serwisie. Folder App.Managers i w środku Managery (Kontrolery) do komunikacji z użytkownikiem, wołania metod serwisów i decydowania co się dzieje w programie. W programowaniu internetowym serwisów będzie więcej.
 
