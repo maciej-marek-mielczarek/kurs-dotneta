@@ -20,5 +20,14 @@ namespace Doppelganger.App.Abstract
         public string YourScoreIs();
         public string FightWhom();
         public string StayHowLong();
+        public string FightInfo();
+        public string PickOpponentInfo();
+        public string PickAllyInfo();
+        public string Id();
+        public string Attack();
+        public string Speed();
+        public string HP();
+        public string MaxHP();
+        public string PickAlly();
     }
 }

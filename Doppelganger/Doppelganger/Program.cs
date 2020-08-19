@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using Doppelganger.App.Abstract;
 using Doppelganger.App.Concrete;
 using Doppelganger.Domain.Common;
-using Translations;
 
 namespace Doppelganger
 {
     class Program
     {
-        private static Texts texts;
         private const byte NUMBER_OF_OPPS = 10;
         private const byte FIRST_COLUMN_WIDTH = 14;
         private static List<Creature> creatures;
@@ -191,7 +189,7 @@ namespace Doppelganger
 
         private static void FightInfo(MenuActionService menuActionService)
         {
-            Console.Write(texts.FightInfo());
+            Console.Write(textService.FightInfo());
             List<MenuAction> actions = menuActionService.GetActionsForMenu("ActionInfo");
             string possibleChoices = "";
             foreach (var action in actions)
@@ -213,7 +211,7 @@ namespace Doppelganger
 
         private static void PickOpponentInfo(MenuActionService menuActionService)
         {
-            Console.Write(texts.PickOpponentInfo());
+            Console.Write(textService.PickOpponentInfo());
             List<MenuAction> actions = menuActionService.GetActionsForMenu("ActionInfo");
             string possibleChoices = "";
             foreach (var action in actions)
@@ -235,7 +233,7 @@ namespace Doppelganger
 
         private static void PickAllyInfo(MenuActionService menuActionService)
         {
-            Console.Write(texts.PickAllyInfo());
+            Console.Write(textService.PickAllyInfo());
             List<MenuAction> actions = menuActionService.GetActionsForMenu("ActionInfo");
             string possibleChoices = "";
             foreach (var action in actions)
@@ -294,28 +292,28 @@ namespace Doppelganger
         {
             Console.WriteLine(textService.WelcomeToFight());
 
-            Console.Write(texts.Id().PadRight(FIRST_COLUMN_WIDTH));
+            Console.Write(textService.Id().PadRight(FIRST_COLUMN_WIDTH));
             for (int i = 0; i < NUMBER_OF_OPPS; i++)
             {
                 Console.Write(("|" + i).PadRight(OTHER_COLUMNS_WIDTH));
             }
             Console.WriteLine();
 
-            Console.Write(texts.Attack().PadRight(FIRST_COLUMN_WIDTH));
+            Console.Write(textService.Attack().PadRight(FIRST_COLUMN_WIDTH));
             for (int i = 0; i < NUMBER_OF_OPPS; i++)
             {
                 Console.Write(("|" + creatures[i].Attack).PadRight(OTHER_COLUMNS_WIDTH));
             }
             Console.WriteLine();
 
-            Console.Write(texts.Speed().PadRight(FIRST_COLUMN_WIDTH));
+            Console.Write(textService.Speed().PadRight(FIRST_COLUMN_WIDTH));
             for (int i = 0; i < NUMBER_OF_OPPS; i++)
             {
                 Console.Write(("|" + creatures[i].Speed).PadRight(OTHER_COLUMNS_WIDTH));
             }
             Console.WriteLine();
 
-            Console.Write(texts.MaxHP().PadRight(FIRST_COLUMN_WIDTH));
+            Console.Write(textService.MaxHP().PadRight(FIRST_COLUMN_WIDTH));
             for (int i = 0; i < NUMBER_OF_OPPS; i++)
             {
                 Console.Write(("|" + creatures[i].MaxHP).PadRight(OTHER_COLUMNS_WIDTH));
@@ -327,7 +325,7 @@ namespace Doppelganger
 
         private static void PickAllyMenu(MenuActionService menuActionService)
         {
-            Console.Write(texts.PickAlly());
+            Console.Write(textService.PickAlly());
             string possibleChoices = "x";
             for (int i = 0; i < NUMBER_OF_OPPS; i++)
             {
@@ -368,7 +366,7 @@ namespace Doppelganger
 
         private static void PickOppMenu(MenuActionService menuActionService)
         {
-            Console.Write(texts.HP().PadRight(FIRST_COLUMN_WIDTH));
+            Console.Write(textService.HP().PadRight(FIRST_COLUMN_WIDTH));
             foreach (var creature in creatures)
             {
                 Console.Write(("|" + creature.CurrentHP + (creature is Ally ? "*" : "")).PadRight(OTHER_COLUMNS_WIDTH));
@@ -404,7 +402,7 @@ namespace Doppelganger
 
         private static void FightSubMenu(MenuActionService menuActionService, int chosenOppId, int combatTurn)
         {
-            Console.Write(texts.HP().PadRight(FIRST_COLUMN_WIDTH));
+            Console.Write(textService.HP().PadRight(FIRST_COLUMN_WIDTH));
             for (int i = 0; i < NUMBER_OF_OPPS; ++i)
             {
                 Console.Write(("|"
@@ -569,7 +567,6 @@ namespace Doppelganger
             }
             char languageCode = Helpers.GetChar(possibleChoices);
             Helpers.ClearLine();
-            texts = new Texts(languageCode);
             textService = new TextService(languageCode == 'p' ? Language.Polish : Language.English);
             Initialize(menuActionService);
         }
@@ -590,9 +587,9 @@ namespace Doppelganger
             menuActionService.AddNewAction('a', textService.Actions(), "Instructions");
             menuActionService.AddNewAction('b', textService.Back(), "Instructions");
 
-            menuActionService.AddNewAction('a', texts.Attack(), "StatsInfo");
-            menuActionService.AddNewAction('h', texts.HP(), "StatsInfo");
-            menuActionService.AddNewAction('s', texts.Speed(), "StatsInfo");
+            menuActionService.AddNewAction('a', textService.Attack(), "StatsInfo");
+            menuActionService.AddNewAction('h', textService.HP(), "StatsInfo");
+            menuActionService.AddNewAction('s', textService.Speed(), "StatsInfo");
             menuActionService.AddNewAction('b', textService.Back(), "StatsInfo");
 
             menuActionService.AddNewAction('b', textService.Back(), "StatInfo");

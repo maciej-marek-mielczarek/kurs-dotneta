@@ -13,7 +13,7 @@ namespace Doppelganger.App.Concrete
         {
             var dictionaries = new Dictionary<TextCathegories, TextsBase>
             {
-                {TextCathegories.ActionsInfoTexts, new GenericButtonTexts(language)},
+                {TextCathegories.ActionsInfoTexts, new ActionsInfoTexts(language)},
                 {TextCathegories.GenericButtonTexts, new GenericButtonTexts(language)},
                 {TextCathegories.MenuTexts, new MenuTexts(language)},
                 {TextCathegories.MiscellaneousTexts, new MiscellaneousTexts(language)},
@@ -118,6 +118,51 @@ namespace Doppelganger.App.Concrete
         public string StayHowLong()
         {
             return GetText(TextCathegories.MiscellaneousTexts, TextLists.MiscTexts.StayHowLong);
+        }
+
+        public string FightInfo()
+        {
+            return GetText(TextCathegories.ActionsInfoTexts, TextLists.ActionsInfoTexts.FightInfo);
+        }
+
+        public string PickOpponentInfo()
+        {
+            return GetText(TextCathegories.ActionsInfoTexts, TextLists.ActionsInfoTexts.PickOpponentInfo);
+        }
+
+        public string PickAllyInfo()
+        {
+            return GetText(TextCathegories.ActionsInfoTexts, TextLists.ActionsInfoTexts.PickAllyInfo);
+        }
+
+        public string Id()
+        {
+            return GetText(TextCathegories.StatNameTexts, TextLists.StatNames.Id);
+        }
+
+        public string Attack()
+        {
+            return GetText(TextCathegories.StatNameTexts, TextLists.StatNames.Attack);
+        }
+
+        public string Speed()
+        {
+            return GetText(TextCathegories.StatNameTexts, TextLists.StatNames.Speed);
+        }
+
+        public string HP()
+        {
+            return GetText(TextCathegories.StatNameTexts, TextLists.StatNames.HP);
+        }
+
+        public string MaxHP()
+        {
+            return GetText(TextCathegories.StatNameTexts, TextLists.StatNames.MaxHP);
+        }
+
+        public string PickAlly()
+        {
+            return GetText(TextCathegories.MiscellaneousTexts, TextLists.MiscTexts.PickAlly);
         }
     }
 }

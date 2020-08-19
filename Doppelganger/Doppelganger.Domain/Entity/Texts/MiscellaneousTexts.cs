@@ -45,6 +45,10 @@ namespace Doppelganger.Domain.Entity.Texts
             {
                 TextLists.MiscTexts.YourScoreIs, 
                 "Your score is: "
+            },
+            {
+                TextLists.MiscTexts.PickAlly,
+                "Please choose an opponent to turn into."
             }
         };
         
@@ -87,6 +91,10 @@ namespace Doppelganger.Domain.Entity.Texts
             {
                 TextLists.MiscTexts.YourScoreIs, 
                 "Twój wynik to: "
+            },
+            {
+                TextLists.MiscTexts.PickAlly,
+                "Wybierz w którego przeciwnika chcesz się zmienić."
             }
         };
 

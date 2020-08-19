@@ -6,7 +6,9 @@ namespace Doppelganger.Domain.Common
     {
         public enum ActionsInfoTexts
         {
-            
+            FightInfo,
+            PickOpponentInfo,
+            PickAllyInfo
         }
         public enum MiscTexts
         {
@@ -18,7 +20,8 @@ namespace Doppelganger.Domain.Common
             WelcomeToFight,
             YourScoreIs,
             FightWhom,
-            StayHowLong
+            StayHowLong,
+            PickAlly
         }
 
         public enum MenuTexts
@@ -48,6 +51,11 @@ namespace Doppelganger.Domain.Common
 
         public enum StatNames
         {
+            Id,
+            Attack,
+            Speed,
+            HP,
+            MaxHP
         }
 
         public enum MechanicsInfoTexts
