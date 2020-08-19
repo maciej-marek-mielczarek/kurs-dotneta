@@ -4,9 +4,21 @@ namespace Doppelganger.Domain.Common
 {
     public static class TextLists
     {
-        public enum WelcomeTexts
+        public enum ActionsInfoTexts
         {
-            WelcomeToGame
+            
+        }
+        public enum MiscTexts
+        {
+            WelcomeToGame,
+            GetInfoOn,
+            AboutAlly,
+            AboutOpponent,
+            Fight,
+            WelcomeToFight,
+            YourScoreIs,
+            FightWhom,
+            StayHowLong
         }
 
         public enum MenuTexts
@@ -23,6 +35,9 @@ namespace Doppelganger.Domain.Common
 
         public enum StatInfoTexts
         {
+            SpeedInfo,
+            HPInfo,
+            AttackInfo
         }
 
         public enum MenuInfoTexts

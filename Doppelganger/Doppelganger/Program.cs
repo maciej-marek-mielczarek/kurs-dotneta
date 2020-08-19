@@ -35,7 +35,7 @@ namespace Doppelganger
             //Instructions Menu
             List<MenuAction> actions = menuActionService.GetActionsForMenu("Instructions");
             string possibleChoices = "";
-            Console.Write(texts.GetInfoOn());
+            Console.Write(textService.GetInfoOn());
             foreach (var action in actions)
             {
                 Console.Write(Helpers.Buttonize(action.ActionName, action.KeyToChoose));
@@ -64,7 +64,7 @@ namespace Doppelganger
             //Stats Info Menu
             List<MenuAction> actions = menuActionService.GetActionsForMenu("StatsInfo");
             string possibleChoices = "";
-            Console.Write(texts.GetInfoOn());
+            Console.Write(textService.GetInfoOn());
             foreach (var action in actions)
             {
                 Console.Write(Helpers.Buttonize(action.ActionName,action.KeyToChoose));
@@ -93,7 +93,7 @@ namespace Doppelganger
 
         private static void SpeedInfo(MenuActionService menuActionService)
         {
-            Console.Write(texts.SpeedInfo());
+            Console.Write(textService.SpeedInfo());
             List<MenuAction> actions = menuActionService.GetActionsForMenu("ActionInfo");
             string possibleChoices = "";
             foreach (var action in actions)
@@ -115,7 +115,7 @@ namespace Doppelganger
 
         private static void HpInfo(MenuActionService menuActionService)
         {
-            Console.Write(texts.HPInfo());
+            Console.Write(textService.HPInfo());
             List<MenuAction> actions = menuActionService.GetActionsForMenu("ActionInfo");
             string possibleChoices = "";
             foreach (var action in actions)
@@ -137,7 +137,7 @@ namespace Doppelganger
 
         private static void AttackInfo(MenuActionService menuActionService)
         {
-            Console.Write(texts.AttackInfo());
+            Console.Write(textService.AttackInfo());
             List<MenuAction> actions = menuActionService.GetActionsForMenu("ActionInfo");
             string possibleChoices = "";
             foreach (var action in actions)
@@ -162,7 +162,7 @@ namespace Doppelganger
             //Actions Info Menu
             List<MenuAction> actions = menuActionService.GetActionsForMenu("ActionsInfo");
             string possibleChoices = "";
-            Console.Write(texts.GetInfoOn());
+            Console.Write(textService.GetInfoOn());
             foreach (var action in actions)
             {
                 Console.Write(Helpers.Buttonize(action.ActionName,action.KeyToChoose));
@@ -292,7 +292,7 @@ namespace Doppelganger
 
         private static void FightMenu(MenuActionService menuActionService)
         {
-            Console.WriteLine(texts.WelcomeToFight());
+            Console.WriteLine(textService.WelcomeToFight());
 
             Console.Write(texts.Id().PadRight(FIRST_COLUMN_WIDTH));
             for (int i = 0; i < NUMBER_OF_OPPS; i++)
@@ -360,7 +360,7 @@ namespace Doppelganger
 
         private static void EndGameMenu(MenuActionService menuActionService)
         {
-            Console.WriteLine(texts.YourScoreIs() + Helpers.CalculateScore(creatures) + "%");
+            Console.WriteLine(textService.YourScoreIs() + Helpers.CalculateScore(creatures) + "%");
             Console.WriteLine();
             creatures = new List<Creature>();
             MainMenu(menuActionService);
@@ -374,7 +374,7 @@ namespace Doppelganger
                 Console.Write(("|" + creature.CurrentHP + (creature is Ally ? "*" : "")).PadRight(OTHER_COLUMNS_WIDTH));
             }
 
-            Console.Write(texts.FightWhom());
+            Console.Write(textService.FightWhom());
             string possibleChoices = "x";
             for (int i = 0; i < NUMBER_OF_OPPS; i++)
             {
@@ -413,7 +413,7 @@ namespace Doppelganger
                 + (i == chosenOppId ? "x" : ""))
                 .PadRight(OTHER_COLUMNS_WIDTH));
             }
-            Console.Write(texts.StayHowLong());
+            Console.Write(textService.StayHowLong());
             string possibleChoices = "x";
             for (int i = 0; i < NUMBER_OF_OPPS; i++)
             {
@@ -590,16 +590,16 @@ namespace Doppelganger
             menuActionService.AddNewAction('a', textService.Actions(), "Instructions");
             menuActionService.AddNewAction('b', textService.Back(), "Instructions");
 
-            menuActionService.AddNewAction('a', texts.AttackButton(), "StatsInfo");
-            menuActionService.AddNewAction('h', texts.HPButton(), "StatsInfo");
-            menuActionService.AddNewAction('s', texts.SpeedButton(), "StatsInfo");
+            menuActionService.AddNewAction('a', texts.Attack(), "StatsInfo");
+            menuActionService.AddNewAction('h', texts.HP(), "StatsInfo");
+            menuActionService.AddNewAction('s', texts.Speed(), "StatsInfo");
             menuActionService.AddNewAction('b', textService.Back(), "StatsInfo");
 
             menuActionService.AddNewAction('b', textService.Back(), "StatInfo");
 
-            menuActionService.AddNewAction('a', texts.PickAllyButton(), "ActionsInfo");
-            menuActionService.AddNewAction('o', texts.PickOpponentButton(), "ActionsInfo");
-            menuActionService.AddNewAction('f', texts.FightButton(), "ActionsInfo");
+            menuActionService.AddNewAction('a', textService.AboutAlly(), "ActionsInfo");
+            menuActionService.AddNewAction('o', textService.AboutOpponent(), "ActionsInfo");
+            menuActionService.AddNewAction('f', textService.Fight(), "ActionsInfo");
             menuActionService.AddNewAction('b', textService.Back(), "ActionsInfo");
 
             menuActionService.AddNewAction('b', textService.Back(), "ActionInfo");
