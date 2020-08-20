@@ -13,7 +13,7 @@ namespace Doppelganger.Domain.Entity.Texts
                 TextLists.MiscTexts.WelcomeToGame,
                 "Welcome to the Basic Level School Leaving Exam on Mathematics!\n" 
                 + "As you surely know, every Shapeshifter in this country takes their Maturity Exam as they come of age.\n" 
-                + "In a moment, you'll see 10 opponents. Turn yourself into one of them and then defeat as many of them as you can. Good Luck!"
+                + "In a moment, you'll see 10 opponents. Turn yourself into one of them and then defeat as many of them as you can. Good Luck!\n\n"
             },
             {
                 TextLists.MiscTexts.GetInfoOn,
@@ -59,7 +59,7 @@ namespace Doppelganger.Domain.Entity.Texts
                 TextLists.MiscTexts.WelcomeToGame,
                 "Witamy na Maturze Podstawowej z Matematyki!\n"
                 + "Jak na pewno dobrze wiesz, każdy Zmiennokształtny w tym kraju po osiągnięciu dorosłości przystępuje do Egzaminu Dojrzałości.\n"
-                + "Za chwilę zobaczysz 10 przeciwników. Zmień się w jednego z nich i pokonaj tylu z nich ilu zdołasz. Powodzenia!"
+                + "Za chwilę zobaczysz 10 przeciwników. Zmień się w jednego z nich i pokonaj tylu z nich ilu zdołasz. Powodzenia!\n\n"
             },
             {
                 TextLists.MiscTexts.GetInfoOn,

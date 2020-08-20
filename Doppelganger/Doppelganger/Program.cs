@@ -5,6 +5,7 @@ using Doppelganger.App.Concrete;
 using Doppelganger.Domain.Common;
 using Doppelganger.Domain.Common.Creatures;
 using Doppelganger.Domain.Entity.Creatures;
+using Doppelganger.Domain.Entity.Texts;
 
 namespace Doppelganger
 {
@@ -20,13 +21,12 @@ namespace Doppelganger
         private static void Main()
         {
             IMenuActionService menuActionService = new MenuActionService();
-            InitializeLang(menuActionService);
 
-            Console.WriteLine("Doppelgänger, a puzzle/rpg game.");
-            Console.WriteLine();
             LanguageMenu(menuActionService);
-            Console.WriteLine(_textService.Welcome());
-            Console.WriteLine();
+            Initialize(menuActionService);
+            _creatures = new List<Creature>();
+            Console.Write(_textService.Welcome());
+
             MainMenu(menuActionService);
         }
 
@@ -543,7 +543,7 @@ namespace Doppelganger
         private static void LanguageMenu(IMenuActionService menuActionService)
         {
             //Language Choice Menu
-            Console.Write("Please choose your language: ");
+            Console.Write(ChooseLanguageText.Text);
             List<MenuAction> actions = menuActionService.GetActionsForMenu("Lang");
             string possibleChoices = "";
             foreach (var action in actions)
@@ -554,13 +554,6 @@ namespace Doppelganger
             char languageCode = Helpers.Helpers.GetChar(possibleChoices);
             Helpers.Helpers.ClearLine();
             _textService = new TextService(languageCode == 'p' ? Language.Polish : Language.English);
-            Initialize(menuActionService);
-        }
-
-        private static void InitializeLang(IMenuActionService menuActionService)
-        {
-            menuActionService.AddNewAction('p', "pl", "Lang");
-            menuActionService.AddNewAction('e', "eng", "Lang");
         }
 
         private static void Initialize(IMenuActionService menuActionService)
@@ -586,8 +579,6 @@ namespace Doppelganger
             menuActionService.AddNewAction('b', _textService.Back(), "ActionsInfo");
 
             menuActionService.AddNewAction('b', _textService.Back(), "ActionInfo");
-
-            _creatures = new List<Creature>();
         }
     }
 }

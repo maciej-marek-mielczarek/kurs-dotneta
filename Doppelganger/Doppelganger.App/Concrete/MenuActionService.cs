@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Doppelganger.App.Abstract;
 using Doppelganger.Domain.Common;
+using Doppelganger.Domain.Entity.Texts;
 
 namespace Doppelganger.App.Concrete
 {
@@ -11,6 +13,10 @@ namespace Doppelganger.App.Concrete
         public MenuActionService()
         {
             _menuActions = new List<MenuAction>();
+
+            Console.Write(TitleText.Text);
+            
+            InitializeLang();
         }
 
         public void AddNewAction(char keyToChoose, string actionName, string menuName)
@@ -22,6 +28,12 @@ namespace Doppelganger.App.Concrete
         public List<MenuAction> GetActionsForMenu(string menuName)
         {
             return _menuActions.FindAll(action => action.MenuName == menuName);
+        }
+
+        private void InitializeLang()
+        {
+            AddNewAction('p', "pl", "Lang");
+            AddNewAction('e', "eng", "Lang");
         }
     }
 }
