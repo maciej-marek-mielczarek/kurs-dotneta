@@ -128,4 +128,12 @@ Domain.Entity do trzymania reszty modeli.
 \section{Mój Refaktor}
 Zacząłem od wydzielenia części kodu do refaktoryzacji (klasa z tekstami). Następnie zaplanowałem co powinno się stać ze wszystkimi częściami kodu z tej klasy. Potem chciałem dodać bibliotekę Domain w folderze obok programu i wtedy okazało się, że program mam w tym samym folderze co rozwiązanie, więc samą refaktoryzację zacząłem od poprawienia tego ustawienia.
 
+Następnie, nadal przy dodawaniu bibliotek, przekonałem się, że Frameworki używane przez biblioteki (netstandard2.1) i aplikacje konsolowe (netcoreapp3.1) mają nieco inne nazwy i osobne numeracje. MonoDevelop, którego używałem wcześniej nie wiedział co to $"$netstandard3.1$"$ i zanim zorientowałem się że czegoś takiego rzeczywiście nie ma, to zmieniłem IDE na Ridera.
+
+Przy rozbijaniu klasy Texts okazało się, że dziedziczenie enumów działa nieco inaczej niż się spodziewałem, więc potrzebne było korygowanie planów na bieżąco. Przy przenoszeniu kodu w inne miejsca w innej formie bardzo pomocne okazały się występujące w Riderze zakładki (Ctrl + Shift + cyfra żeby stworzyć i Ctrl + cyfra by przywołać), wskazane całej grupie przez Maćka Kukuczkę.
+
+Inne klasy były bardziej rozbite, więc właściwie wystarczyło je poprzenosić w odpowiednie miejsca. Oczywiście po tym przenoszeniu mam wrażenie że nie wszystko jest tam gdzie być powinno, ale przynajmniej nie mam już wszystkiego w jednym miejscu.
+
+Jeszcze jedno miejsce w którym mam duże nagromadzenie kodu to sama klasa Program. Wcześniej powydzielałem z Maina dużo funkcji typu MenuTakie, MenuInne, więc wystarczy stworzyć dla każdej z nich odpowiednie miejsce.
+
 \end{document}
