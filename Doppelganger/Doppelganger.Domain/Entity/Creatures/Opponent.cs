@@ -1,9 +1,11 @@
-﻿namespace Doppelganger
+﻿using Doppelganger.Domain.Common.Creatures;
+
+namespace Doppelganger.Domain.Entity.Creatures
 {
-    internal class Opponent : Creature
+    public class Opponent : Creature
     {
 
-        internal Opponent(Creature cr) : base(cr.Attack, cr.Speed, cr.MaxHP, cr.MaxHP)
+        public Opponent(Creature cr) : base(cr.Attack, cr.Speed, cr.MaxHP, cr.MaxHP)
         {
         }
         internal Opponent(Ally ally) : base(ally.Attack, ally.Speed, ally.MaxHP, 0)

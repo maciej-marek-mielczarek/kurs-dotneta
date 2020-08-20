@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Doppelganger.Domain.Common
+namespace Doppelganger.Domain.Common.Texts
 {
     public class TextsBase: AuditableModel
     {

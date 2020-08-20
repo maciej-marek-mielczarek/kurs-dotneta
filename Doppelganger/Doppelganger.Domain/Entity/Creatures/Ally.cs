@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Doppelganger.Domain.Common.Creatures;
 
-namespace Doppelganger
+namespace Doppelganger.Domain.Entity.Creatures
 {
-    internal class Ally : Creature
+    public class Ally : Creature
     {
-        internal Ally(Creature cr) : base(cr.Attack, cr.Speed, cr.MaxHP, cr.MaxHP)
+        public Ally(Creature cr) : base(cr.Attack, cr.Speed, cr.MaxHP, cr.MaxHP)
         {
         }
         internal Ally(Opponent opp) : base(opp.Attack, opp.Speed, opp.MaxHP, opp.MaxHP)

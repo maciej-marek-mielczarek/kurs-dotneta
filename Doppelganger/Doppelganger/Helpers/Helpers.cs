@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using Doppelganger.Domain.Common.Creatures;
+using Doppelganger.Domain.Entity.Creatures;
 
-namespace Doppelganger
+namespace Doppelganger.Helpers
 {
     public static class Helpers
     {

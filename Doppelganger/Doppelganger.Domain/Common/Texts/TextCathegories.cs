@@ -1,4 +1,4 @@
-namespace Doppelganger.Domain.Common
+namespace Doppelganger.Domain.Common.Texts
 {
     public enum TextCathegories
     {

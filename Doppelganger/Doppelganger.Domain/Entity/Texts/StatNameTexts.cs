@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Doppelganger.Domain.Common;
+using Doppelganger.Domain.Common.Texts;
 
 namespace Doppelganger.Domain.Entity.Texts
 {

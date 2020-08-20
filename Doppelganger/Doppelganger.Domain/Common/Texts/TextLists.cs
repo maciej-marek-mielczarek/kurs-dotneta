@@ -1,6 +1,4 @@
-using System;
-
-namespace Doppelganger.Domain.Common
+namespace Doppelganger.Domain.Common.Texts
 {
     public static class TextLists
     {

@@ -1,8 +1,6 @@
-using System;
 using System.Collections.Generic;
-using Doppelganger.Domain.Common;
 
-namespace Doppelganger.Domain.Entity.Texts
+namespace Doppelganger.Domain.Common.Texts
 {
     public class AllTexts
     {

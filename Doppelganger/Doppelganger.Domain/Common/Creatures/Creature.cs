@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Doppelganger
+namespace Doppelganger.Domain.Common.Creatures
 {
-    internal class Creature
+    public class Creature
     {
         private const byte MIN_ATTACK = 5;
         private const byte MAX_ATTACK = 20;
@@ -15,7 +15,7 @@ namespace Doppelganger
 
         private static readonly Random numberGenerator = new Random();
 
-        internal Creature()
+        public Creature()
         {
             Attack = (byte)numberGenerator.Next(MIN_ATTACK, MAX_ATTACK + 1);
             Speed = (byte)numberGenerator.Next(MIN_SPEED, MAX_SPEED + 1);
@@ -30,12 +30,12 @@ namespace Doppelganger
             CurrentHP = currentHP;
         }
 
-        internal byte Attack { get; }
+        public byte Attack { get; }
 
-        internal byte Speed { get; }
+        public byte Speed { get; }
 
-        internal byte MaxHP { get; }
+        public byte MaxHP { get; }
 
-        internal byte CurrentHP { get; set; }
+        public byte CurrentHP { get; set; }
     }
 }
