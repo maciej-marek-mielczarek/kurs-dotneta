@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Doppelganger.App.Abstract;
 using Doppelganger.App.Concrete;
+using Doppelganger.App.Helpers;
 using Doppelganger.Domain.Common;
 using Doppelganger.Domain.Common.Creatures;
 using Doppelganger.Domain.Entity.Creatures;
@@ -38,11 +39,11 @@ namespace Doppelganger
             Console.Write(_textService.GetInfoOn());
             foreach (var action in actions)
             {
-                Console.Write(Helpers.Helpers.Buttonize(action.ActionName, action.KeyToChoose));
+                Console.Write(Helpers.Buttonize(action.ActionName, action.KeyToChoose));
                 possibleChoices += action.KeyToChoose;
             }
-            char menuChoice = Helpers.Helpers.GetChar(possibleChoices);
-            Helpers.Helpers.ClearLine();
+            char menuChoice = Helpers.GetChar(possibleChoices);
+            Helpers.ClearLine();
             switch (menuChoice)
             {
                 case 'a':
@@ -65,11 +66,11 @@ namespace Doppelganger
             Console.Write(_textService.GetInfoOn());
             foreach (var action in actions)
             {
-                Console.Write(Helpers.Helpers.Buttonize(action.ActionName,action.KeyToChoose));
+                Console.Write(Helpers.Buttonize(action.ActionName,action.KeyToChoose));
                 possibleChoices += action.KeyToChoose;
             }
-            char menuChoice = Helpers.Helpers.GetChar(possibleChoices);
-            Helpers.Helpers.ClearLine();
+            char menuChoice = Helpers.GetChar(possibleChoices);
+            Helpers.ClearLine();
             switch (menuChoice)
             {
                 case 'a':
@@ -94,11 +95,11 @@ namespace Doppelganger
             string possibleChoices = "";
             foreach (var action in actions)
             {
-                Console.Write(Helpers.Helpers.Buttonize(action.ActionName,action.KeyToChoose));
+                Console.Write(Helpers.Buttonize(action.ActionName,action.KeyToChoose));
                 possibleChoices += action.KeyToChoose;
             }
-            char menuChoice = Helpers.Helpers.GetChar(possibleChoices);
-            Helpers.Helpers.ClearLine();
+            char menuChoice = Helpers.GetChar(possibleChoices);
+            Helpers.ClearLine();
             switch (menuChoice)
             {
                 case 'b':
@@ -114,11 +115,11 @@ namespace Doppelganger
             string possibleChoices = "";
             foreach (var action in actions)
             {
-                Console.Write(Helpers.Helpers.Buttonize(action.ActionName,action.KeyToChoose));
+                Console.Write(Helpers.Buttonize(action.ActionName,action.KeyToChoose));
                 possibleChoices += action.KeyToChoose;
             }
-            char menuChoice = Helpers.Helpers.GetChar(possibleChoices);
-            Helpers.Helpers.ClearLine();
+            char menuChoice = Helpers.GetChar(possibleChoices);
+            Helpers.ClearLine();
             switch (menuChoice)
             {
                 case 'b':
@@ -134,11 +135,11 @@ namespace Doppelganger
             string possibleChoices = "";
             foreach (var action in actions)
             {
-                Console.Write(Helpers.Helpers.Buttonize(action.ActionName,action.KeyToChoose));
+                Console.Write(Helpers.Buttonize(action.ActionName,action.KeyToChoose));
                 possibleChoices += action.KeyToChoose;
             }
-            char menuChoice = Helpers.Helpers.GetChar(possibleChoices);
-            Helpers.Helpers.ClearLine();
+            char menuChoice = Helpers.GetChar(possibleChoices);
+            Helpers.ClearLine();
             switch (menuChoice)
             {
                 case 'b':
@@ -155,11 +156,11 @@ namespace Doppelganger
             Console.Write(_textService.GetInfoOn());
             foreach (var action in actions)
             {
-                Console.Write(Helpers.Helpers.Buttonize(action.ActionName,action.KeyToChoose));
+                Console.Write(Helpers.Buttonize(action.ActionName,action.KeyToChoose));
                 possibleChoices += action.KeyToChoose;
             }
-            char menuChoice = Helpers.Helpers.GetChar(possibleChoices);
-            Helpers.Helpers.ClearLine();
+            char menuChoice = Helpers.GetChar(possibleChoices);
+            Helpers.ClearLine();
             switch (menuChoice)
             {
                 case 'a':
@@ -184,11 +185,11 @@ namespace Doppelganger
             string possibleChoices = "";
             foreach (var action in actions)
             {
-                Console.Write(Helpers.Helpers.Buttonize(action.ActionName,action.KeyToChoose));
+                Console.Write(Helpers.Buttonize(action.ActionName,action.KeyToChoose));
                 possibleChoices += action.KeyToChoose;
             }
-            char menuChoice = Helpers.Helpers.GetChar(possibleChoices);
-            Helpers.Helpers.ClearLine();
+            char menuChoice = Helpers.GetChar(possibleChoices);
+            Helpers.ClearLine();
             switch (menuChoice)
             {
                 case 'b':
@@ -204,11 +205,11 @@ namespace Doppelganger
             string possibleChoices = "";
             foreach (var action in actions)
             {
-                Console.Write(Helpers.Helpers.Buttonize(action.ActionName,action.KeyToChoose));
+                Console.Write(Helpers.Buttonize(action.ActionName,action.KeyToChoose));
                 possibleChoices += action.KeyToChoose;
             }
-            char menuChoice = Helpers.Helpers.GetChar(possibleChoices);
-            Helpers.Helpers.ClearLine();
+            char menuChoice = Helpers.GetChar(possibleChoices);
+            Helpers.ClearLine();
             switch (menuChoice)
             {
                 case 'b':
@@ -224,11 +225,11 @@ namespace Doppelganger
             string possibleChoices = "";
             foreach (var action in actions)
             {
-                Console.Write(Helpers.Helpers.Buttonize(action.ActionName,action.KeyToChoose));
+                Console.Write(Helpers.Buttonize(action.ActionName,action.KeyToChoose));
                 possibleChoices += action.KeyToChoose;
             }
-            char menuChoice = Helpers.Helpers.GetChar(possibleChoices);
-            Helpers.Helpers.ClearLine();
+            char menuChoice = Helpers.GetChar(possibleChoices);
+            Helpers.ClearLine();
             switch (menuChoice)
             {
                 case 'b':
@@ -244,11 +245,11 @@ namespace Doppelganger
             string possibleChoices = "";
             foreach (var action in actions)
             {
-                Console.Write(Helpers.Helpers.Buttonize(action.ActionName,action.KeyToChoose));
+                Console.Write(Helpers.Buttonize(action.ActionName,action.KeyToChoose));
                 possibleChoices += action.KeyToChoose;
             }
-            char menuChoice = Helpers.Helpers.GetChar(possibleChoices);
-            Helpers.Helpers.ClearLine();
+            char menuChoice = Helpers.GetChar(possibleChoices);
+            Helpers.ClearLine();
             switch (menuChoice)
             {
                 case 'n':
@@ -315,11 +316,11 @@ namespace Doppelganger
                 possibleChoices += i;
             }
 
-            char choice = Helpers.Helpers.GetChar(possibleChoices);
-            Helpers.Helpers.ClearLine();
+            char choice = Helpers.GetChar(possibleChoices);
+            Helpers.ClearLine();
             if (choice != 'x')
             {
-                int chosenAlly = Helpers.Helpers.CharDigitToInt(choice);
+                int chosenAlly = Helpers.CharDigitToInt(choice);
                 for (int i = 0; i < NumberOfOpps; i++)
                 {
                     if (i == chosenAlly)
@@ -341,7 +342,7 @@ namespace Doppelganger
 
         private static void EndGameMenu(IMenuActionService menuActionService)
         {
-            Console.WriteLine(_textService.YourScoreIs() + Helpers.Helpers.CalculateScore(_creatures) + "%");
+            Console.WriteLine(_textService.YourScoreIs() + Helpers.CalculateScore(_creatures) + "%");
             Console.WriteLine();
             _creatures = new List<Creature>();
             MainMenu(menuActionService);
@@ -362,11 +363,11 @@ namespace Doppelganger
                 possibleChoices += i;
             }
 
-            char choice = Helpers.Helpers.GetChar(possibleChoices);
+            char choice = Helpers.GetChar(possibleChoices);
             if (choice != 'x')
             {
-                Helpers.Helpers.ClearLine();
-                int chosenOppId = Helpers.Helpers.CharDigitToInt(choice);
+                Helpers.ClearLine();
+                int chosenOppId = Helpers.CharDigitToInt(choice);
                 if (_creatures[chosenOppId].CurrentHP == 0)
                 {
                     PickOppMenu(menuActionService);
@@ -400,7 +401,7 @@ namespace Doppelganger
             {
                 possibleChoices += i;
             }
-            char choice = Helpers.Helpers.GetChar(possibleChoices);
+            char choice = Helpers.GetChar(possibleChoices);
             if (choice == 'x')
             {
                 Console.WriteLine();
@@ -408,12 +409,12 @@ namespace Doppelganger
             }
             else if (choice == '0')
             {
-                Helpers.Helpers.ClearLine();
+                Helpers.ClearLine();
                 PickOppMenu(menuActionService);
             }
             else
             {
-                int chosenFightLength = Helpers.Helpers.CharDigitToInt(choice);
+                int chosenFightLength = Helpers.CharDigitToInt(choice);
                 FightSimulation(menuActionService, chosenOppId, chosenFightLength, combatTurn);
             }
         }
@@ -422,7 +423,7 @@ namespace Doppelganger
         {
             if (chosenFightLength == 0)
             {
-                Helpers.Helpers.ClearLine();
+                Helpers.ClearLine();
                 FightSubMenu(menuActionService, chosenOppId, combatTurn);
             }
             else
@@ -520,7 +521,7 @@ namespace Doppelganger
                                 break;
                             }
                         }
-                        Helpers.Helpers.ClearLine();
+                        Helpers.ClearLine();
                         PickOppMenu(menuActionService);
                     }
                 }
@@ -528,7 +529,7 @@ namespace Doppelganger
                 {
                     if (chosenFightLength == 1)
                     {
-                        Helpers.Helpers.ClearLine();
+                        Helpers.ClearLine();
                         FightSubMenu(menuActionService, chosenOppId, combatTurn);
                     }
                     else
@@ -548,11 +549,11 @@ namespace Doppelganger
             string possibleChoices = "";
             foreach (var action in actions)
             {
-                Console.Write(Helpers.Helpers.Buttonize(action.ActionName,action.KeyToChoose));
+                Console.Write(Helpers.Buttonize(action.ActionName,action.KeyToChoose));
                 possibleChoices += action.KeyToChoose;
             }
-            char languageCode = Helpers.Helpers.GetChar(possibleChoices);
-            Helpers.Helpers.ClearLine();
+            char languageCode = Helpers.GetChar(possibleChoices);
+            Helpers.ClearLine();
             _textService = new TextService(languageCode == 'p' ? Language.Polish : Language.English);
         }
 

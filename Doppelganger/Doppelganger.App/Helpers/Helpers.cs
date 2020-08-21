@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using Doppelganger.Domain.Common.Creatures;
 using Doppelganger.Domain.Entity.Creatures;
 
-namespace Doppelganger.Helpers
+namespace Doppelganger.App.Helpers
 {
     public static class Helpers
     {
-        internal static char GetChar(string possibleChoices)
+        public static char GetChar(string possibleChoices)
         {//Not "try to get a correct char", rather "try until you get a correct char".
             char choice;
             bool madeChoice;
@@ -20,13 +20,13 @@ namespace Doppelganger.Helpers
             return choice;
         }
 
-        internal static void ClearLine(int lineLength = 80)
+        public static void ClearLine(int lineLength = 80)
         {
             string enoughSpaces = new string(' ', lineLength);
             Console.Write('\r' + enoughSpaces + '\r');
         }
 
-        internal static int CharDigitToInt(char v)
+        public static int CharDigitToInt(char v)
         {
             if (v >= '0' && v <= '9')
             {
@@ -68,7 +68,7 @@ namespace Doppelganger.Helpers
             return " [" + buttonText + "] ";
         }
 
-        internal static int CalculateScore(List<Creature> creatures)
+        public static int CalculateScore(List<Creature> creatures)
         {
             int score = 0;
             foreach (var creature in creatures)
@@ -76,11 +76,11 @@ namespace Doppelganger.Helpers
                 int creatureScore = 0;
                 if (creature is Ally)
                 {
-                    creatureScore = (int)Math.Floor(10m - 10m * ((decimal)((Ally)creature).CurrentHP) / (decimal)creature.MaxHP);
+                    creatureScore = (int)Math.Floor(10m - 10m * ((Ally)creature).CurrentHP / creature.MaxHP);
                 }
                 else if (creature is Opponent)
                 {
-                    creatureScore = (int)Math.Floor(10m - 10m * ((decimal)((Opponent)creature).CurrentHP) / (decimal)creature.MaxHP);
+                    creatureScore = (int)Math.Floor(10m - 10m * ((Opponent)creature).CurrentHP / creature.MaxHP);
                 }
                 score += creatureScore;
             }
