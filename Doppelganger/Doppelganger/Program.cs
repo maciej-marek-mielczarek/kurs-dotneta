@@ -17,25 +17,26 @@ namespace Doppelganger
         private const int OtherColumnsWidth = 5; 
         
         private static List<Creature> _creatures;
-        private static ITextService _textService;
 
         private static void Main()
         {
+            //Initialize, display title and welcome message
             IMenuActionService menuActionService = new MenuActionService();
-            LanguageMenu(menuActionService);
-            menuActionService.Initialize(_textService);
+            Language languageChoice = LanguageMenu(menuActionService);
+            ITextService textService = new TextService(languageChoice);
+            menuActionService.Initialize(textService);
             _creatures = new List<Creature>();
-            Console.Write(_textService.Welcome());
-
-            MainMenu(menuActionService);
+            Console.Write(textService.Welcome());
+            //Start game
+            MainMenu(menuActionService, textService);
         }
 
-        private static void InstructionsMenu(IMenuActionService menuActionService)
+        private static void InstructionsMenu(IMenuActionService menuActionService, ITextService textService)
         {
             //Instructions Menu
             List<MenuAction> actions = menuActionService.GetActionsForMenu("Instructions");
             string possibleChoices = "";
-            Console.Write(_textService.GetInfoOn());
+            Console.Write(textService.GetInfoOn());
             foreach (var action in actions)
             {
                 Console.Write(Helpers.Buttonize(action.ActionName, action.KeyToChoose));
@@ -46,23 +47,23 @@ namespace Doppelganger
             switch (menuChoice)
             {
                 case 'a':
-                    ActionsInfo(menuActionService);
+                    ActionsInfo(menuActionService, textService);
                     break;
                 case 's':
-                    StatsInfo(menuActionService);
+                    StatsInfo(menuActionService, textService);
                     break;
                 case 'b':
-                    MainMenu(menuActionService);
+                    MainMenu(menuActionService, textService);
                     break;
             }
         }
 
-        private static void StatsInfo(IMenuActionService menuActionService)
+        private static void StatsInfo(IMenuActionService menuActionService, ITextService textService)
         {
             //Stats Info Menu
             List<MenuAction> actions = menuActionService.GetActionsForMenu("StatsInfo");
             string possibleChoices = "";
-            Console.Write(_textService.GetInfoOn());
+            Console.Write(textService.GetInfoOn());
             foreach (var action in actions)
             {
                 Console.Write(Helpers.Buttonize(action.ActionName,action.KeyToChoose));
@@ -73,23 +74,23 @@ namespace Doppelganger
             switch (menuChoice)
             {
                 case 'a':
-                    AttackInfo(menuActionService);
+                    AttackInfo(menuActionService, textService);
                     break;
                 case 'h':
-                    HpInfo(menuActionService);
+                    HpInfo(menuActionService, textService);
                     break;
                 case 's':
-                    SpeedInfo(menuActionService);
+                    SpeedInfo(menuActionService, textService);
                     break;
                 case 'b':
-                    InstructionsMenu(menuActionService);
+                    InstructionsMenu(menuActionService, textService);
                     break;
             }
         }
 
-        private static void SpeedInfo(IMenuActionService menuActionService)
+        private static void SpeedInfo(IMenuActionService menuActionService, ITextService textService)
         {
-            Console.Write(_textService.SpeedInfo());
+            Console.Write(textService.SpeedInfo());
             List<MenuAction> actions = menuActionService.GetActionsForMenu("ActionInfo");
             string possibleChoices = "";
             foreach (var action in actions)
@@ -102,14 +103,14 @@ namespace Doppelganger
             switch (menuChoice)
             {
                 case 'b':
-                    StatsInfo(menuActionService);
+                    StatsInfo(menuActionService, textService);
                     break;
             }
         }
 
-        private static void HpInfo(IMenuActionService menuActionService)
+        private static void HpInfo(IMenuActionService menuActionService, ITextService textService)
         {
-            Console.Write(_textService.HPInfo());
+            Console.Write(textService.HPInfo());
             List<MenuAction> actions = menuActionService.GetActionsForMenu("ActionInfo");
             string possibleChoices = "";
             foreach (var action in actions)
@@ -122,14 +123,14 @@ namespace Doppelganger
             switch (menuChoice)
             {
                 case 'b':
-                    StatsInfo(menuActionService);
+                    StatsInfo(menuActionService, textService);
                     break;
             }
         }
 
-        private static void AttackInfo(IMenuActionService menuActionService)
+        private static void AttackInfo(IMenuActionService menuActionService, ITextService textService)
         {
-            Console.Write(_textService.AttackInfo());
+            Console.Write(textService.AttackInfo());
             List<MenuAction> actions = menuActionService.GetActionsForMenu("ActionInfo");
             string possibleChoices = "";
             foreach (var action in actions)
@@ -142,17 +143,17 @@ namespace Doppelganger
             switch (menuChoice)
             {
                 case 'b':
-                    StatsInfo(menuActionService);
+                    StatsInfo(menuActionService, textService);
                     break;
             }
         }
 
-        private static void ActionsInfo(IMenuActionService menuActionService)
+        private static void ActionsInfo(IMenuActionService menuActionService, ITextService textService)
         {
             //Actions Info Menu
             List<MenuAction> actions = menuActionService.GetActionsForMenu("ActionsInfo");
             string possibleChoices = "";
-            Console.Write(_textService.GetInfoOn());
+            Console.Write(textService.GetInfoOn());
             foreach (var action in actions)
             {
                 Console.Write(Helpers.Buttonize(action.ActionName,action.KeyToChoose));
@@ -163,23 +164,23 @@ namespace Doppelganger
             switch (menuChoice)
             {
                 case 'a':
-                    PickAllyInfo(menuActionService);
+                    PickAllyInfo(menuActionService, textService);
                     break;
                 case 'o':
-                    PickOpponentInfo(menuActionService);
+                    PickOpponentInfo(menuActionService, textService);
                     break;
                 case 'f':
-                    FightInfo(menuActionService);
+                    FightInfo(menuActionService, textService);
                     break;
                 case 'b':
-                    InstructionsMenu(menuActionService);
+                    InstructionsMenu(menuActionService, textService);
                     break;
             }
         }
 
-        private static void FightInfo(IMenuActionService menuActionService)
+        private static void FightInfo(IMenuActionService menuActionService, ITextService textService)
         {
-            Console.Write(_textService.FightInfo());
+            Console.Write(textService.FightInfo());
             List<MenuAction> actions = menuActionService.GetActionsForMenu("ActionInfo");
             string possibleChoices = "";
             foreach (var action in actions)
@@ -192,14 +193,14 @@ namespace Doppelganger
             switch (menuChoice)
             {
                 case 'b':
-                    ActionsInfo(menuActionService);
+                    ActionsInfo(menuActionService, textService);
                     break;
             }
         }
 
-        private static void PickOpponentInfo(IMenuActionService menuActionService)
+        private static void PickOpponentInfo(IMenuActionService menuActionService, ITextService textService)
         {
-            Console.Write(_textService.PickOpponentInfo());
+            Console.Write(textService.PickOpponentInfo());
             List<MenuAction> actions = menuActionService.GetActionsForMenu("ActionInfo");
             string possibleChoices = "";
             foreach (var action in actions)
@@ -212,14 +213,14 @@ namespace Doppelganger
             switch (menuChoice)
             {
                 case 'b':
-                    ActionsInfo(menuActionService);
+                    ActionsInfo(menuActionService, textService);
                     break;
             }
         }
 
-        private static void PickAllyInfo(IMenuActionService menuActionService)
+        private static void PickAllyInfo(IMenuActionService menuActionService, ITextService textService)
         {
-            Console.Write(_textService.PickAllyInfo());
+            Console.Write(textService.PickAllyInfo());
             List<MenuAction> actions = menuActionService.GetActionsForMenu("ActionInfo");
             string possibleChoices = "";
             foreach (var action in actions)
@@ -232,12 +233,12 @@ namespace Doppelganger
             switch (menuChoice)
             {
                 case 'b':
-                    ActionsInfo(menuActionService);
+                    ActionsInfo(menuActionService, textService);
                     break;
             }
         }
 
-        private static void MainMenu(IMenuActionService menuActionService)
+        private static void MainMenu(IMenuActionService menuActionService, ITextService textService)
         {
             //Main Menu
             List<MenuAction> actions = menuActionService.GetActionsForMenu("Main");
@@ -252,63 +253,63 @@ namespace Doppelganger
             switch (menuChoice)
             {
                 case 'n':
-                    NewGame(menuActionService);
+                    NewGame(menuActionService, textService);
                     break;
                 case 'i':
-                    InstructionsMenu(menuActionService);
+                    InstructionsMenu(menuActionService, textService);
                     break;
                 case 'x':
                     break;
             }
         }
 
-        private static void NewGame(IMenuActionService menuActionService)
+        private static void NewGame(IMenuActionService menuActionService, ITextService textService)
         {
             for (int i = 0; i < NumberOfOpps; i++)
             {
                 _creatures.Add(new Creature());
             }
-            FightMenu(menuActionService);
+            FightMenu(menuActionService, textService);
         }
 
-        private static void FightMenu(IMenuActionService menuActionService)
+        private static void FightMenu(IMenuActionService menuActionService, ITextService textService)
         {
-            Console.WriteLine(_textService.WelcomeToFight());
+            Console.WriteLine(textService.WelcomeToFight());
 
-            Console.Write(_textService.Id().PadRight(FirstColumnWidth));
+            Console.Write(textService.Id().PadRight(FirstColumnWidth));
             for (int i = 0; i < NumberOfOpps; i++)
             {
                 Console.Write(("|" + i).PadRight(OtherColumnsWidth));
             }
             Console.WriteLine();
 
-            Console.Write(_textService.Attack().PadRight(FirstColumnWidth));
+            Console.Write(textService.Attack().PadRight(FirstColumnWidth));
             for (int i = 0; i < NumberOfOpps; i++)
             {
                 Console.Write(("|" + _creatures[i].Attack).PadRight(OtherColumnsWidth));
             }
             Console.WriteLine();
 
-            Console.Write(_textService.Speed().PadRight(FirstColumnWidth));
+            Console.Write(textService.Speed().PadRight(FirstColumnWidth));
             for (int i = 0; i < NumberOfOpps; i++)
             {
                 Console.Write(("|" + _creatures[i].Speed).PadRight(OtherColumnsWidth));
             }
             Console.WriteLine();
 
-            Console.Write(_textService.MaxHP().PadRight(FirstColumnWidth));
+            Console.Write(textService.MaxHP().PadRight(FirstColumnWidth));
             for (int i = 0; i < NumberOfOpps; i++)
             {
                 Console.Write(("|" + _creatures[i].MaxHP).PadRight(OtherColumnsWidth));
             }
             Console.WriteLine();
 
-            PickAllyMenu(menuActionService);
+            PickAllyMenu(menuActionService, textService);
         }
 
-        private static void PickAllyMenu(IMenuActionService menuActionService)
+        private static void PickAllyMenu(IMenuActionService menuActionService, ITextService textService)
         {
-            Console.Write(_textService.PickAlly());
+            Console.Write(textService.PickAlly());
             string possibleChoices = "x";
             for (int i = 0; i < NumberOfOpps; i++)
             {
@@ -331,31 +332,31 @@ namespace Doppelganger
                         _creatures[i] = new Opponent(_creatures[i]);
                     }
                 }
-                PickOppMenu(menuActionService);
+                PickOppMenu(menuActionService, textService);
             }
             else
             {
-                EndGameMenu(menuActionService);
+                EndGameMenu(menuActionService, textService);
             }
         }
 
-        private static void EndGameMenu(IMenuActionService menuActionService)
+        private static void EndGameMenu(IMenuActionService menuActionService, ITextService textService)
         {
-            Console.WriteLine(_textService.YourScoreIs() + Helpers.CalculateScore(_creatures) + "%");
+            Console.WriteLine(textService.YourScoreIs() + Helpers.CalculateScore(_creatures) + "%");
             Console.WriteLine();
             _creatures = new List<Creature>();
-            MainMenu(menuActionService);
+            MainMenu(menuActionService, textService);
         }
 
-        private static void PickOppMenu(IMenuActionService menuActionService)
+        private static void PickOppMenu(IMenuActionService menuActionService, ITextService textService)
         {
-            Console.Write(_textService.HP().PadRight(FirstColumnWidth));
+            Console.Write(textService.HP().PadRight(FirstColumnWidth));
             foreach (var creature in _creatures)
             {
                 Console.Write(("|" + creature.CurrentHP + (creature is Ally ? "*" : "")).PadRight(OtherColumnsWidth));
             }
 
-            Console.Write(_textService.FightWhom());
+            Console.Write(textService.FightWhom());
             string possibleChoices = "x";
             for (int i = 0; i < NumberOfOpps; i++)
             {
@@ -369,23 +370,23 @@ namespace Doppelganger
                 int chosenOppId = Helpers.CharDigitToInt(choice);
                 if (_creatures[chosenOppId].CurrentHP == 0)
                 {
-                    PickOppMenu(menuActionService);
+                    PickOppMenu(menuActionService, textService);
                 }
                 else
                 {
-                    FightSubMenu(menuActionService, chosenOppId, 0);
+                    FightSubMenu(menuActionService, chosenOppId, 0, textService);
                 }
             }
             else
             {
                 Console.WriteLine();
-                EndGameMenu(menuActionService);
+                EndGameMenu(menuActionService, textService);
             }
         }
 
-        private static void FightSubMenu(IMenuActionService menuActionService, int chosenOppId, int combatTurn)
+        private static void FightSubMenu(IMenuActionService menuActionService, int chosenOppId, int combatTurn, ITextService textService)
         {
-            Console.Write(_textService.HP().PadRight(FirstColumnWidth));
+            Console.Write(textService.HP().PadRight(FirstColumnWidth));
             for (int i = 0; i < NumberOfOpps; ++i)
             {
                 Console.Write(("|"
@@ -394,7 +395,7 @@ namespace Doppelganger
                 + (i == chosenOppId ? "x" : ""))
                 .PadRight(OtherColumnsWidth));
             }
-            Console.Write(_textService.StayHowLong());
+            Console.Write(textService.StayHowLong());
             string possibleChoices = "x";
             for (int i = 0; i < NumberOfOpps; i++)
             {
@@ -404,26 +405,26 @@ namespace Doppelganger
             if (choice == 'x')
             {
                 Console.WriteLine();
-                EndGameMenu(menuActionService);
+                EndGameMenu(menuActionService, textService);
             }
             else if (choice == '0')
             {
                 Helpers.ClearLine();
-                PickOppMenu(menuActionService);
+                PickOppMenu(menuActionService, textService);
             }
             else
             {
                 int chosenFightLength = Helpers.CharDigitToInt(choice);
-                FightSimulation(menuActionService, chosenOppId, chosenFightLength, combatTurn);
+                FightSimulation(menuActionService, chosenOppId, chosenFightLength, combatTurn, textService);
             }
         }
 
-        private static void FightSimulation(IMenuActionService menuActionService, int chosenOppId, int chosenFightLength, int combatTurn)
+        private static void FightSimulation(IMenuActionService menuActionService, int chosenOppId, int chosenFightLength, int combatTurn, ITextService textService)
         {
             if (chosenFightLength == 0)
             {
                 Helpers.ClearLine();
-                FightSubMenu(menuActionService, chosenOppId, combatTurn);
+                FightSubMenu(menuActionService, chosenOppId, combatTurn, textService);
             }
             else
             {
@@ -486,14 +487,14 @@ namespace Doppelganger
                 if (playerDied)
                 {
                     Console.WriteLine();
-                    EndGameMenu(menuActionService);
+                    EndGameMenu(menuActionService, textService);
                 }
                 else if (oppDied)
                 {
                     if (deadOppsCount + 1 == NumberOfOpps)
                     {
                         Console.WriteLine();
-                        EndGameMenu(menuActionService);
+                        EndGameMenu(menuActionService, textService);
                     }
                     else
                     {
@@ -523,7 +524,7 @@ namespace Doppelganger
                             }
                         }
                         Helpers.ClearLine();
-                        PickOppMenu(menuActionService);
+                        PickOppMenu(menuActionService, textService);
                     }
                 }
                 else
@@ -531,18 +532,18 @@ namespace Doppelganger
                     if (chosenFightLength == 1)
                     {
                         Helpers.ClearLine();
-                        FightSubMenu(menuActionService, chosenOppId, combatTurn);
+                        FightSubMenu(menuActionService, chosenOppId, combatTurn, textService);
                     }
                     else
                     {
                         chosenFightLength--;
-                        FightSimulation(menuActionService, chosenOppId, chosenFightLength, combatTurn);
+                        FightSimulation(menuActionService, chosenOppId, chosenFightLength, combatTurn, textService);
                     }
                 }
             }
         }
 
-        private static void LanguageMenu(IMenuActionService menuActionService)
+        private static Language LanguageMenu(IMenuActionService menuActionService)
         {
             //Language Choice Menu
             Console.Write(ChooseLanguageText.Text);
@@ -555,7 +556,7 @@ namespace Doppelganger
             }
             char languageCode = Helpers.GetChar(possibleChoices);
             Helpers.ClearLine();
-            _textService = new TextService(languageCode == 'p' ? Language.Polish : Language.English);
+            return languageCode == 'p' ? Language.Polish : Language.English;
         }
     }
 }
