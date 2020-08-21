@@ -13,6 +13,56 @@ OldClass's contents
 	... NewInterface1: ...
 	...
 
+====	NOT DONE:	====
+
+Program:
+text service
+list of creatures
+constants for looks (column widths, number of opps - if too many, won't fit in a standard width 80 console)
+various menus and screens
+fight simulation (simulates 1 round, then calls self or one of the menus)
+new game initialization
+menu initializations -> move to each menu's service class
+when going into a menu: display the menu's persisting message, display menu's volatile message, execute action (get key), clear volatile message, decide where to go
+
+	menu service
+		
+			screen
+			name
+	class Domain.Common.GenericMenu
+			method enter:
+				display the menu's persisting message,
+				display menu's volatile message,
+				get key,
+				clear volatile message,
+				execute action
+	class Domain.Entity.Screens.SomeScreen: screen
+		one screen from a menu
+			overwrites messages
+	abstract class Domain.Common.Screen: AuditableEntity (because it might come from a database later)
+		base class for screens
+			persisting message (doesn't disappear when screen is gone)
+			volatile message (one line, length<=80, disappears when screen is gone)
+	ScreenService
+		methods to display screens, doesn't care about user input
+			list of all screens
+			methods like in text service
+	IScreenService
+			like ITextService
+	a way to identify screens, like for texts
+	
+	game
+		
+			screen service, menu action service, text service, list of cretures, consts for looks
+	combat round service
+		combat simulation
+			combat simulation, returns combat result
+			combat round simulation
+
+add to notes: i tried to make program work after each commit
+
+====	DONE:	====
+
 Translations.Texts:
 text strings in pl and eng: welcome texts, menu texts, buttons, stat info texts, menu info texts, stat names
 methods to return those strings based on language, some strings are kind-of-buttons - they have one letter in parentheses
