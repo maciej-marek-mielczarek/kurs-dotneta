@@ -134,6 +134,19 @@ Przy rozbijaniu klasy Texts okazało się, że dziedziczenie enumów działa nie
 
 Inne klasy były bardziej rozbite, więc właściwie wystarczyło je poprzenosić w odpowiednie miejsca. Oczywiście po tym przenoszeniu mam wrażenie że nie wszystko jest tam gdzie być powinno, ale przynajmniej nie mam już wszystkiego w jednym miejscu.
 
-Jeszcze jedno miejsce w którym mam duże nagromadzenie kodu to sama klasa Program. Wcześniej powydzielałem z Maina dużo funkcji typu MenuTakie, MenuInne, więc wystarczy stworzyć dla każdej z nich odpowiednie miejsce.
+Jeszcze jedno miejsce w którym mam duże nagromadzenie kodu to sama klasa Program. Wcześniej powydzielałem z Maina dużo funkcji statycznych typu MenuTakie, MenuInne, więc wystarczy stworzyć dla każdej z nich odpowiednie miejsce.
+
+Przed wyrzuceniem menu z klasy Program musiałem jeszcze tak poprzerabiać te wszystkie metody MenuTakie, MenuInne, żeby wszystkie potrzebne dane dostawały w argumentach zamiast używać pól klasy Program. To znaczy wszystkie dane poza stałymi, które też wyrzuciłem do osobnych klas statycznych w bibliotece Domain. Po tych przygotowaniach większość pracy związanej z przenoszeniem metod wykonało IDE (PPM na nazwę metody -> Refactor -> Move).
+
+Rozdzieliłem menu na 3 klasy tak żeby w żadnej nie było ich szczególnie dużo i żeby każda zawierała rzeczy, które umiem nazwać jakimś wspólnym określeniem. W jednej klasie znalazły się więc metody związane z walką, w drugiej -- z instrukcjami, a w trzeciej -- bardziej ogólne menu. Po tym podziale okazało się, że większość z przeniesionych metod może być prywatna, bo nie są wołane przez menu spoza swojej klasy.
+
+\section{Wnioski po refaktorze}
+Po tych wszystkich operacjach najdłuższy plik w moim projekcie ma niecałe 300 linii, drugi najdłuższy -- też ponad 200 (te dwa raczej będę chciał jeszcze rozbić), a cała reszta mieści się poniżej 200. W zbyt długich plikach trudniej się zorientować, więc uważam, że można to uznać za sporą poprawę w stosunku do stanu sprzed refaktoru, gdzie najdłuższy plik miał ponad 600 linii, a drugi najdłuższy -- ponad 500.
+
+Prawdopodobnie istotne przy przeróbkach było to, że starałem się nie zmieniać za dużo w jednym commicie i za każdym razem zostawiać aplikację w stanie działającym.
+
+Poza tym, wydzielałem kawałek kodu do poprawienia i głównie na nim się skupiałem, ignorując resztę aplikacji o ile nie psuło to jej działania.
+
+Przy większych kawałkach do zmiany pomocne było też rozpisanie sobie co właściwie znajduje się w wybranej części i co mam zamiar z tym zrobić. Te rozpiski miały mniej sensu niż początkowo po nich oczekiwałem, ale samo przemyślenie problemu i tak pomagało.
 
 \end{document}
