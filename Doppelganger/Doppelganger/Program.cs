@@ -14,9 +14,7 @@ namespace Doppelganger
     {
         private const byte NumberOfOpps = 10;
         private const byte FirstColumnWidth = 14;
-        private const int OtherColumnsWidth = 5; 
-        
-        private static List<Creature> _creatures;
+        private const int OtherColumnsWidth = 5;
 
         private static void Main()
         {
@@ -25,13 +23,14 @@ namespace Doppelganger
             Language languageChoice = LanguageMenu(menuActionService);
             ITextService textService = new TextService(languageChoice);
             menuActionService.Initialize(textService);
-            _creatures = new List<Creature>();
+            List<Creature> creatures = new List<Creature>();
             Console.Write(textService.Welcome());
             //Start game
-            MainMenu(menuActionService, textService);
+            MainMenu(menuActionService, textService, creatures);
         }
 
-        private static void InstructionsMenu(IMenuActionService menuActionService, ITextService textService)
+        private static void InstructionsMenu(IMenuActionService menuActionService, ITextService textService,
+            List<Creature> creatures)
         {
             //Instructions Menu
             List<MenuAction> actions = menuActionService.GetActionsForMenu("Instructions");
@@ -47,18 +46,19 @@ namespace Doppelganger
             switch (menuChoice)
             {
                 case 'a':
-                    ActionsInfo(menuActionService, textService);
+                    ActionsInfo(menuActionService, textService, creatures);
                     break;
                 case 's':
-                    StatsInfo(menuActionService, textService);
+                    StatsInfo(menuActionService, textService, creatures);
                     break;
                 case 'b':
-                    MainMenu(menuActionService, textService);
+                    MainMenu(menuActionService, textService, creatures);
                     break;
             }
         }
 
-        private static void StatsInfo(IMenuActionService menuActionService, ITextService textService)
+        private static void StatsInfo(IMenuActionService menuActionService, ITextService textService,
+            List<Creature> creatures)
         {
             //Stats Info Menu
             List<MenuAction> actions = menuActionService.GetActionsForMenu("StatsInfo");
@@ -74,21 +74,22 @@ namespace Doppelganger
             switch (menuChoice)
             {
                 case 'a':
-                    AttackInfo(menuActionService, textService);
+                    AttackInfo(menuActionService, textService, creatures);
                     break;
                 case 'h':
-                    HpInfo(menuActionService, textService);
+                    HpInfo(menuActionService, textService, creatures);
                     break;
                 case 's':
-                    SpeedInfo(menuActionService, textService);
+                    SpeedInfo(menuActionService, textService, creatures);
                     break;
                 case 'b':
-                    InstructionsMenu(menuActionService, textService);
+                    InstructionsMenu(menuActionService, textService, creatures);
                     break;
             }
         }
 
-        private static void SpeedInfo(IMenuActionService menuActionService, ITextService textService)
+        private static void SpeedInfo(IMenuActionService menuActionService, ITextService textService,
+            List<Creature> creatures)
         {
             Console.Write(textService.SpeedInfo());
             List<MenuAction> actions = menuActionService.GetActionsForMenu("ActionInfo");
@@ -103,12 +104,13 @@ namespace Doppelganger
             switch (menuChoice)
             {
                 case 'b':
-                    StatsInfo(menuActionService, textService);
+                    StatsInfo(menuActionService, textService, creatures);
                     break;
             }
         }
 
-        private static void HpInfo(IMenuActionService menuActionService, ITextService textService)
+        private static void HpInfo(IMenuActionService menuActionService, ITextService textService,
+            List<Creature> creatures)
         {
             Console.Write(textService.HPInfo());
             List<MenuAction> actions = menuActionService.GetActionsForMenu("ActionInfo");
@@ -123,12 +125,13 @@ namespace Doppelganger
             switch (menuChoice)
             {
                 case 'b':
-                    StatsInfo(menuActionService, textService);
+                    StatsInfo(menuActionService, textService, creatures);
                     break;
             }
         }
 
-        private static void AttackInfo(IMenuActionService menuActionService, ITextService textService)
+        private static void AttackInfo(IMenuActionService menuActionService, ITextService textService,
+            List<Creature> creatures)
         {
             Console.Write(textService.AttackInfo());
             List<MenuAction> actions = menuActionService.GetActionsForMenu("ActionInfo");
@@ -143,12 +146,13 @@ namespace Doppelganger
             switch (menuChoice)
             {
                 case 'b':
-                    StatsInfo(menuActionService, textService);
+                    StatsInfo(menuActionService, textService, creatures);
                     break;
             }
         }
 
-        private static void ActionsInfo(IMenuActionService menuActionService, ITextService textService)
+        private static void ActionsInfo(IMenuActionService menuActionService, ITextService textService,
+            List<Creature> creatures)
         {
             //Actions Info Menu
             List<MenuAction> actions = menuActionService.GetActionsForMenu("ActionsInfo");
@@ -164,21 +168,22 @@ namespace Doppelganger
             switch (menuChoice)
             {
                 case 'a':
-                    PickAllyInfo(menuActionService, textService);
+                    PickAllyInfo(menuActionService, textService, creatures);
                     break;
                 case 'o':
-                    PickOpponentInfo(menuActionService, textService);
+                    PickOpponentInfo(menuActionService, textService, creatures);
                     break;
                 case 'f':
-                    FightInfo(menuActionService, textService);
+                    FightInfo(menuActionService, textService, creatures);
                     break;
                 case 'b':
-                    InstructionsMenu(menuActionService, textService);
+                    InstructionsMenu(menuActionService, textService, creatures);
                     break;
             }
         }
 
-        private static void FightInfo(IMenuActionService menuActionService, ITextService textService)
+        private static void FightInfo(IMenuActionService menuActionService, ITextService textService,
+            List<Creature> creatures)
         {
             Console.Write(textService.FightInfo());
             List<MenuAction> actions = menuActionService.GetActionsForMenu("ActionInfo");
@@ -193,12 +198,13 @@ namespace Doppelganger
             switch (menuChoice)
             {
                 case 'b':
-                    ActionsInfo(menuActionService, textService);
+                    ActionsInfo(menuActionService, textService, creatures);
                     break;
             }
         }
 
-        private static void PickOpponentInfo(IMenuActionService menuActionService, ITextService textService)
+        private static void PickOpponentInfo(IMenuActionService menuActionService, ITextService textService,
+            List<Creature> creatures)
         {
             Console.Write(textService.PickOpponentInfo());
             List<MenuAction> actions = menuActionService.GetActionsForMenu("ActionInfo");
@@ -213,12 +219,13 @@ namespace Doppelganger
             switch (menuChoice)
             {
                 case 'b':
-                    ActionsInfo(menuActionService, textService);
+                    ActionsInfo(menuActionService, textService, creatures);
                     break;
             }
         }
 
-        private static void PickAllyInfo(IMenuActionService menuActionService, ITextService textService)
+        private static void PickAllyInfo(IMenuActionService menuActionService, ITextService textService,
+            List<Creature> creatures)
         {
             Console.Write(textService.PickAllyInfo());
             List<MenuAction> actions = menuActionService.GetActionsForMenu("ActionInfo");
@@ -233,12 +240,13 @@ namespace Doppelganger
             switch (menuChoice)
             {
                 case 'b':
-                    ActionsInfo(menuActionService, textService);
+                    ActionsInfo(menuActionService, textService, creatures);
                     break;
             }
         }
 
-        private static void MainMenu(IMenuActionService menuActionService, ITextService textService)
+        private static void MainMenu(IMenuActionService menuActionService, ITextService textService,
+            List<Creature> creatures)
         {
             //Main Menu
             List<MenuAction> actions = menuActionService.GetActionsForMenu("Main");
@@ -253,26 +261,28 @@ namespace Doppelganger
             switch (menuChoice)
             {
                 case 'n':
-                    NewGame(menuActionService, textService);
+                    NewGame(menuActionService, textService, creatures);
                     break;
                 case 'i':
-                    InstructionsMenu(menuActionService, textService);
+                    InstructionsMenu(menuActionService, textService, creatures);
                     break;
                 case 'x':
                     break;
             }
         }
 
-        private static void NewGame(IMenuActionService menuActionService, ITextService textService)
+        private static void NewGame(IMenuActionService menuActionService, ITextService textService,
+            List<Creature> creatures)
         {
             for (int i = 0; i < NumberOfOpps; i++)
             {
-                _creatures.Add(new Creature());
+                creatures.Add(new Creature());
             }
-            FightMenu(menuActionService, textService);
+            FightMenu(menuActionService, textService, creatures);
         }
 
-        private static void FightMenu(IMenuActionService menuActionService, ITextService textService)
+        private static void FightMenu(IMenuActionService menuActionService, ITextService textService,
+            List<Creature> creatures)
         {
             Console.WriteLine(textService.WelcomeToFight());
 
@@ -286,28 +296,29 @@ namespace Doppelganger
             Console.Write(textService.Attack().PadRight(FirstColumnWidth));
             for (int i = 0; i < NumberOfOpps; i++)
             {
-                Console.Write(("|" + _creatures[i].Attack).PadRight(OtherColumnsWidth));
+                Console.Write(("|" + creatures[i].Attack).PadRight(OtherColumnsWidth));
             }
             Console.WriteLine();
 
             Console.Write(textService.Speed().PadRight(FirstColumnWidth));
             for (int i = 0; i < NumberOfOpps; i++)
             {
-                Console.Write(("|" + _creatures[i].Speed).PadRight(OtherColumnsWidth));
+                Console.Write(("|" + creatures[i].Speed).PadRight(OtherColumnsWidth));
             }
             Console.WriteLine();
 
             Console.Write(textService.MaxHP().PadRight(FirstColumnWidth));
             for (int i = 0; i < NumberOfOpps; i++)
             {
-                Console.Write(("|" + _creatures[i].MaxHP).PadRight(OtherColumnsWidth));
+                Console.Write(("|" + creatures[i].MaxHP).PadRight(OtherColumnsWidth));
             }
             Console.WriteLine();
 
-            PickAllyMenu(menuActionService, textService);
+            PickAllyMenu(menuActionService, textService, creatures);
         }
 
-        private static void PickAllyMenu(IMenuActionService menuActionService, ITextService textService)
+        private static void PickAllyMenu(IMenuActionService menuActionService, ITextService textService,
+            List<Creature> creatures)
         {
             Console.Write(textService.PickAlly());
             string possibleChoices = "x";
@@ -325,33 +336,35 @@ namespace Doppelganger
                 {
                     if (i == chosenAlly)
                     {
-                        _creatures[i] = new Ally(_creatures[i]);
+                        creatures[i] = new Ally(creatures[i]);
                     }
                     else
                     {
-                        _creatures[i] = new Opponent(_creatures[i]);
+                        creatures[i] = new Opponent(creatures[i]);
                     }
                 }
-                PickOppMenu(menuActionService, textService);
+                PickOppMenu(menuActionService, textService, creatures);
             }
             else
             {
-                EndGameMenu(menuActionService, textService);
+                EndGameMenu(menuActionService, textService, creatures);
             }
         }
 
-        private static void EndGameMenu(IMenuActionService menuActionService, ITextService textService)
+        private static void EndGameMenu(IMenuActionService menuActionService, ITextService textService,
+            List<Creature> creatures)
         {
-            Console.WriteLine(textService.YourScoreIs() + Helpers.CalculateScore(_creatures) + "%");
+            Console.WriteLine(textService.YourScoreIs() + Helpers.CalculateScore(creatures) + "%");
             Console.WriteLine();
-            _creatures = new List<Creature>();
-            MainMenu(menuActionService, textService);
+            creatures = new List<Creature>();
+            MainMenu(menuActionService, textService, creatures);
         }
 
-        private static void PickOppMenu(IMenuActionService menuActionService, ITextService textService)
+        private static void PickOppMenu(IMenuActionService menuActionService, ITextService textService,
+            List<Creature> creatures)
         {
             Console.Write(textService.HP().PadRight(FirstColumnWidth));
-            foreach (var creature in _creatures)
+            foreach (var creature in creatures)
             {
                 Console.Write(("|" + creature.CurrentHP + (creature is Ally ? "*" : "")).PadRight(OtherColumnsWidth));
             }
@@ -368,30 +381,31 @@ namespace Doppelganger
             {
                 Helpers.ClearLine();
                 int chosenOppId = Helpers.CharDigitToInt(choice);
-                if (_creatures[chosenOppId].CurrentHP == 0)
+                if (creatures[chosenOppId].CurrentHP == 0)
                 {
-                    PickOppMenu(menuActionService, textService);
+                    PickOppMenu(menuActionService, textService, creatures);
                 }
                 else
                 {
-                    FightSubMenu(menuActionService, chosenOppId, 0, textService);
+                    FightSubMenu(menuActionService, chosenOppId, 0, textService, creatures);
                 }
             }
             else
             {
                 Console.WriteLine();
-                EndGameMenu(menuActionService, textService);
+                EndGameMenu(menuActionService, textService, creatures);
             }
         }
 
-        private static void FightSubMenu(IMenuActionService menuActionService, int chosenOppId, int combatTurn, ITextService textService)
+        private static void FightSubMenu(IMenuActionService menuActionService, int chosenOppId, int combatTurn,
+            ITextService textService, List<Creature> creatures)
         {
             Console.Write(textService.HP().PadRight(FirstColumnWidth));
             for (int i = 0; i < NumberOfOpps; ++i)
             {
                 Console.Write(("|"
-                + _creatures[i].CurrentHP
-                + (_creatures[i] is Ally ? "*" : "")
+                + creatures[i].CurrentHP
+                + (creatures[i] is Ally ? "*" : "")
                 + (i == chosenOppId ? "x" : ""))
                 .PadRight(OtherColumnsWidth));
             }
@@ -405,26 +419,27 @@ namespace Doppelganger
             if (choice == 'x')
             {
                 Console.WriteLine();
-                EndGameMenu(menuActionService, textService);
+                EndGameMenu(menuActionService, textService, creatures);
             }
             else if (choice == '0')
             {
                 Helpers.ClearLine();
-                PickOppMenu(menuActionService, textService);
+                PickOppMenu(menuActionService, textService, creatures);
             }
             else
             {
                 int chosenFightLength = Helpers.CharDigitToInt(choice);
-                FightSimulation(menuActionService, chosenOppId, chosenFightLength, combatTurn, textService);
+                FightSimulation(menuActionService, chosenOppId, chosenFightLength, combatTurn, textService, creatures);
             }
         }
 
-        private static void FightSimulation(IMenuActionService menuActionService, int chosenOppId, int chosenFightLength, int combatTurn, ITextService textService)
+        private static void FightSimulation(IMenuActionService menuActionService, int chosenOppId,
+            int chosenFightLength, int combatTurn, ITextService textService, List<Creature> creatures)
         {
             if (chosenFightLength == 0)
             {
                 Helpers.ClearLine();
-                FightSubMenu(menuActionService, chosenOppId, combatTurn, textService);
+                FightSubMenu(menuActionService, chosenOppId, combatTurn, textService, creatures);
             }
             else
             {
@@ -432,90 +447,90 @@ namespace Doppelganger
                 byte playersStrike = 0, oppsStrike = 0;
                 for (int creatureId = 0; creatureId < NumberOfOpps; ++creatureId)
                 {
-                    if (_creatures[creatureId] is Ally)
+                    if (creatures[creatureId] is Ally)
                     {
-                        if (combatTurn % _creatures[creatureId].Speed == 0)
+                        if (combatTurn % creatures[creatureId].Speed == 0)
                         {
-                            playersStrike = _creatures[creatureId].Attack;
+                            playersStrike = creatures[creatureId].Attack;
                         }
                     }
-                    else if (creatureId == chosenOppId && combatTurn % _creatures[creatureId].Speed == 0)
+                    else if (creatureId == chosenOppId && combatTurn % creatures[creatureId].Speed == 0)
                     {
-                        oppsStrike = _creatures[creatureId].Attack;
+                        oppsStrike = creatures[creatureId].Attack;
                     }
                 }
                 bool playerDied = false, oppDied = false;
                 byte deadOppsCount = 0;
                 for (int creatureId = 0; creatureId < NumberOfOpps; ++creatureId)
                 {
-                    if (_creatures[creatureId] is Ally)
+                    if (creatures[creatureId] is Ally)
                     {
-                        var playersHP = _creatures[creatureId].CurrentHP;
+                        var playersHP = creatures[creatureId].CurrentHP;
                         if (playersHP <= oppsStrike)
                         {
-                            _creatures[creatureId].CurrentHP = 0;
+                            creatures[creatureId].CurrentHP = 0;
                             playerDied = true;
                         }
                         else
                         {
-                            _creatures[creatureId].CurrentHP -= oppsStrike;
+                            creatures[creatureId].CurrentHP -= oppsStrike;
                         }
                     }
-                    else if (_creatures[creatureId].CurrentHP == 0)
+                    else if (creatures[creatureId].CurrentHP == 0)
                     {
                         deadOppsCount++;
                     }
                     if (creatureId == chosenOppId)
                     {
-                        var oppsHP = _creatures[creatureId].CurrentHP;
+                        var oppsHP = creatures[creatureId].CurrentHP;
                         if (oppsHP <= playersStrike)
                         {
-                            _creatures[creatureId].CurrentHP = 0;
+                            creatures[creatureId].CurrentHP = 0;
                             deadOppsCount++;
                             oppDied = true;
-                            if(_creatures[creatureId] is Ally)
+                            if(creatures[creatureId] is Ally)
                             {
                                 playerDied = true;
                             }
                         }
                         else
                         {
-                            _creatures[creatureId].CurrentHP -= playersStrike;
+                            creatures[creatureId].CurrentHP -= playersStrike;
                         }
                     }
                 }
                 if (playerDied)
                 {
                     Console.WriteLine();
-                    EndGameMenu(menuActionService, textService);
+                    EndGameMenu(menuActionService, textService, creatures);
                 }
                 else if (oppDied)
                 {
                     if (deadOppsCount + 1 == NumberOfOpps)
                     {
                         Console.WriteLine();
-                        EndGameMenu(menuActionService, textService);
+                        EndGameMenu(menuActionService, textService, creatures);
                     }
                     else
                     {
                         // ReSharper disable once PossibleNullReferenceException
-                        float previousAllysHPPercent = _creatures.Find(cr => cr is Ally).CurrentHP
+                        float previousAllysHPPercent = creatures.Find(cr => cr is Ally).CurrentHP
                                                        // ReSharper disable once PossibleNullReferenceException
-                                                       / ((float)(_creatures.Find(cr => cr is Ally).MaxHP));
+                                                       / ((float)(creatures.Find(cr => cr is Ally).MaxHP));
                         bool leftOldAlly = false, assumedNewShape = false;
                         for (int creatureId = 0; creatureId < NumberOfOpps; creatureId++)
                         {
-                            if (!leftOldAlly && _creatures[creatureId] is Ally)
+                            if (!leftOldAlly && creatures[creatureId] is Ally)
                             {
-                                Opponent oldAlly = (Ally)_creatures[creatureId];
-                                _creatures[creatureId] = oldAlly;
+                                Opponent oldAlly = (Ally)creatures[creatureId];
+                                creatures[creatureId] = oldAlly;
                                 leftOldAlly = true;
                             }
                             if (!assumedNewShape && creatureId == chosenOppId)
                             {
-                                Ally newAlly = (Opponent)_creatures[creatureId];
+                                Ally newAlly = (Opponent)creatures[creatureId];
                                 newAlly.CurrentHP = (byte)Math.Ceiling(newAlly.MaxHP * previousAllysHPPercent);
-                                _creatures[creatureId] = newAlly;
+                                creatures[creatureId] = newAlly;
                                 assumedNewShape = true;
                             }
                             if (assumedNewShape && leftOldAlly)
@@ -524,7 +539,7 @@ namespace Doppelganger
                             }
                         }
                         Helpers.ClearLine();
-                        PickOppMenu(menuActionService, textService);
+                        PickOppMenu(menuActionService, textService, creatures);
                     }
                 }
                 else
@@ -532,12 +547,12 @@ namespace Doppelganger
                     if (chosenFightLength == 1)
                     {
                         Helpers.ClearLine();
-                        FightSubMenu(menuActionService, chosenOppId, combatTurn, textService);
+                        FightSubMenu(menuActionService, chosenOppId, combatTurn, textService, creatures);
                     }
                     else
                     {
                         chosenFightLength--;
-                        FightSimulation(menuActionService, chosenOppId, chosenFightLength, combatTurn, textService);
+                        FightSimulation(menuActionService, chosenOppId, chosenFightLength, combatTurn, textService, creatures);
                     }
                 }
             }
