@@ -14,17 +14,16 @@ namespace Doppelganger
     {
         private const byte NumberOfOpps = 10;
         private const byte FirstColumnWidth = 14;
+        private const int OtherColumnsWidth = 5; 
+        
         private static List<Creature> _creatures;
-        private const int OtherColumnsWidth = 5;
-
         private static ITextService _textService;
 
         private static void Main()
         {
             IMenuActionService menuActionService = new MenuActionService();
-
             LanguageMenu(menuActionService);
-            Initialize(menuActionService);
+            menuActionService.Initialize(_textService);
             _creatures = new List<Creature>();
             Console.Write(_textService.Welcome());
 
@@ -498,7 +497,9 @@ namespace Doppelganger
                     }
                     else
                     {
+                        // ReSharper disable once PossibleNullReferenceException
                         float previousAllysHPPercent = _creatures.Find(cr => cr is Ally).CurrentHP
+                                                       // ReSharper disable once PossibleNullReferenceException
                                                        / ((float)(_creatures.Find(cr => cr is Ally).MaxHP));
                         bool leftOldAlly = false, assumedNewShape = false;
                         for (int creatureId = 0; creatureId < NumberOfOpps; creatureId++)
@@ -555,31 +556,6 @@ namespace Doppelganger
             char languageCode = Helpers.GetChar(possibleChoices);
             Helpers.ClearLine();
             _textService = new TextService(languageCode == 'p' ? Language.Polish : Language.English);
-        }
-
-        private static void Initialize(IMenuActionService menuActionService)
-        {
-            menuActionService.AddNewAction('n', _textService.NewGame(), "Main");
-            menuActionService.AddNewAction('i', _textService.Instructions(), "Main");
-            menuActionService.AddNewAction('x', _textService.Exit(), "Main");
-
-            menuActionService.AddNewAction('s', _textService.Stats(), "Instructions");
-            menuActionService.AddNewAction('a', _textService.Actions(), "Instructions");
-            menuActionService.AddNewAction('b', _textService.Back(), "Instructions");
-
-            menuActionService.AddNewAction('a', _textService.Attack(), "StatsInfo");
-            menuActionService.AddNewAction('h', _textService.HP(), "StatsInfo");
-            menuActionService.AddNewAction('s', _textService.Speed(), "StatsInfo");
-            menuActionService.AddNewAction('b', _textService.Back(), "StatsInfo");
-
-            menuActionService.AddNewAction('b', _textService.Back(), "StatInfo");
-
-            menuActionService.AddNewAction('a', _textService.AboutAlly(), "ActionsInfo");
-            menuActionService.AddNewAction('o', _textService.AboutOpponent(), "ActionsInfo");
-            menuActionService.AddNewAction('f', _textService.Fight(), "ActionsInfo");
-            menuActionService.AddNewAction('b', _textService.Back(), "ActionsInfo");
-
-            menuActionService.AddNewAction('b', _textService.Back(), "ActionInfo");
         }
     }
 }

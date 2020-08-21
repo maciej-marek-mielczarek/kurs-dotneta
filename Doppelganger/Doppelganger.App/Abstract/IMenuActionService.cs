@@ -5,7 +5,7 @@ namespace Doppelganger.App.Abstract
 {
     public interface IMenuActionService
     {
-        void AddNewAction(char keyToChoose, string actionName, string menuName);
         List<MenuAction> GetActionsForMenu(string menuName);
+        void Initialize(ITextService textService);
     }
 }
