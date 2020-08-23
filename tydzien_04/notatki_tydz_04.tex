@@ -18,6 +18,9 @@
 
 \tableofcontents
 
+\section{Stan aplikacji}
+
+
 \section{Projekt testowy}
 Dla C\# mamy 3 popularne biblioteki do testowania aplikacji, będące bazami dla 3 typów projektów testowych:
 \begin{itemize}
@@ -33,5 +36,14 @@ Wciśnięcie PPM na projekcie testowym w eksploratorze rozwiązania -> run tests
 Luźno latające okienka w IDE (przynajmniej niektóre), takie jak to z testami można, przez przeciągnięcie gdzieś do rogu, $"$zadokować$"$, czyli sprawić, żeby zostały w wyznaczonym miejscu i nie znikały po użyciu.
 
 Zielone i czerwone kółka przy metodach testowych oznaczają wynik ostatniego testu i są skrótami do odpalania tego testu.
+
+\section{Testy jednostkowe}
+Test jednostkowy powinien zachowywać tak zwaną strukturę $"$AAA$"$, co jest skrótem od słów:
+\begin{itemize}
+\item Arrange (Przygotowanie). Tu przygotowujemy dane testowe.
+\item Act (Działanie). Tu wykonujemy to, czego działanie chcemy przetestować.
+\item Assert (Weryfikacja). Tu sprawdzamy poprawność tego, co stało się w poprzedniej części. Używamy do tego (metod) klasy Assert obecnej w praktycznie każdej bibliotece testowej.
+\end{itemize}
+Te części to po prostu kawałki kodu wykonywane po kolei i tworzące logiczne całości.
 
 \end{document}
