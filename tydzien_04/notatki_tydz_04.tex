@@ -50,6 +50,13 @@ Testy jednostkowe są do sprawdzania czy najmniejsze części aplikacji (metody 
 
 Istnienie testów oszczędza nam debugowania.
 
-Metody nie powinny być zbyt duże, żeby łatwiej było się upewnić że działają poprawnie.
+Metody nie powinny być zbyt duże, żeby łatwiej było się upewnić że działają poprawnie. Te części które aktualnie nie są testowane, zakładamy że działają i symulujemy ich poprawne działanie przy użyciu biblioteki Moq.
+
+\section{Biblioteka Moq}
+Ta biblioteka jest do tworzenia danych potrzebnych do testów i symulowania zachowania części aplikacji związanej z danymi. Te dane testowe i symulacje są po to, żeby trzymać bazę danych z daleka od testów jednostkowych, bo to nie ona jest tam testowana i nie wiadomo w jakim jest stanie. Stan bazy danych zapewne sprawdzany jest albo w ramach jakiegoś innego typu testów albo ręcznie.
+
+Opcję zainstalowania biblioteki znajdziemy przez PPM na projekt testowy -> Manage NuGet Packages.
+
+Obiekt klasy Mock<SymulowanaKlasa> (tym razem Mock, nie Moq) służy do symulowania działania klasy, która nie jest testowana w aktualnym teście, ale jest używana przez testowaną metodę. Jak zachowuje się obiekt $"$mock$"$ definiujemy np. poprzez mock.Setup(...).Returns(...). Jeśli chcemy użyć zasymulowanego obiektu zamiast prawdziwego, to zamiast nazwy zmiennej typu SymulowanaKlasa pisemy mock.Object.
 
 \end{document}
