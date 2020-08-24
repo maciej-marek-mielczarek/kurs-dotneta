@@ -53,7 +53,9 @@ Istnienie testów oszczędza nam debugowania.
 Metody nie powinny być zbyt duże, żeby łatwiej było się upewnić że działają poprawnie. Te części które aktualnie nie są testowane, zakładamy że działają i symulujemy ich poprawne działanie przy użyciu biblioteki Moq.
 
 \section{Biblioteka Moq}
-Ta biblioteka jest do tworzenia danych potrzebnych do testów i symulowania zachowania części aplikacji związanej z danymi. Te dane testowe i symulacje są po to, żeby trzymać bazę danych z daleka od testów jednostkowych, bo to nie ona jest tam testowana i nie wiadomo w jakim jest stanie. Stan bazy danych zapewne sprawdzany jest albo w ramach jakiegoś innego typu testów albo ręcznie.
+Do testów nie używamy danych z bazy danych, tylko danych testowych.
+
+Biblioteka Moq jest do tworzenia danych potrzebnych do testów i symulowania zachowania części aplikacji związanej z danymi. Te dane testowe i symulacje są po to, żeby trzymać bazę danych z daleka od testów jednostkowych, bo to nie ona jest tam testowana i nie wiadomo w jakim jest stanie. Stan bazy danych zapewne sprawdzany jest albo w ramach jakiegoś innego typu testów albo ręcznie.
 
 Opcję zainstalowania biblioteki znajdziemy przez PPM na projekt testowy -> Manage NuGet Packages.
 
@@ -63,5 +65,12 @@ Obiekt klasy Mock<SymulowanaKlasa> (tym razem Mock, nie Moq) służy do symulowa
 Metody z tej biblioteki wołamy tak, jakbyśmy wołali metody sprawdzanego obiektu-odpowiedzi, a metody klasy Assert wołamy jako Assert.Metoda(...).
 
 Kolejność Assertów ma znaczenie, bo funkcja testowa kończy się na pierwszym oblanym teście. Najpierw sprawdzamy bardziej ogólne warunki, np. jeśli wołamy metodę Dodaj(2,2), to najpierw sprawdzamy, czy wynik dodawania jest liczbą, a potem czy jest równy 4.
+
+\section{Co testować?}
+Jak coś nie zawiera logiki, np. konstruktor, standardowy getter czy setter albo proste operacje CRUD (które zwykle możemy znaleźć w Serwisie), to nie ma sensu tego testować. Natomiast np. klasy ze słowem Manager w nazwie zwykle mają metody które reagują na działania użytkownika i te metody na pewno chcemy testować.
+
+Testy jednostkowe są do metod (funkcji). Nie testujemy testami jednostkowymi np. czy (klasa) Koń jest (czyli dziedziczy po klasie) Zwierzęciem i czy ma (pole typu lista, długości) 4 (zawierające obiekty typu) Nogi. Testujemy natomiast, np. czy metoda Koń.Idź(...) zwraca sensowne nowe położenie konia.
+
+Nie testujemy też czy zewnętrzne biblioteki dobrze działają i generują sensowny kod. Tym zajmują się twórcy tych bibliotek. Polegamy tu na ich reputacji.
 
 \end{document}
