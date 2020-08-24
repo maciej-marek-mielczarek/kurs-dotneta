@@ -59,4 +59,9 @@ Opcję zainstalowania biblioteki znajdziemy przez PPM na projekt testowy -> Mana
 
 Obiekt klasy Mock<SymulowanaKlasa> (tym razem Mock, nie Moq) służy do symulowania działania klasy, która nie jest testowana w aktualnym teście, ale jest używana przez testowaną metodę. Jak zachowuje się obiekt $"$mock$"$ definiujemy np. poprzez mock.Setup(...).Returns(...). Jeśli chcemy użyć zasymulowanego obiektu zamiast prawdziwego, to zamiast nazwy zmiennej typu SymulowanaKlasa pisemy mock.Object.
 
+\section{Biblioteka FluentAssertions}
+Metody z tej biblioteki wołamy tak, jakbyśmy wołali metody sprawdzanego obiektu-odpowiedzi, a metody klasy Assert wołamy jako Assert.Metoda(...).
+
+Kolejność Assertów ma znaczenie, bo funkcja testowa kończy się na pierwszym oblanym teście. Najpierw sprawdzamy bardziej ogólne warunki, np. jeśli wołamy metodę Dodaj(2,2), to najpierw sprawdzamy, czy wynik dodawania jest liczbą, a potem czy jest równy 4.
+
 \end{document}
