@@ -1,11 +1,14 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Doppelganger", "Doppelganger\Doppelganger.csproj", "{A9C78C4D-FF1B-465C-BD3C-0E32881BC10E}"
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30413.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Doppelganger", "Doppelganger\Doppelganger.csproj", "{A9C78C4D-FF1B-465C-BD3C-0E32881BC10E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Doppelganger.Domain", "Doppelganger.Domain\Doppelganger.Domain.csproj", "{9D112B16-9726-479A-9E1C-8A738990F7C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Doppelganger.Domain", "Doppelganger.Domain\Doppelganger.Domain.csproj", "{9D112B16-9726-479A-9E1C-8A738990F7C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Doppelganger.App", "Doppelganger.App\Doppelganger.App.csproj", "{84966741-9D94-432A-8657-BA0319FBA0CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Doppelganger.App", "Doppelganger.App\Doppelganger.App.csproj", "{84966741-9D94-432A-8657-BA0319FBA0CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Doppelganger.Tests", "Doppelganger.Tests\Doppelganger.Tests.csproj", "{01BC262C-BD43-4984-9313-E633977DCE07}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,5 +28,15 @@ Global
 		{84966741-9D94-432A-8657-BA0319FBA0CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84966741-9D94-432A-8657-BA0319FBA0CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84966741-9D94-432A-8657-BA0319FBA0CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01BC262C-BD43-4984-9313-E633977DCE07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01BC262C-BD43-4984-9313-E633977DCE07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01BC262C-BD43-4984-9313-E633977DCE07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01BC262C-BD43-4984-9313-E633977DCE07}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ED9A45B7-6D15-40C2-A315-9F86FAB157BF}
 	EndGlobalSection
 EndGlobal

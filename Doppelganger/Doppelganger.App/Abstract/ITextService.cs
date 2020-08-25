@@ -2,32 +2,32 @@ namespace Doppelganger.App.Abstract
 {
     public interface ITextService
     {
-        public string Welcome();
-        public string NewGame();
-        public string Instructions();
-        public string Exit();
-        public string Stats();
-        public string Actions();
-        public string Back();
-        public string GetInfoOn();
-        public string AttackInfo();
-        public string HPInfo();
-        public string SpeedInfo();
-        public string AboutAlly();
-        public string AboutOpponent();
-        public string Fight();
-        public string WelcomeToFight();
-        public string YourScoreIs();
-        public string FightWhom();
-        public string StayHowLong();
-        public string FightInfo();
-        public string PickOpponentInfo();
-        public string PickAllyInfo();
-        public string Id();
-        public string Attack();
-        public string Speed();
-        public string HP();
-        public string MaxHP();
-        public string PickAlly();
+        string Welcome();
+        string NewGame();
+        string Instructions();
+        string Exit();
+        string Stats();
+        string Actions();
+        string Back();
+        string GetInfoOn();
+        string AttackInfo();
+        string HPInfo();
+        string SpeedInfo();
+        string AboutAlly();
+        string AboutOpponent();
+        string Fight();
+        string WelcomeToFight();
+        string YourScoreIs();
+        string FightWhom();
+        string StayHowLong();
+        string FightInfo();
+        string PickOpponentInfo();
+        string PickAllyInfo();
+        string Id();
+        string Attack();
+        string Speed();
+        string HP();
+        string MaxHP();
+        string PickAlly();
     }
 }
