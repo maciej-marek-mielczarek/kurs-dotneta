@@ -82,4 +82,11 @@ Jeśli natrafiamy podczas pisania testu na sytuację w której test nie kompiluj
 
 Jeśli nowa metoda będzie potrzebowała skorzystać np. z metod serwisu, to przy pomocy mock.Setup() ustawiamy jak te metody powinny się zachowywać.
 
+\section{Testy integracyjne}
+Sprawdzają czy różne warstwy aplikacji, np. Kontrolery i Menadżery, dobrze ze sobą współpracują.
+
+Tutaj nie używamy Mocków, tylko prawdziwych obiektów. Zapisujemy, odczytujemy, usuwamy dane z bazy używanej też przez samą aplikację. Zwracamy więc uwagę, żeby test zostawił bazę w takim stanie w jakim ją zastał. Na koniec testu integracyjnego możemy więc mieć dodatkowy krok Czyszczenia (Clear), gdzie właśnie przywracamy bazę do stanu sprzed wykonania testu.
+
+Na etapie czyszczenia, jeśli wcześniej dodawaliśmy do bazy jakieś obiekty, to konieczne może być nie tylko ich usunięcie, ale też posprzątanie innych śmieci, które mogły po tych obiektach pozostać w bazie. Np. zwrócić identyfikatory obiektów zużyte do testów, żeby potem w normalnym działaniu aplikacji nie powodować przerw w numerowaniu obiektów. Także najpierw uczymy się przywracać stan bazy danych do stanu sprzed testu, a dopiero potem zabieramy się za testy integracyjne.
+
 \end{document}
