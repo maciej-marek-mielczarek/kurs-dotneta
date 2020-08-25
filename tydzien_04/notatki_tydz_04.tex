@@ -62,7 +62,7 @@ Opcję zainstalowania biblioteki znajdziemy przez PPM na projekt testowy -> Mana
 Obiekt klasy Mock<SymulowanaKlasa> (tym razem Mock, nie Moq) służy do symulowania działania klasy, która nie jest testowana w aktualnym teście, ale jest używana przez testowaną metodę. Jak zachowuje się obiekt $"$mock$"$ definiujemy np. poprzez mock.Setup(...).Returns(...). Jeśli chcemy użyć zasymulowanego obiektu zamiast prawdziwego, to zamiast nazwy zmiennej typu SymulowanaKlasa pisemy mock.Object.
 
 \section{Biblioteka FluentAssertions}
-Metody z tej biblioteki wołamy tak, jakbyśmy wołali metody sprawdzanego obiektu-odpowiedzi, a metody klasy Assert wołamy jako Assert.Metoda(...).
+Metody z tej biblioteki wołamy tak, jakbyśmy wołali metody sprawdzanego obiektu-odpowiedzi, a metody klasy Assert wołamy jako Assert.Metoda(...). Możemy je wołać również na obiektach typów Mock<...>.
 
 Kolejność Assertów ma znaczenie, bo funkcja testowa kończy się na pierwszym oblanym teście. Najpierw sprawdzamy bardziej ogólne warunki, np. jeśli wołamy metodę Dodaj(2,2), to najpierw sprawdzamy, czy wynik dodawania jest liczbą, a potem czy jest równy 4.
 
@@ -72,5 +72,14 @@ Jak coś nie zawiera logiki, np. konstruktor, standardowy getter czy setter albo
 Testy jednostkowe są do metod (funkcji). Nie testujemy testami jednostkowymi np. czy (klasa) Koń jest (czyli dziedziczy po klasie) Zwierzęciem i czy ma (pole typu lista, długości) 4 (zawierające obiekty typu) Nogi. Testujemy natomiast, np. czy metoda Koń.Idź(...) zwraca sensowne nowe położenie konia.
 
 Nie testujemy też czy zewnętrzne biblioteki dobrze działają i generują sensowny kod. Tym zajmują się twórcy tych bibliotek. Polegamy tu na ich reputacji.
+
+\section{TDD}
+TDD, czyli Test Driven Development, polega na tym, że najpierw piszemy test, a potem kod wymagany do jego zaliczenia. Następnie przechodzimy do kolejnego testu, potem kodu wymaganego do jego zaliczenia, i tak dalej.
+
+Oczywiście, zaraz po napisaniu testu do nieistniejącego jeszcze kodu, oblewamy ten test. Chodzi o to, żeby zaraz po oblaniu testu dopisać do aplikacji tylko tyle kodu ile potrzeba żeby zaliczyć test.
+
+Jeśli natrafiamy podczas pisania testu na sytuację w której test nie kompiluje się, bo brakuje jakiegoś kodu w aplikacji, to wtedy dopisujemy ten kod, np. pustą metodę. Ciało tej metody dopisujemy dopiero wtedy, gdy test zaczyna tego wymagać.
+
+Jeśli nowa metoda będzie potrzebowała skorzystać np. z metod serwisu, to przy pomocy mock.Setup() ustawiamy jak te metody powinny się zachowywać.
 
 \end{document}
