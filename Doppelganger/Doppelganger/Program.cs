@@ -16,15 +16,22 @@ namespace Doppelganger
     {
         private static void Main()
         {
-            //Initialize, display title and welcome message
+            //Display title
+            Console.Write(TitleText.Text);
+            //Create Menu Action Service and partly initialize it (further initialization equireslanuage choice)
             IMenuActionService menuActionService = new MenuActionService();
-            Language languageChoice = LanguageManager.ChooseLanguage(menuActionService);
+            //Create Language Manager and ask it to pick a language
+            LanguageManager languageManager = new LanguageManager(menuActionService);
+            Language languageChoice = languageManager.ChooseLanguage();
+            //Use the language choice to initialize Text and Menu Action Services
             ITextService textService = new TextService(languageChoice);
             menuActionService.Initialize(textService);
-            List<Creature> creatures = new List<Creature>();
+            //Write a one-time welcome message in the chosen language
             Console.Write(textService.Welcome());
+            //Use services to initiaize Game Manager
+            GameManager gameManager = new GameManager(textService, menuActionService);
             //Start game
-            MenuManager.MainMenu(menuActionService, textService, creatures);
+            gameManager.Launch();
         }
     }
 }

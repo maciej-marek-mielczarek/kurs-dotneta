@@ -7,9 +7,15 @@ using System.Text;
 
 namespace Doppelganger.App.Managers
 {
-    public static class LanguageManager
+    public class LanguageManager
     {
-        public static Language ChooseLanguage(IMenuActionService menuActionService)
+        private readonly IMenuActionService menuActionService;
+
+        public LanguageManager(IMenuActionService menuActionService)
+        {
+            this.menuActionService = menuActionService;
+        }
+        public Language ChooseLanguage()
         {
             //Language Choice Menu
             Console.Write(ChooseLanguageText.Text);

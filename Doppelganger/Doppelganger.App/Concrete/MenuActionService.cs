@@ -13,8 +13,6 @@ namespace Doppelganger.App.Concrete
         public MenuActionService()
         {
             _menuActions = new List<MenuAction>();
-
-            Console.Write(TitleText.Text);
             
             InitializeLang();
         }
