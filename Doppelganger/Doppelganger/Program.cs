@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Doppelganger.App.Abstract;
 using Doppelganger.App.Concrete;
 using Doppelganger.App.Helpers;
-using Doppelganger.App.Menus;
+using Doppelganger.App.Managers;
 using Doppelganger.Domain.Common;
 using Doppelganger.Domain.Common.Creatures;
 using Doppelganger.Domain.Entity.Creatures;
@@ -18,13 +18,13 @@ namespace Doppelganger
         {
             //Initialize, display title and welcome message
             IMenuActionService menuActionService = new MenuActionService();
-            Language languageChoice = BasicMenus.LanguageMenu(menuActionService);
+            Language languageChoice = LanguageManager.ChooseLanguage(menuActionService);
             ITextService textService = new TextService(languageChoice);
             menuActionService.Initialize(textService);
             List<Creature> creatures = new List<Creature>();
             Console.Write(textService.Welcome());
             //Start game
-            BasicMenus.MainMenu(menuActionService, textService, creatures);
+            MenuManager.MainMenu(menuActionService, textService, creatures);
         }
     }
 }

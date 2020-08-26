@@ -4,9 +4,9 @@ using Doppelganger.App.Abstract;
 using Doppelganger.Domain.Common;
 using Doppelganger.Domain.Common.Creatures;
 
-namespace Doppelganger.App.Menus
+namespace Doppelganger.App.Managers
 {
-    public static class InstructionMenus
+    public static class InstructionsManager
     {
         public static void InstructionsMenu(IMenuActionService menuActionService, ITextService textService,
             List<Creature> creatures)
@@ -32,7 +32,7 @@ namespace Doppelganger.App.Menus
                     StatsInfo(menuActionService, textService, creatures);
                     break;
                 case 'b':
-                    BasicMenus.MainMenu(menuActionService, textService, creatures);
+                    MenuManager.MainMenu(menuActionService, textService, creatures);
                     break;
             }
         }

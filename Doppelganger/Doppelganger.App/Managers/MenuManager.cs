@@ -6,9 +6,9 @@ using Doppelganger.Domain.Common.Creatures;
 using Doppelganger.Domain.Entity.Settings;
 using Doppelganger.Domain.Entity.Texts;
 
-namespace Doppelganger.App.Menus
+namespace Doppelganger.App.Managers
 {
-    public static class BasicMenus
+    public static class MenuManager
     {
         public static void MainMenu(IMenuActionService menuActionService, ITextService textService,
             List<Creature> creatures)
@@ -30,7 +30,7 @@ namespace Doppelganger.App.Menus
                     NewGame(menuActionService, textService, creatures);
                     break;
                 case 'i':
-                    InstructionMenus.InstructionsMenu(menuActionService, textService, creatures);
+                    InstructionsManager.InstructionsMenu(menuActionService, textService, creatures);
                     break;
                 case 'x':
                     break;
@@ -45,7 +45,7 @@ namespace Doppelganger.App.Menus
                 creatures.Add(new Creature());
             }
 
-            FightMenus.FightMenu(menuActionService, textService, creatures);
+            FightManager.FightMenu(menuActionService, textService, creatures);
         }
 
         public static void EndGameMenu(IMenuActionService menuActionService, ITextService textService,
@@ -55,23 +55,6 @@ namespace Doppelganger.App.Menus
             Console.WriteLine();
             creatures = new List<Creature>();
             MainMenu(menuActionService, textService, creatures);
-        }
-
-        public static Language LanguageMenu(IMenuActionService menuActionService)
-        {
-            //Language Choice Menu
-            Console.Write(ChooseLanguageText.Text);
-            List<MenuAction> actions = menuActionService.GetActionsForMenu("Lang");
-            string possibleChoices = "";
-            foreach (var action in actions)
-            {
-                Console.Write(Helpers.Helpers.Buttonize(action.ActionName, action.KeyToChoose));
-                possibleChoices += action.KeyToChoose;
-            }
-
-            char languageCode = Helpers.Helpers.GetChar(possibleChoices);
-            Helpers.Helpers.ClearLine();
-            return languageCode == 'p' ? Language.Polish : Language.English;
         }
     }
 }

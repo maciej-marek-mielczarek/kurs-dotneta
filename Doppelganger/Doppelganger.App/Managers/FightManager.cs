@@ -5,9 +5,9 @@ using Doppelganger.Domain.Common.Creatures;
 using Doppelganger.Domain.Entity.Creatures;
 using Doppelganger.Domain.Entity.Settings;
 
-namespace Doppelganger.App.Menus
+namespace Doppelganger.App.Managers
 {
-    public static class FightMenus
+    public static class FightManager
     {
         public static void FightMenu(IMenuActionService menuActionService, ITextService textService,
             List<Creature> creatures)
@@ -80,7 +80,7 @@ namespace Doppelganger.App.Menus
             }
             else
             {
-                BasicMenus.EndGameMenu(menuActionService, textService, creatures);
+                MenuManager.EndGameMenu(menuActionService, textService, creatures);
             }
         }
 
@@ -119,7 +119,7 @@ namespace Doppelganger.App.Menus
             else
             {
                 Console.WriteLine();
-                BasicMenus.EndGameMenu(menuActionService, textService, creatures);
+                MenuManager.EndGameMenu(menuActionService, textService, creatures);
             }
         }
 
@@ -147,7 +147,7 @@ namespace Doppelganger.App.Menus
             if (choice == 'x')
             {
                 Console.WriteLine();
-                BasicMenus.EndGameMenu(menuActionService, textService, creatures);
+                MenuManager.EndGameMenu(menuActionService, textService, creatures);
             }
             else if (choice == '0')
             {
@@ -233,35 +233,35 @@ namespace Doppelganger.App.Menus
                 if (playerDied)
                 {
                     Console.WriteLine();
-                    BasicMenus.EndGameMenu(menuActionService, textService, creatures);
+                    MenuManager.EndGameMenu(menuActionService, textService, creatures);
                 }
                 else if (oppDied)
                 {
                     if (deadOppsCount + 1 == DisplaySettings.NumberOfOpps)
                     {
                         Console.WriteLine();
-                        BasicMenus.EndGameMenu(menuActionService, textService, creatures);
+                        MenuManager.EndGameMenu(menuActionService, textService, creatures);
                     }
                     else
                     {
                         // ReSharper disable once PossibleNullReferenceException
                         float previousAllysHPPercent = creatures.Find(cr => cr is Ally).CurrentHP
                                                        // ReSharper disable once PossibleNullReferenceException
-                                                       / ((float) (creatures.Find(cr => cr is Ally).MaxHP));
+                                                       / (float)creatures.Find(cr => cr is Ally).MaxHP;
                         bool leftOldAlly = false, assumedNewShape = false;
                         for (int creatureId = 0; creatureId < DisplaySettings.NumberOfOpps; creatureId++)
                         {
                             if (!leftOldAlly && creatures[creatureId] is Ally)
                             {
-                                Opponent oldAlly = (Ally) creatures[creatureId];
+                                Opponent oldAlly = (Ally)creatures[creatureId];
                                 creatures[creatureId] = oldAlly;
                                 leftOldAlly = true;
                             }
 
                             if (!assumedNewShape && creatureId == chosenOppId)
                             {
-                                Ally newAlly = (Opponent) creatures[creatureId];
-                                newAlly.CurrentHP = (byte) Math.Ceiling(newAlly.MaxHP * previousAllysHPPercent);
+                                Ally newAlly = (Opponent)creatures[creatureId];
+                                newAlly.CurrentHP = (byte)Math.Ceiling(newAlly.MaxHP * previousAllysHPPercent);
                                 creatures[creatureId] = newAlly;
                                 assumedNewShape = true;
                             }
