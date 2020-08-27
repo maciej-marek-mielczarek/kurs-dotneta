@@ -6,6 +6,10 @@ namespace Doppelganger.App.Abstract
     public interface ICreatureService
     {
         List<Creature> GetCrts();
-        void SetCrts(List<Creature> creatures);
+        void GenerateNewCrts();
+        void MakeAllHostileExcept(int chosenAlly);
+        void ClearCrts();
+        void RegisterHit(byte oppsStrike, int creatureId);
+        void SwitchBodiesWith(int chosenOppId);
     }
 }

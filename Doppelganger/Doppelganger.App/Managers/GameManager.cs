@@ -52,21 +52,17 @@ namespace Doppelganger.App.Managers
 
         private void NewGame()
         {
-            List<Creature> creatures = _fightManager.CreatureService.GetCrts();
-            for (int i = 0; i < DisplaySettings.NumberOfOpps; i++)
-            {
-                creatures.Add(new Creature());
-            }
-            _fightManager.CreatureService.SetCrts(creatures);
+            _fightManager.Initialize();
             _fightManager.FightMenu();
             EndGame();
         }
 
         private void EndGame()
         {
+            Console.WriteLine();
             Console.WriteLine(_textService.YourScoreIs() + Helpers.Helpers.CalculateScore(_fightManager.CreatureService.GetCrts()) + "%");
             Console.WriteLine();
-            _fightManager.CreatureService.SetCrts(new List<Creature>());
+            _fightManager.CreatureService.ClearCrts();
             MainMenu();
         }
     }

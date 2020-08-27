@@ -68,29 +68,15 @@ namespace Doppelganger.App.Managers
             }
 
             char choice = Helpers.Helpers.GetChar(possibleChoices);
-            Helpers.Helpers.ClearLine();
-            List<Creature> creatures = CreatureService.GetCrts();
             if (choice != 'x')
             {
+                Helpers.Helpers.ClearLine();
                 int chosenAlly = Helpers.Helpers.CharDigitToInt(choice);
-                for (int i = 0; i < DisplaySettings.NumberOfOpps; i++)
-                {
-                    if (i == chosenAlly)
-                    {
-                        creatures[i] = new Ally(creatures[i]);
-                    }
-                    else
-                    {
-                        creatures[i] = new Opponent(creatures[i]);
-                    }
-                }
-                CreatureService.SetCrts(creatures);
+                CreatureService.MakeAllHostileExcept(chosenAlly);
                 PickOppMenu();
             }
-            else
-            {
-                //return control upwards
-            }
+
+            //return control upwards
         }
 
         private void PickOppMenu()
@@ -100,7 +86,8 @@ namespace Doppelganger.App.Managers
             foreach (var creature in creatures)
             {
                 Console.Write(
-                    ("|" + creature.CurrentHP + (creature is Ally ? "*" : "")).PadRight(DisplaySettings.OtherColumnsWidth));
+                    ("|" + creature.CurrentHP + (creature is Ally ? "*" : "")).PadRight(DisplaySettings
+                        .OtherColumnsWidth));
             }
 
             Console.Write(_textService.FightWhom());
@@ -124,11 +111,8 @@ namespace Doppelganger.App.Managers
                     FightSubMenu(chosenOppId, 0);
                 }
             }
-            else
-            {
-                Console.WriteLine();
-                //return control upwards
-            }
+
+            //else return control upwards
         }
 
         private void FightSubMenu(int chosenOppId, int combatTurn)
@@ -152,21 +136,18 @@ namespace Doppelganger.App.Managers
             }
 
             char choice = Helpers.Helpers.GetChar(possibleChoices);
-            if (choice == 'x')
-            {
-                Console.WriteLine();
-                //return control upwards
-            }
-            else if (choice == '0')
+            if (choice == '0')
             {
                 Helpers.Helpers.ClearLine();
                 PickOppMenu();
             }
-            else
+            else if (choice != 'x')
             {
                 int chosenFightLength = Helpers.Helpers.CharDigitToInt(choice);
                 FightSimulation(chosenOppId, chosenFightLength, combatTurn);
             }
+
+            //else return control upwards
         }
 
         private void FightSimulation(int chosenOppId, int chosenFightLength, int combatTurn)
@@ -202,15 +183,11 @@ namespace Doppelganger.App.Managers
                 {
                     if (creatures[creatureId] is Ally)
                     {
-                        var playersHP = creatures[creatureId].CurrentHP;
-                        if (playersHP <= oppsStrike)
+                        CreatureService.RegisterHit(oppsStrike, creatureId);
+                        creatures = CreatureService.GetCrts();
+                        if (creatures[creatureId].CurrentHP <= 0)
                         {
-                            creatures[creatureId].CurrentHP = 0;
                             playerDied = true;
-                        }
-                        else
-                        {
-                            creatures[creatureId].CurrentHP -= oppsStrike;
                         }
                     }
                     else if (creatures[creatureId].CurrentHP == 0)
@@ -220,10 +197,10 @@ namespace Doppelganger.App.Managers
 
                     if (creatureId == chosenOppId)
                     {
-                        var oppsHP = creatures[creatureId].CurrentHP;
-                        if (oppsHP <= playersStrike)
+                        CreatureService.RegisterHit(playersStrike, creatureId);
+                        creatures = CreatureService.GetCrts();
+                        if (creatures[creatureId].CurrentHP <= 0)
                         {
-                            creatures[creatureId].CurrentHP = 0;
                             deadOppsCount++;
                             oppDied = true;
                             if (creatures[creatureId] is Ally)
@@ -231,54 +208,23 @@ namespace Doppelganger.App.Managers
                                 playerDied = true;
                             }
                         }
-                        else
-                        {
-                            creatures[creatureId].CurrentHP -= playersStrike;
-                        }
                     }
                 }
-                CreatureService.SetCrts(creatures);
+
                 if (playerDied)
                 {
-                    Console.WriteLine();
                     //return control upwards
                 }
                 else if (oppDied)
                 {
                     if (deadOppsCount + 1 == DisplaySettings.NumberOfOpps)
                     {
-                        Console.WriteLine();
                         //return control upwards
                     }
                     else
                     {
-                        // ReSharper disable once PossibleNullReferenceException
-                        float previousAllysHPPercent = creatures.Find(cr => cr is Ally).CurrentHP
-                                                       // ReSharper disable once PossibleNullReferenceException
-                                                       / (float)creatures.Find(cr => cr is Ally).MaxHP;
-                        bool leftOldAlly = false, assumedNewShape = false;
-                        for (int creatureId = 0; creatureId < DisplaySettings.NumberOfOpps; creatureId++)
-                        {
-                            if (!leftOldAlly && creatures[creatureId] is Ally)
-                            {
-                                Opponent oldAlly = (Ally)creatures[creatureId];
-                                creatures[creatureId] = oldAlly;
-                                leftOldAlly = true;
-                            }
-                            if (!assumedNewShape && creatureId == chosenOppId)
-                            {
-                                Ally newAlly = (Opponent)creatures[creatureId];
-                                newAlly.CurrentHP = (byte)Math.Ceiling(newAlly.MaxHP * previousAllysHPPercent);
-                                creatures[creatureId] = newAlly;
-                                assumedNewShape = true;
-                            }
-                            if (assumedNewShape && leftOldAlly)
-                            {
-                                break;
-                            }
-                        }
+                        CreatureService.SwitchBodiesWith(chosenOppId);
                         Helpers.Helpers.ClearLine();
-                        CreatureService.SetCrts(creatures);
                         PickOppMenu();
                     }
                 }
@@ -296,6 +242,11 @@ namespace Doppelganger.App.Managers
                     }
                 }
             }
+        }
+
+        public void Initialize()
+        {
+            CreatureService.GenerateNewCrts();
         }
     }
 }
