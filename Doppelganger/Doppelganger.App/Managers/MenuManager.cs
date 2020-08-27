@@ -8,10 +8,18 @@ using Doppelganger.Domain.Entity.Texts;
 
 namespace Doppelganger.App.Managers
 {
-    public static class MenuManager
-    {
-        public static void MainMenu(IMenuActionService menuActionService, ITextService textService,
-            List<Creature> creatures)
+    public class MenuManager
+    {//move all from this class to GameManager; control will flow through it
+        private readonly IMenuActionService menuActionService;
+        private readonly ITextService textService;
+
+        public MenuManager(IMenuActionService menuActionService, ITextService textService)
+        {
+            this.menuActionService = menuActionService;
+            this.textService = textService;
+        }
+
+        public void MainMenu()
         {
             //Main Menu
             List<MenuAction> actions = menuActionService.GetActionsForMenu("Main");
@@ -27,10 +35,10 @@ namespace Doppelganger.App.Managers
             switch (menuChoice)
             {
                 case 'n':
-                    NewGame(menuActionService, textService, creatures);
+                    NewGame(creatures);
                     break;
                 case 'i':
-                    InstructionsManager.InstructionsMenu(menuActionService, textService, creatures);
+                    InstructionsManager.InstructionsMenu();
                     break;
                 case 'x':
                     break;

@@ -6,10 +6,18 @@ using Doppelganger.Domain.Common.Creatures;
 
 namespace Doppelganger.App.Managers
 {
-    public static class InstructionsManager
+    public class InstructionsManager
     {
-        public static void InstructionsMenu(IMenuActionService menuActionService, ITextService textService,
-            List<Creature> creatures)
+        private readonly IMenuActionService menuActionService;
+        private readonly ITextService textService;
+
+        public InstructionsManager(IMenuActionService menuActionService, ITextService textService)
+        {
+            this.menuActionService = menuActionService;
+            this.textService = textService;
+        }
+
+        public void InstructionsMenu()
         {
             //Instructions Menu
             List<MenuAction> actions = menuActionService.GetActionsForMenu("Instructions");
@@ -26,19 +34,18 @@ namespace Doppelganger.App.Managers
             switch (menuChoice)
             {
                 case 'a':
-                    ActionsInfo(menuActionService, textService, creatures);
+                    ActionsInfo();
                     break;
                 case 's':
-                    StatsInfo(menuActionService, textService, creatures);
+                    StatsInfo();
                     break;
                 case 'b':
-                    MenuManager.MainMenu(menuActionService, textService, creatures);
+                    MenuManager.MainMenu();
                     break;
             }
         }
 
-        private static void StatsInfo(IMenuActionService menuActionService, ITextService textService,
-            List<Creature> creatures)
+        private void StatsInfo()
         {
             //Stats Info Menu
             List<MenuAction> actions = menuActionService.GetActionsForMenu("StatsInfo");
@@ -55,22 +62,21 @@ namespace Doppelganger.App.Managers
             switch (menuChoice)
             {
                 case 'a':
-                    AttackInfo(menuActionService, textService, creatures);
+                    AttackInfo();
                     break;
                 case 'h':
-                    HpInfo(menuActionService, textService, creatures);
+                    HpInfo();
                     break;
                 case 's':
-                    SpeedInfo(menuActionService, textService, creatures);
+                    SpeedInfo();
                     break;
                 case 'b':
-                    InstructionsMenu(menuActionService, textService, creatures);
+                    InstructionsMenu();
                     break;
             }
         }
 
-        private static void SpeedInfo(IMenuActionService menuActionService, ITextService textService,
-            List<Creature> creatures)
+        private void SpeedInfo()
         {
             Console.Write(textService.SpeedInfo());
             List<MenuAction> actions = menuActionService.GetActionsForMenu("ActionInfo");
@@ -86,13 +92,12 @@ namespace Doppelganger.App.Managers
             switch (menuChoice)
             {
                 case 'b':
-                    StatsInfo(menuActionService, textService, creatures);
+                    StatsInfo();
                     break;
             }
         }
 
-        private static void HpInfo(IMenuActionService menuActionService, ITextService textService,
-            List<Creature> creatures)
+        private void HpInfo()
         {
             Console.Write(textService.HPInfo());
             List<MenuAction> actions = menuActionService.GetActionsForMenu("ActionInfo");
@@ -108,13 +113,12 @@ namespace Doppelganger.App.Managers
             switch (menuChoice)
             {
                 case 'b':
-                    StatsInfo(menuActionService, textService, creatures);
+                    StatsInfo();
                     break;
             }
         }
 
-        private static void AttackInfo(IMenuActionService menuActionService, ITextService textService,
-            List<Creature> creatures)
+        private void AttackInfo()
         {
             Console.Write(textService.AttackInfo());
             List<MenuAction> actions = menuActionService.GetActionsForMenu("ActionInfo");
@@ -130,13 +134,12 @@ namespace Doppelganger.App.Managers
             switch (menuChoice)
             {
                 case 'b':
-                    StatsInfo(menuActionService, textService, creatures);
+                    StatsInfo();
                     break;
             }
         }
 
-        private static void ActionsInfo(IMenuActionService menuActionService, ITextService textService,
-            List<Creature> creatures)
+        private void ActionsInfo()
         {
             //Actions Info Menu
             List<MenuAction> actions = menuActionService.GetActionsForMenu("ActionsInfo");
@@ -153,22 +156,21 @@ namespace Doppelganger.App.Managers
             switch (menuChoice)
             {
                 case 'a':
-                    PickAllyInfo(menuActionService, textService, creatures);
+                    PickAllyInfo();
                     break;
                 case 'o':
-                    PickOpponentInfo(menuActionService, textService, creatures);
+                    PickOpponentInfo();
                     break;
                 case 'f':
-                    FightInfo(menuActionService, textService, creatures);
+                    FightInfo();
                     break;
                 case 'b':
-                    InstructionsMenu(menuActionService, textService, creatures);
+                    InstructionsMenu();
                     break;
             }
         }
 
-        private static void FightInfo(IMenuActionService menuActionService, ITextService textService,
-            List<Creature> creatures)
+        private void FightInfo()
         {
             Console.Write(textService.FightInfo());
             List<MenuAction> actions = menuActionService.GetActionsForMenu("ActionInfo");
@@ -184,13 +186,12 @@ namespace Doppelganger.App.Managers
             switch (menuChoice)
             {
                 case 'b':
-                    ActionsInfo(menuActionService, textService, creatures);
+                    ActionsInfo();
                     break;
             }
         }
 
-        private static void PickOpponentInfo(IMenuActionService menuActionService, ITextService textService,
-            List<Creature> creatures)
+        private void PickOpponentInfo()
         {
             Console.Write(textService.PickOpponentInfo());
             List<MenuAction> actions = menuActionService.GetActionsForMenu("ActionInfo");
@@ -206,13 +207,12 @@ namespace Doppelganger.App.Managers
             switch (menuChoice)
             {
                 case 'b':
-                    ActionsInfo(menuActionService, textService, creatures);
+                    ActionsInfo();
                     break;
             }
         }
 
-        private static void PickAllyInfo(IMenuActionService menuActionService, ITextService textService,
-            List<Creature> creatures)
+        private void PickAllyInfo()
         {
             Console.Write(textService.PickAllyInfo());
             List<MenuAction> actions = menuActionService.GetActionsForMenu("ActionInfo");
@@ -228,7 +228,7 @@ namespace Doppelganger.App.Managers
             switch (menuChoice)
             {
                 case 'b':
-                    ActionsInfo(menuActionService, textService, creatures);
+                    ActionsInfo();
                     break;
             }
         }

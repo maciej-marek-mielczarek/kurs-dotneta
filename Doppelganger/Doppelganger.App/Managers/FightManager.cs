@@ -7,10 +7,20 @@ using Doppelganger.Domain.Entity.Settings;
 
 namespace Doppelganger.App.Managers
 {
-    public static class FightManager
+    public class FightManager
     {
-        public static void FightMenu(IMenuActionService menuActionService, ITextService textService,
-            List<Creature> creatures)
+        private readonly IMenuActionService menuActionService;
+        private readonly ITextService textService;
+        private ICreatureService creatureService;
+
+        public FightManager(IMenuActionService menuActionService, ITextService textService, ICreatureService creatureService)
+        {
+            this.menuActionService = menuActionService;
+            this.textService = textService;
+            this.creatureService = creatureService;
+        }
+
+        public void FightMenu()
         {
             Console.WriteLine(textService.WelcomeToFight());
 
@@ -22,6 +32,7 @@ namespace Doppelganger.App.Managers
 
             Console.WriteLine();
 
+            List<Creature> creatures = creatureService.GetCrts();
             Console.Write(textService.Attack().PadRight(DisplaySettings.FirstColumnWidth));
             for (int i = 0; i < DisplaySettings.NumberOfOpps; i++)
             {
@@ -46,11 +57,10 @@ namespace Doppelganger.App.Managers
 
             Console.WriteLine();
 
-            PickAllyMenu(menuActionService, textService, creatures);
+            PickAllyMenu();
         }
 
-        private static void PickAllyMenu(IMenuActionService menuActionService, ITextService textService,
-            List<Creature> creatures)
+        private void PickAllyMenu()
         {
             Console.Write(textService.PickAlly());
             string possibleChoices = "x";
@@ -61,6 +71,7 @@ namespace Doppelganger.App.Managers
 
             char choice = Helpers.Helpers.GetChar(possibleChoices);
             Helpers.Helpers.ClearLine();
+            List<Creature> creatures = creatureService.GetCrts();
             if (choice != 'x')
             {
                 int chosenAlly = Helpers.Helpers.CharDigitToInt(choice);
@@ -75,24 +86,23 @@ namespace Doppelganger.App.Managers
                         creatures[i] = new Opponent(creatures[i]);
                     }
                 }
-
-                PickOppMenu(menuActionService, textService, creatures);
+                creatureService.SetCrts(creatures);
+                PickOppMenu();
             }
             else
             {
-                MenuManager.EndGameMenu(menuActionService, textService, creatures);
+                MenuManager.EndGameMenu(creatures);
             }
         }
 
-        private static void PickOppMenu(IMenuActionService menuActionService, ITextService textService,
-            List<Creature> creatures)
+        private void PickOppMenu()
         {
             Console.Write(textService.HP().PadRight(DisplaySettings.FirstColumnWidth));
+            List<Creature> creatures = creatureService.GetCrts();
             foreach (var creature in creatures)
             {
                 Console.Write(
-                    ("|" + creature.CurrentHP + (creature is Ally ? "*" : "")).PadRight(DisplaySettings
-                        .OtherColumnsWidth));
+                    ("|" + creature.CurrentHP + (creature is Ally ? "*" : "")).PadRight(DisplaySettings.OtherColumnsWidth));
             }
 
             Console.Write(textService.FightWhom());
@@ -109,23 +119,23 @@ namespace Doppelganger.App.Managers
                 int chosenOppId = Helpers.Helpers.CharDigitToInt(choice);
                 if (creatures[chosenOppId].CurrentHP == 0)
                 {
-                    PickOppMenu(menuActionService, textService, creatures);
+                    PickOppMenu();
                 }
                 else
                 {
-                    FightSubMenu(menuActionService, chosenOppId, 0, textService, creatures);
+                    FightSubMenu(chosenOppId, 0);
                 }
             }
             else
             {
                 Console.WriteLine();
-                MenuManager.EndGameMenu(menuActionService, textService, creatures);
+                MenuManager.EndGameMenu(creatures);
             }
         }
 
-        private static void FightSubMenu(IMenuActionService menuActionService, int chosenOppId, int combatTurn,
-            ITextService textService, List<Creature> creatures)
+        private void FightSubMenu(int chosenOppId, int combatTurn)
         {
+            List<Creature> creatures = creatureService.GetCrts();
             Console.Write(textService.HP().PadRight(DisplaySettings.FirstColumnWidth));
             for (int i = 0; i < DisplaySettings.NumberOfOpps; ++i)
             {
@@ -152,25 +162,25 @@ namespace Doppelganger.App.Managers
             else if (choice == '0')
             {
                 Helpers.Helpers.ClearLine();
-                PickOppMenu(menuActionService, textService, creatures);
+                PickOppMenu();
             }
             else
             {
                 int chosenFightLength = Helpers.Helpers.CharDigitToInt(choice);
-                FightSimulation(menuActionService, chosenOppId, chosenFightLength, combatTurn, textService, creatures);
+                FightSimulation(chosenOppId, chosenFightLength, combatTurn);
             }
         }
 
-        private static void FightSimulation(IMenuActionService menuActionService, int chosenOppId,
-            int chosenFightLength, int combatTurn, ITextService textService, List<Creature> creatures)
+        private void FightSimulation(int chosenOppId, int chosenFightLength, int combatTurn)
         {
             if (chosenFightLength == 0)
             {
                 Helpers.Helpers.ClearLine();
-                FightSubMenu(menuActionService, chosenOppId, combatTurn, textService, creatures);
+                FightSubMenu(chosenOppId, combatTurn);
             }
             else
             {
+                List<Creature> creatures = creatureService.GetCrts();
                 ++combatTurn;
                 byte playersStrike = 0, oppsStrike = 0;
                 for (int creatureId = 0; creatureId < DisplaySettings.NumberOfOpps; ++creatureId)
@@ -229,18 +239,18 @@ namespace Doppelganger.App.Managers
                         }
                     }
                 }
-
+                creatureService.SetCrts(creatures);
                 if (playerDied)
                 {
                     Console.WriteLine();
-                    MenuManager.EndGameMenu(menuActionService, textService, creatures);
+                    MenuManager.EndGameMenu(creatures);
                 }
                 else if (oppDied)
                 {
                     if (deadOppsCount + 1 == DisplaySettings.NumberOfOpps)
                     {
                         Console.WriteLine();
-                        MenuManager.EndGameMenu(menuActionService, textService, creatures);
+                        MenuManager.EndGameMenu(creatures);
                     }
                     else
                     {
@@ -257,7 +267,6 @@ namespace Doppelganger.App.Managers
                                 creatures[creatureId] = oldAlly;
                                 leftOldAlly = true;
                             }
-
                             if (!assumedNewShape && creatureId == chosenOppId)
                             {
                                 Ally newAlly = (Opponent)creatures[creatureId];
@@ -265,15 +274,14 @@ namespace Doppelganger.App.Managers
                                 creatures[creatureId] = newAlly;
                                 assumedNewShape = true;
                             }
-
                             if (assumedNewShape && leftOldAlly)
                             {
                                 break;
                             }
                         }
-
                         Helpers.Helpers.ClearLine();
-                        PickOppMenu(menuActionService, textService, creatures);
+                        creatureService.SetCrts(creatures);
+                        PickOppMenu();
                     }
                 }
                 else
@@ -281,13 +289,12 @@ namespace Doppelganger.App.Managers
                     if (chosenFightLength == 1)
                     {
                         Helpers.Helpers.ClearLine();
-                        FightSubMenu(menuActionService, chosenOppId, combatTurn, textService, creatures);
+                        FightSubMenu(chosenOppId, combatTurn);
                     }
                     else
                     {
                         chosenFightLength--;
-                        FightSimulation(menuActionService, chosenOppId, chosenFightLength, combatTurn, textService,
-                            creatures);
+                        FightSimulation(chosenOppId, chosenFightLength, combatTurn);
                     }
                 }
             }

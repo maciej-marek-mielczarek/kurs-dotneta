@@ -10,19 +10,21 @@ namespace Doppelganger.App.Managers
 {
     public class GameManager
     {
-        /*private FightManager _fightManager;
-        private InstructionsManager _instructionsManager;
-        private MenuManager _menuManager;
-        */
-        public GameManager(ITextService textService, IMenuActionService menuActionService)
+        private FightManager fightManager;
+        private InstructionsManager instructionsManager;
+        private MenuManager menuManager;
+        
+        public GameManager(ITextService textService, IMenuActionService menuActionService, ICreatureService creatureService)
         {
             List<Creature> creatures = new List<Creature>();
-            MenuManager.MainMenu(menuActionService, textService, creatures);
+            menuManager = new MenuManager(menuActionService, textService);
+            instructionsManager = new InstructionsManager(menuActionService, textService);
+            fightManager = new FightManager(menuActionService, textService, creatureService);
         }
 
         public void Launch()
         {
-            
+            menuManager.MainMenu();
         }
     }
 }

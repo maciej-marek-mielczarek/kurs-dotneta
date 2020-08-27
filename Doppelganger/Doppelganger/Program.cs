@@ -20,6 +20,7 @@ namespace Doppelganger
             Console.Write(TitleText.Text);
             //Create Menu Action Service and partly initialize it (further initialization equireslanuage choice)
             IMenuActionService menuActionService = new MenuActionService();
+            ICreatureService creatureService = new CreatureService();
             //Create Language Manager and ask it to pick a language
             LanguageManager languageManager = new LanguageManager(menuActionService);
             Language languageChoice = languageManager.ChooseLanguage();
@@ -29,7 +30,7 @@ namespace Doppelganger
             //Write a one-time welcome message in the chosen language
             Console.Write(textService.Welcome());
             //Use services to initiaize Game Manager
-            GameManager gameManager = new GameManager(textService, menuActionService);
+            GameManager gameManager = new GameManager(textService, menuActionService, creatureService);
             //Start game
             gameManager.Launch();
         }
