@@ -2,27 +2,26 @@ using System;
 using System.Collections.Generic;
 using Doppelganger.App.Abstract;
 using Doppelganger.Domain.Common;
-using Doppelganger.Domain.Common.Creatures;
 
 namespace Doppelganger.App.Managers
 {
     public class InstructionsManager
     {
-        private readonly IMenuActionService menuActionService;
-        private readonly ITextService textService;
+        private readonly IMenuActionService _menuActionService;
+        private readonly ITextService _textService;
 
         public InstructionsManager(IMenuActionService menuActionService, ITextService textService)
         {
-            this.menuActionService = menuActionService;
-            this.textService = textService;
+            this._menuActionService = menuActionService;
+            this._textService = textService;
         }
 
         public void InstructionsMenu()
         {
             //Instructions Menu
-            List<MenuAction> actions = menuActionService.GetActionsForMenu("Instructions");
+            List<MenuAction> actions = _menuActionService.GetActionsForMenu("Instructions");
             string possibleChoices = "";
-            Console.Write(textService.GetInfoOn());
+            Console.Write(_textService.GetInfoOn());
             foreach (var action in actions)
             {
                 Console.Write(Helpers.Helpers.Buttonize(action.ActionName, action.KeyToChoose));
@@ -40,7 +39,7 @@ namespace Doppelganger.App.Managers
                     StatsInfo();
                     break;
                 case 'b':
-                    MenuManager.MainMenu();
+                    //return control upwards
                     break;
             }
         }
@@ -48,9 +47,9 @@ namespace Doppelganger.App.Managers
         private void StatsInfo()
         {
             //Stats Info Menu
-            List<MenuAction> actions = menuActionService.GetActionsForMenu("StatsInfo");
+            List<MenuAction> actions = _menuActionService.GetActionsForMenu("StatsInfo");
             string possibleChoices = "";
-            Console.Write(textService.GetInfoOn());
+            Console.Write(_textService.GetInfoOn());
             foreach (var action in actions)
             {
                 Console.Write(Helpers.Helpers.Buttonize(action.ActionName, action.KeyToChoose));
@@ -78,8 +77,8 @@ namespace Doppelganger.App.Managers
 
         private void SpeedInfo()
         {
-            Console.Write(textService.SpeedInfo());
-            List<MenuAction> actions = menuActionService.GetActionsForMenu("ActionInfo");
+            Console.Write(_textService.SpeedInfo());
+            List<MenuAction> actions = _menuActionService.GetActionsForMenu("ActionInfo");
             string possibleChoices = "";
             foreach (var action in actions)
             {
@@ -99,8 +98,8 @@ namespace Doppelganger.App.Managers
 
         private void HpInfo()
         {
-            Console.Write(textService.HPInfo());
-            List<MenuAction> actions = menuActionService.GetActionsForMenu("ActionInfo");
+            Console.Write(_textService.HPInfo());
+            List<MenuAction> actions = _menuActionService.GetActionsForMenu("ActionInfo");
             string possibleChoices = "";
             foreach (var action in actions)
             {
@@ -120,8 +119,8 @@ namespace Doppelganger.App.Managers
 
         private void AttackInfo()
         {
-            Console.Write(textService.AttackInfo());
-            List<MenuAction> actions = menuActionService.GetActionsForMenu("ActionInfo");
+            Console.Write(_textService.AttackInfo());
+            List<MenuAction> actions = _menuActionService.GetActionsForMenu("ActionInfo");
             string possibleChoices = "";
             foreach (var action in actions)
             {
@@ -142,9 +141,9 @@ namespace Doppelganger.App.Managers
         private void ActionsInfo()
         {
             //Actions Info Menu
-            List<MenuAction> actions = menuActionService.GetActionsForMenu("ActionsInfo");
+            List<MenuAction> actions = _menuActionService.GetActionsForMenu("ActionsInfo");
             string possibleChoices = "";
-            Console.Write(textService.GetInfoOn());
+            Console.Write(_textService.GetInfoOn());
             foreach (var action in actions)
             {
                 Console.Write(Helpers.Helpers.Buttonize(action.ActionName, action.KeyToChoose));
@@ -172,8 +171,8 @@ namespace Doppelganger.App.Managers
 
         private void FightInfo()
         {
-            Console.Write(textService.FightInfo());
-            List<MenuAction> actions = menuActionService.GetActionsForMenu("ActionInfo");
+            Console.Write(_textService.FightInfo());
+            List<MenuAction> actions = _menuActionService.GetActionsForMenu("ActionInfo");
             string possibleChoices = "";
             foreach (var action in actions)
             {
@@ -193,8 +192,8 @@ namespace Doppelganger.App.Managers
 
         private void PickOpponentInfo()
         {
-            Console.Write(textService.PickOpponentInfo());
-            List<MenuAction> actions = menuActionService.GetActionsForMenu("ActionInfo");
+            Console.Write(_textService.PickOpponentInfo());
+            List<MenuAction> actions = _menuActionService.GetActionsForMenu("ActionInfo");
             string possibleChoices = "";
             foreach (var action in actions)
             {
@@ -214,8 +213,8 @@ namespace Doppelganger.App.Managers
 
         private void PickAllyInfo()
         {
-            Console.Write(textService.PickAllyInfo());
-            List<MenuAction> actions = menuActionService.GetActionsForMenu("ActionInfo");
+            Console.Write(_textService.PickAllyInfo());
+            List<MenuAction> actions = _menuActionService.GetActionsForMenu("ActionInfo");
             string possibleChoices = "";
             foreach (var action in actions)
             {

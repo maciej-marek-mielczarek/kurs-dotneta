@@ -3,23 +3,22 @@ using Doppelganger.Domain.Common;
 using Doppelganger.Domain.Entity.Texts;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Doppelganger.App.Managers
 {
     public class LanguageManager
     {
-        private readonly IMenuActionService menuActionService;
+        private readonly IMenuActionService _menuActionService;
 
         public LanguageManager(IMenuActionService menuActionService)
         {
-            this.menuActionService = menuActionService;
+            this._menuActionService = menuActionService;
         }
         public Language ChooseLanguage()
         {
             //Language Choice Menu
             Console.Write(ChooseLanguageText.Text);
-            List<MenuAction> actions = menuActionService.GetActionsForMenu("Lang");
+            List<MenuAction> actions = _menuActionService.GetActionsForMenu("Lang");
             string possibleChoices = "";
             foreach (var action in actions)
             {
