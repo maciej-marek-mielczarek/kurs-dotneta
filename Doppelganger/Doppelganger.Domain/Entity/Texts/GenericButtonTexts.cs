@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Doppelganger.Domain.Common;
 using Doppelganger.Domain.Common.Texts;
 
@@ -7,7 +8,7 @@ namespace Doppelganger.Domain.Entity.Texts
 {
     public class GenericButtonTexts : TextsBase
     {
-        private static Dictionary<Enum, string> _plDict =
+        [SuppressMessage("ReSharper", "StringLiteralTypo")] private static Dictionary<Enum, string> _plDict =
             new Dictionary<Enum, string>()
             {
                 {

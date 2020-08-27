@@ -9,6 +9,6 @@ namespace Doppelganger.Domain.Common.Texts
         {
             Dict = dictionary;
         }
-        public Dictionary<Enum, string> Dict { get; set; }
+        public Dictionary<Enum, string> Dict { get; }
     }
 }

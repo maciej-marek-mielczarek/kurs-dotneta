@@ -1,6 +1,6 @@
 namespace Doppelganger.Domain.Common.Texts
 {
-    public enum TextCathegories
+    public enum TextCategories
     {
         ActionsInfoTexts,
         GenericButtonTexts,

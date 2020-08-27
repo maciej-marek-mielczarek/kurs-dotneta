@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Doppelganger.App.Abstract;
 using Doppelganger.Domain.Common;
-using Doppelganger.Domain.Entity.Texts;
 
 namespace Doppelganger.App.Concrete
 {

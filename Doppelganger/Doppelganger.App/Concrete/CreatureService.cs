@@ -1,24 +1,25 @@
-﻿using Doppelganger.Domain.Common.Creatures;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Doppelganger.App.Abstract;
+using Doppelganger.Domain.Common.Creatures;
 
-namespace Doppelganger.App.Managers
+namespace Doppelganger.App.Concrete
 {
     public class CreatureService : ICreatureService
     {
-        private List<Creature> creatures;
+        private List<Creature> _creatures;
 
         public CreatureService()
         {
-            creatures = new List<Creature>();
+            _creatures = new List<Creature>();
         }
         public List<Creature> GetCrts()
         {
-            return creatures;
+            return _creatures;
         }
 
         public void SetCrts(List<Creature> creatures)
         {
-            this.creatures = creatures;
+            this._creatures = creatures;
         }
     }
 }

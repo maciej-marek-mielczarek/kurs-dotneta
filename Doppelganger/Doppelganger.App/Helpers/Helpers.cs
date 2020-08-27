@@ -74,13 +74,13 @@ namespace Doppelganger.App.Helpers
             foreach (var creature in creatures)
             {
                 int creatureScore = 0;
-                if (creature is Ally)
+                if (creature is Ally ally)
                 {
-                    creatureScore = (int)Math.Floor(10m - 10m * ((Ally)creature).CurrentHP / creature.MaxHP);
+                    creatureScore = (int)Math.Floor(10m - 10m * ally.CurrentHP / ally.MaxHP);
                 }
-                else if (creature is Opponent)
+                else if (creature is Opponent opponent)
                 {
-                    creatureScore = (int)Math.Floor(10m - 10m * ((Opponent)creature).CurrentHP / creature.MaxHP);
+                    creatureScore = (int)Math.Floor(10m - 10m * opponent.CurrentHP / opponent.MaxHP);
                 }
                 score += creatureScore;
             }
