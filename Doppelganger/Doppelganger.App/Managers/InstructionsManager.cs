@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Doppelganger.App.Abstract;
+using Doppelganger.App.Helpers;
 using Doppelganger.Domain.Common;
 
 namespace Doppelganger.App.Managers
@@ -24,12 +25,12 @@ namespace Doppelganger.App.Managers
             Console.Write(_textService.GetInfoOn());
             foreach (var action in actions)
             {
-                Console.Write(Helpers.Helpers.Buttonize(action.ActionName, action.KeyToChoose));
+                Console.Write(HelperMethods.Buttonize(action.ActionName, action.KeyToChoose));
                 possibleChoices += action.KeyToChoose;
             }
 
-            char menuChoice = Helpers.Helpers.GetChar(possibleChoices);
-            Helpers.Helpers.ClearLine();
+            char menuChoice = HelperMethods.GetChar(possibleChoices);
+            HelperMethods.ClearLine();
             switch (menuChoice)
             {
                 case 'a':
@@ -52,12 +53,12 @@ namespace Doppelganger.App.Managers
             Console.Write(_textService.GetInfoOn());
             foreach (var action in actions)
             {
-                Console.Write(Helpers.Helpers.Buttonize(action.ActionName, action.KeyToChoose));
+                Console.Write(HelperMethods.Buttonize(action.ActionName, action.KeyToChoose));
                 possibleChoices += action.KeyToChoose;
             }
 
-            char menuChoice = Helpers.Helpers.GetChar(possibleChoices);
-            Helpers.Helpers.ClearLine();
+            char menuChoice = HelperMethods.GetChar(possibleChoices);
+            HelperMethods.ClearLine();
             switch (menuChoice)
             {
                 case 'a':
@@ -82,12 +83,12 @@ namespace Doppelganger.App.Managers
             string possibleChoices = "";
             foreach (var action in actions)
             {
-                Console.Write(Helpers.Helpers.Buttonize(action.ActionName, action.KeyToChoose));
+                Console.Write(HelperMethods.Buttonize(action.ActionName, action.KeyToChoose));
                 possibleChoices += action.KeyToChoose;
             }
 
-            char menuChoice = Helpers.Helpers.GetChar(possibleChoices);
-            Helpers.Helpers.ClearLine();
+            char menuChoice = HelperMethods.GetChar(possibleChoices);
+            HelperMethods.ClearLine();
             switch (menuChoice)
             {
                 case 'b':
@@ -103,12 +104,12 @@ namespace Doppelganger.App.Managers
             string possibleChoices = "";
             foreach (var action in actions)
             {
-                Console.Write(Helpers.Helpers.Buttonize(action.ActionName, action.KeyToChoose));
+                Console.Write(HelperMethods.Buttonize(action.ActionName, action.KeyToChoose));
                 possibleChoices += action.KeyToChoose;
             }
 
-            char menuChoice = Helpers.Helpers.GetChar(possibleChoices);
-            Helpers.Helpers.ClearLine();
+            char menuChoice = HelperMethods.GetChar(possibleChoices);
+            HelperMethods.ClearLine();
             switch (menuChoice)
             {
                 case 'b':
@@ -124,12 +125,12 @@ namespace Doppelganger.App.Managers
             string possibleChoices = "";
             foreach (var action in actions)
             {
-                Console.Write(Helpers.Helpers.Buttonize(action.ActionName, action.KeyToChoose));
+                Console.Write(HelperMethods.Buttonize(action.ActionName, action.KeyToChoose));
                 possibleChoices += action.KeyToChoose;
             }
 
-            char menuChoice = Helpers.Helpers.GetChar(possibleChoices);
-            Helpers.Helpers.ClearLine();
+            char menuChoice = HelperMethods.GetChar(possibleChoices);
+            HelperMethods.ClearLine();
             switch (menuChoice)
             {
                 case 'b':
@@ -146,12 +147,12 @@ namespace Doppelganger.App.Managers
             Console.Write(_textService.GetInfoOn());
             foreach (var action in actions)
             {
-                Console.Write(Helpers.Helpers.Buttonize(action.ActionName, action.KeyToChoose));
+                Console.Write(HelperMethods.Buttonize(action.ActionName, action.KeyToChoose));
                 possibleChoices += action.KeyToChoose;
             }
 
-            char menuChoice = Helpers.Helpers.GetChar(possibleChoices);
-            Helpers.Helpers.ClearLine();
+            char menuChoice = HelperMethods.GetChar(possibleChoices);
+            HelperMethods.ClearLine();
             switch (menuChoice)
             {
                 case 'a':
@@ -176,12 +177,12 @@ namespace Doppelganger.App.Managers
             string possibleChoices = "";
             foreach (var action in actions)
             {
-                Console.Write(Helpers.Helpers.Buttonize(action.ActionName, action.KeyToChoose));
+                Console.Write(HelperMethods.Buttonize(action.ActionName, action.KeyToChoose));
                 possibleChoices += action.KeyToChoose;
             }
 
-            char menuChoice = Helpers.Helpers.GetChar(possibleChoices);
-            Helpers.Helpers.ClearLine();
+            char menuChoice = HelperMethods.GetChar(possibleChoices);
+            HelperMethods.ClearLine();
             switch (menuChoice)
             {
                 case 'b':
@@ -197,12 +198,12 @@ namespace Doppelganger.App.Managers
             string possibleChoices = "";
             foreach (var action in actions)
             {
-                Console.Write(Helpers.Helpers.Buttonize(action.ActionName, action.KeyToChoose));
+                Console.Write(HelperMethods.Buttonize(action.ActionName, action.KeyToChoose));
                 possibleChoices += action.KeyToChoose;
             }
 
-            char menuChoice = Helpers.Helpers.GetChar(possibleChoices);
-            Helpers.Helpers.ClearLine();
+            char menuChoice = HelperMethods.GetChar(possibleChoices);
+            HelperMethods.ClearLine();
             switch (menuChoice)
             {
                 case 'b':
@@ -218,12 +219,12 @@ namespace Doppelganger.App.Managers
             string possibleChoices = "";
             foreach (var action in actions)
             {
-                Console.Write(Helpers.Helpers.Buttonize(action.ActionName, action.KeyToChoose));
+                Console.Write(HelperMethods.Buttonize(action.ActionName, action.KeyToChoose));
                 possibleChoices += action.KeyToChoose;
             }
 
-            char menuChoice = Helpers.Helpers.GetChar(possibleChoices);
-            Helpers.Helpers.ClearLine();
+            char menuChoice = HelperMethods.GetChar(possibleChoices);
+            HelperMethods.ClearLine();
             switch (menuChoice)
             {
                 case 'b':

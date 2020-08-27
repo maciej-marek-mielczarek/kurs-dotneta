@@ -26,21 +26,17 @@ namespace Doppelganger.App.Concrete
             _creatures = new List<Creature>();
             for (int i = 0; i < DisplaySettings.NumberOfOpps; i++)
             {
-                _creatures.Add(new Creature());
+                _creatures.Add(new Opponent());
             }
         }
 
-        public void MakeAllHostileExcept(int chosenAlly)
+        public void MakeGivenCreatureFriendly(int chosenAlly)
         {
             for (int i = 0; i < _creatures.Count; i++)
             {
                 if (i == chosenAlly)
                 {
                     _creatures[i] = new Ally(_creatures[i]);
-                }
-                else
-                {
-                    _creatures[i] = new Opponent(_creatures[i]);
                 }
             }
         }

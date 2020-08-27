@@ -3,6 +3,7 @@ using Doppelganger.Domain.Common;
 using Doppelganger.Domain.Entity.Texts;
 using System;
 using System.Collections.Generic;
+using Doppelganger.App.Helpers;
 
 namespace Doppelganger.App.Managers
 {
@@ -22,12 +23,12 @@ namespace Doppelganger.App.Managers
             string possibleChoices = "";
             foreach (var action in actions)
             {
-                Console.Write(Helpers.Helpers.Buttonize(action.ActionName, action.KeyToChoose));
+                Console.Write(HelperMethods.Buttonize(action.ActionName, action.KeyToChoose));
                 possibleChoices += action.KeyToChoose;
             }
 
-            char languageCode = Helpers.Helpers.GetChar(possibleChoices);
-            Helpers.Helpers.ClearLine();
+            char languageCode = HelperMethods.GetChar(possibleChoices);
+            HelperMethods.ClearLine();
             return languageCode == 'p' ? Language.Polish : Language.English;
         }
     }

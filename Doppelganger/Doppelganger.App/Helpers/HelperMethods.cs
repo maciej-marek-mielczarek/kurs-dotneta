@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using Doppelganger.App.Abstract;
 using Doppelganger.Domain.Common.Creatures;
 using Doppelganger.Domain.Entity.Creatures;
+using Doppelganger.Domain.Entity.Settings;
 
 namespace Doppelganger.App.Helpers
 {
-    public static class Helpers
+    public static class HelperMethods
     {
         public static char GetChar(string possibleChoices)
         {//Not "try to get a correct char", rather "try until you get a correct char".
@@ -85,6 +87,20 @@ namespace Doppelganger.App.Helpers
                 score += creatureScore;
             }
             return score;
+        }
+
+        public static void DisplayCurrentHPs(ITextService textService, ICreatureService creatureService, int chosenOppId = -1)
+        {
+            List<Creature> creatures = creatureService.GetCrts();
+            Console.Write(textService.HP().PadRight(DisplaySettings.FirstColumnWidth));
+            for (int i = 0; i < DisplaySettings.NumberOfOpps; ++i)
+            {
+                Console.Write(("|"
+                               + creatures[i].CurrentHP
+                               + (creatures[i] is Ally ? "*" : "")
+                               + (i == chosenOppId ? "x" : ""))
+                    .PadRight(DisplaySettings.OtherColumnsWidth));
+            }
         }
     }
 }

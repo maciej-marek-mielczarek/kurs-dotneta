@@ -7,7 +7,7 @@ namespace Doppelganger.App.Abstract
     {
         List<Creature> GetCrts();
         void GenerateNewCrts();
-        void MakeAllHostileExcept(int chosenAlly);
+        void MakeGivenCreatureFriendly(int chosenAlly);
         void ClearCrts();
         void RegisterHit(byte oppsStrike, int creatureId);
         void SwitchBodiesWith(int chosenOppId);

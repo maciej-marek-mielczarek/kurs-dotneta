@@ -1,9 +1,8 @@
 ﻿using Doppelganger.App.Abstract;
 using Doppelganger.Domain.Common;
-using Doppelganger.Domain.Common.Creatures;
 using System;
 using System.Collections.Generic;
-using Doppelganger.Domain.Entity.Settings;
+using Doppelganger.App.Helpers;
 
 namespace Doppelganger.App.Managers
 {
@@ -30,12 +29,12 @@ namespace Doppelganger.App.Managers
             string possibleChoices = "";
             foreach (var action in actions)
             {
-                Console.Write(Helpers.Helpers.Buttonize(action.ActionName, action.KeyToChoose));
+                Console.Write(HelperMethods.Buttonize(action.ActionName, action.KeyToChoose));
                 possibleChoices += action.KeyToChoose;
             }
 
-            char menuChoice = Helpers.Helpers.GetChar(possibleChoices);
-            Helpers.Helpers.ClearLine();
+            char menuChoice = HelperMethods.GetChar(possibleChoices);
+            HelperMethods.ClearLine();
             switch (menuChoice)
             {
                 case 'n':
@@ -60,7 +59,7 @@ namespace Doppelganger.App.Managers
         private void EndGame()
         {
             Console.WriteLine();
-            Console.WriteLine(_textService.YourScoreIs() + Helpers.Helpers.CalculateScore(_fightManager.CreatureService.GetCrts()) + "%");
+            Console.WriteLine(_textService.YourScoreIs() + HelperMethods.CalculateScore(_fightManager.CreatureService.GetCrts()) + "%");
             Console.WriteLine();
             _fightManager.CreatureService.ClearCrts();
             MainMenu();
