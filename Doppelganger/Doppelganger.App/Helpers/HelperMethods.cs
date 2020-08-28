@@ -44,7 +44,7 @@ namespace Doppelganger.App.Helpers
             }
             else
             {
-                return v;
+                throw new ArgumentException("Expected a Latin character or a number, got: " + v);
             }
         }
 
