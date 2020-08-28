@@ -68,27 +68,7 @@ namespace Doppelganger.App.Helpers
             buttonText = buttonText.Insert(indexOfKey, "(");
 
             return " [" + buttonText + "] ";
-        }
-
-        public static int CalculateScore(List<Creature> creatures)
-        {
-            int score = 0;
-            foreach (var creature in creatures)
-            {
-                int creatureScore = 0;
-                if (creature is Ally ally)
-                {
-                    creatureScore = (int)Math.Floor(10m - 10m * ally.CurrentHP / ally.MaxHP);
-                }
-                else if (creature is Opponent opponent)
-                {
-                    creatureScore = (int)Math.Floor(10m - 10m * opponent.CurrentHP / opponent.MaxHP);
-                }
-                score += creatureScore;
-            }
-            return score;
-        }
-
+        } 
         public static void DisplayCurrentHPs(ITextService textService, ICreatureService creatureService, int chosenOppId = -1)
         {
             List<Creature> creatures = creatureService.GetCrts();

@@ -4,6 +4,6 @@ namespace Doppelganger.App.Managers.Abstract
 {
     public interface ILanguageManager
     {
-        public Language ChooseLanguage();
+        Language ChooseLanguage();
     }
 }

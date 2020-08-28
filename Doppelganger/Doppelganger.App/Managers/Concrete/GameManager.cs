@@ -60,9 +60,8 @@ namespace Doppelganger.App.Managers.Concrete
         private void EndGame()
         {
             Console.WriteLine();
-            Console.WriteLine(_textService.YourScoreIs() + HelperMethods.CalculateScore(_fightManager.CreatureService.GetCrts()) + "%");
+            Console.WriteLine(_textService.YourScoreIs() + _fightManager.CalculateScore() + "%");
             Console.WriteLine();
-            _fightManager.CreatureService.ClearCrts();
             MainMenu();
         }
     }

@@ -244,5 +244,24 @@ namespace Doppelganger.App.Managers.Concrete
         {
             CreatureService.GenerateNewCrts();
         }
+
+        public int CalculateScore()
+        {
+            int score = 0;
+            foreach (var creature in CreatureService.GetCrts())
+            {
+                int creatureScore = 0;
+                if (creature is Ally ally)
+                {
+                    creatureScore = (int)Math.Floor(10m - 10m * ally.CurrentHP / ally.MaxHP);
+                }
+                else if (creature is Opponent opponent)
+                {
+                    creatureScore = (int)Math.Floor(10m - 10m * opponent.CurrentHP / opponent.MaxHP);
+                }
+                score += creatureScore;
+            }
+            return score;
+        }
     }
 }
