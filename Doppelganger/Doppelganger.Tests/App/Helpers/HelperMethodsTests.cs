@@ -1,3 +1,4 @@
+using System;
 using Doppelganger.App.Helpers;
 using Moq;
 using Xunit;
@@ -6,6 +7,14 @@ namespace Doppelganger.Tests.App.Helpers
 {
     public class HelperMethodsTests
     {
+        /*//Uncomment to write to console during tests,
+         //just use output.WriteLine(...) instead of Console.WriteLine(...)
+        private readonly ITestOutputHelper output;
+
+        public HelperMethodsTests(ITestOutputHelper output)
+        {
+            this.output = output;
+        }*/
         //Tests for Method CharDigitToInt
         [Fact]
         public void CharDigitToInt_GivenZero_ShouldReturnZero()
@@ -39,7 +48,6 @@ namespace Doppelganger.Tests.App.Helpers
             int result = HelperMethods.CharDigitToInt(input);
             //Assert
             Assert.Equal(expected, result);
-            
         }
         [Fact]
         public void CharDigitToInt_GivenBigZ_ShouldReturn35()
@@ -63,6 +71,42 @@ namespace Doppelganger.Tests.App.Helpers
             int result2 = HelperMethods.CharDigitToInt(input2);
             //Assert
             Assert.True(result1 == result2);
-        } 
+        }
+        [Fact]
+        public void CharDigitToInt_GivenNonAlphanumericCharacter_ShouldThrowArgumentException()
+        {
+            //Arrange
+            char input = '-';
+            bool caught = false;
+            //Act
+            try
+            {
+                HelperMethods.CharDigitToInt(input);
+            }
+            catch (ArgumentException)
+            {
+                caught = true;
+            }
+            //Assert
+            Assert.True(caught);
+        }
+        [Fact]
+        public void CharDigitToInt_GivenNonLatinLetter_ShouldThrowArgumentException()
+        {
+            //Arrange
+            char input = 'ą';
+            bool caught = false;
+            //Act
+            try
+            {
+                HelperMethods.CharDigitToInt(input);
+            }
+            catch (ArgumentException)
+            {
+                caught = true;
+            }
+            //Assert
+            Assert.True(caught);
+        }
     }
 }
