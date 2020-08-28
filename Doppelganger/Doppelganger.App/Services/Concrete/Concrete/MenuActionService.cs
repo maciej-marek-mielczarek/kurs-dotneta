@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Doppelganger.App.Abstract;
+using Doppelganger.App.Services.Abstract.Abstract;
 using Doppelganger.Domain.Common;
 
-namespace Doppelganger.App.Concrete
+namespace Doppelganger.App.Services.Concrete.Concrete
 {
     public class MenuActionService: IMenuActionService
     {

@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
-using Doppelganger.App.Abstract;
 using Doppelganger.App.Helpers;
+using Doppelganger.App.Managers.Abstract;
+using Doppelganger.App.Services.Abstract.Abstract;
 using Doppelganger.Domain.Common;
 
-namespace Doppelganger.App.Managers
+namespace Doppelganger.App.Managers.Concrete
 {
-    public class InstructionsManager
+    public class InstructionsManager : IInstructionsManager
     {
         private readonly IMenuActionService _menuActionService;
         private readonly ITextService _textService;

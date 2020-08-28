@@ -1,4 +1,4 @@
-namespace Doppelganger.App.Abstract
+namespace Doppelganger.App.Services.Abstract.Abstract
 {
     public interface ITextService
     {

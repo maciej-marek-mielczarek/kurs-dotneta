@@ -1,19 +1,20 @@
-﻿using Doppelganger.App.Abstract;
-using Doppelganger.Domain.Common;
-using Doppelganger.Domain.Entity.Texts;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Doppelganger.App.Helpers;
+using Doppelganger.App.Managers.Abstract;
+using Doppelganger.App.Services.Abstract.Abstract;
+using Doppelganger.Domain.Common;
+using Doppelganger.Domain.Entity.Texts;
 
-namespace Doppelganger.App.Managers
+namespace Doppelganger.App.Managers.Concrete
 {
-    public class LanguageManager
+    public class LanguageManager : ILanguageManager
     {
         private readonly IMenuActionService _menuActionService;
 
         public LanguageManager(IMenuActionService menuActionService)
         {
-            this._menuActionService = menuActionService;
+            _menuActionService = menuActionService;
         }
         public Language ChooseLanguage()
         {

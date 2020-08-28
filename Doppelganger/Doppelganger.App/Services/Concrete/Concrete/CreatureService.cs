@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Doppelganger.App.Abstract;
+using Doppelganger.App.Services.Abstract.Abstract;
 using Doppelganger.Domain.Common.Creatures;
 using Doppelganger.Domain.Entity.Creatures;
 using Doppelganger.Domain.Entity.Settings;
 
-namespace Doppelganger.App.Concrete
+namespace Doppelganger.App.Services.Concrete.Concrete
 {
     public class CreatureService : ICreatureService
     {

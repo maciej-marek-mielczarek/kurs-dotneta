@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Doppelganger.Domain.Common.Creatures;
 
-namespace Doppelganger.App.Abstract
+namespace Doppelganger.App.Services.Abstract.Abstract
 {
     public interface ICreatureService
     {
@@ -9,7 +9,7 @@ namespace Doppelganger.App.Abstract
         void GenerateNewCrts();
         void MakeGivenCreatureFriendly(int chosenAlly);
         void ClearCrts();
-        void RegisterHit(byte oppsStrike, int creatureId);
+        void RegisterHit(byte damage, int creatureId);
         void SwitchBodiesWith(int chosenOppId);
     }
 }

@@ -8,4 +8,9 @@
     <ProjectReference Include="..\Doppelganger.Domain\Doppelganger.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Abstract" />
+    <Folder Include="Concrete" />
+  </ItemGroup>
+
 </Project>

@@ -1,18 +1,19 @@
-﻿using Doppelganger.App.Abstract;
-using Doppelganger.Domain.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Doppelganger.App.Helpers;
+using Doppelganger.App.Managers.Abstract;
+using Doppelganger.App.Services.Abstract.Abstract;
+using Doppelganger.Domain.Common;
 
-namespace Doppelganger.App.Managers
+namespace Doppelganger.App.Managers.Concrete
 {
-    public class GameManager
+    public class GameManager : IGameManager
     {
         private readonly IMenuActionService _menuActionService;
         private readonly ITextService _textService;
         
-        private readonly FightManager _fightManager;
-        private readonly InstructionsManager _instructionsManager;
+        private readonly IFightManager _fightManager;
+        private readonly IInstructionsManager _instructionsManager;
 
         public GameManager(ITextService textService, IMenuActionService menuActionService, ICreatureService creatureService)
         {

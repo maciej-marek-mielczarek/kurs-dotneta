@@ -1,7 +1,8 @@
 ﻿using System;
-using Doppelganger.App.Abstract;
-using Doppelganger.App.Concrete;
-using Doppelganger.App.Managers;
+using Doppelganger.App.Managers.Abstract;
+using Doppelganger.App.Managers.Concrete;
+using Doppelganger.App.Services.Abstract.Abstract;
+using Doppelganger.App.Services.Concrete.Concrete;
 using Doppelganger.Domain.Common;
 using Doppelganger.Domain.Entity.Texts;
 
@@ -17,7 +18,7 @@ namespace Doppelganger
             IMenuActionService menuActionService = new MenuActionService();
             ICreatureService creatureService = new CreatureService();
             //Create Language Manager and ask it to pick a language
-            LanguageManager languageManager = new LanguageManager(menuActionService);
+            ILanguageManager languageManager = new LanguageManager(menuActionService);
             Language languageChoice = languageManager.ChooseLanguage();
             //Use the language choice to initialize Text and Menu Action Services
             ITextService textService = new TextService(languageChoice);
@@ -25,7 +26,7 @@ namespace Doppelganger
             //Write a one-time welcome message in the chosen language
             Console.Write(textService.Welcome());
             //Use services to initialize Game Manager
-            GameManager gameManager = new GameManager(textService, menuActionService, creatureService);
+            IGameManager gameManager = new GameManager(textService, menuActionService, creatureService);
             //Start game
             gameManager.MainMenu();
         }

@@ -1,17 +1,18 @@
 using System;
 using System.Collections.Generic;
-using Doppelganger.App.Abstract;
 using Doppelganger.App.Helpers;
+using Doppelganger.App.Managers.Abstract;
+using Doppelganger.App.Services.Abstract.Abstract;
 using Doppelganger.Domain.Common.Creatures;
 using Doppelganger.Domain.Entity.Creatures;
 using Doppelganger.Domain.Entity.Settings;
 
-namespace Doppelganger.App.Managers
+namespace Doppelganger.App.Managers.Concrete
 {
-    public class FightManager
+    public class FightManager : IFightManager
     {
         private readonly ITextService _textService;
-        public readonly ICreatureService CreatureService;
+        public ICreatureService CreatureService { get; }
 
         public FightManager(ITextService textService, ICreatureService creatureService)
         {
