@@ -197,6 +197,30 @@ namespace Doppelganger.Tests.App.Helpers
             Buttonize_GenericReturnTest("abc", 'B', " [a(b)c] ");
         }
 
+        [Fact]
+        public void Buttonize_ShouldWorkWithConstArguments()
+        {
+            //Arrange
+            const string inputText = "abc";
+            const char inputKey = 'b';
+            const string expected = " [a(b)c] ";
+            //Act
+            var output = HelperMethods.Buttonize(inputText, inputKey);
+            //Assert
+            Assert.Equal(expected, output);
+        }
+        [Fact]
+        public void Buttonize_ShouldNotModifyItsArguments()
+        {
+            //Arrange
+            string inputText = "abc";
+            string inputTextCopy = "abc";
+            char inputKey = 'd';
+            //Act
+            HelperMethods.Buttonize(inputText, inputKey);
+            //Assert
+            Assert.Equal(inputTextCopy, inputText);
+        }
         //Tests for Method DisplayCurrentHPs
     }
 
