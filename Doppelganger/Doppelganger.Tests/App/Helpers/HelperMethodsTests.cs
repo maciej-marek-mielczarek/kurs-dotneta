@@ -1,6 +1,5 @@
 using System;
 using Doppelganger.App.Helpers;
-using Moq;
 using Xunit;
 
 namespace Doppelganger.Tests.App.Helpers
@@ -27,6 +26,7 @@ namespace Doppelganger.Tests.App.Helpers
             //Assert
             Assert.Equal(expected, result);
         }
+
         [Fact]
         public void CharDigitToInt_GivenFive_ShouldReturnFive()
         {
@@ -38,6 +38,7 @@ namespace Doppelganger.Tests.App.Helpers
             //Assert
             Assert.Equal(expected, result);
         }
+
         [Fact]
         public void CharDigitToInt_GivenSmallC_ShouldReturnTwelve()
         {
@@ -49,6 +50,7 @@ namespace Doppelganger.Tests.App.Helpers
             //Assert
             Assert.Equal(expected, result);
         }
+
         [Fact]
         public void CharDigitToInt_GivenBigZ_ShouldReturn35()
         {
@@ -59,8 +61,9 @@ namespace Doppelganger.Tests.App.Helpers
             int result = HelperMethods.CharDigitToInt(input);
             //Assert
             Assert.Equal(expected, result);
-            
+
         }
+
         [Fact]
         public void CharDigitToInt_GivenLetters_ShouldIgnoreCase()
         {
@@ -72,6 +75,7 @@ namespace Doppelganger.Tests.App.Helpers
             //Assert
             Assert.True(result1 == result2);
         }
+
         [Fact]
         public void CharDigitToInt_GivenNonAlphanumericCharacter_ShouldThrowArgumentException()
         {
@@ -87,9 +91,11 @@ namespace Doppelganger.Tests.App.Helpers
             {
                 caught = true;
             }
+
             //Assert
             Assert.True(caught);
         }
+
         [Fact]
         public void CharDigitToInt_GivenNonLatinLetter_ShouldThrowArgumentException()
         {
@@ -105,8 +111,61 @@ namespace Doppelganger.Tests.App.Helpers
             {
                 caught = true;
             }
+
             //Assert
             Assert.True(caught);
         }
+
+        //Tests for Method Buttonize
+        [Fact]
+        public void Buttonize_GivenNullString_ShouldThrowArgumentException()
+        {
+            throw new NotImplementedException();
+        }
+
+        [Fact]
+        public void Buttonize_GivenEmptyString_ShouldReturnAMarkedAndButtonizedChar()
+        {
+            throw new NotImplementedException();
+        }
+
+        [Fact]
+        public void Buttonize_GivenStringThatHasNoGivenChar_ShouldAddMarkedCharAtTheEndAfterASpace()
+        {
+            throw new NotImplementedException();
+        }
+
+        [Fact]
+        public void Buttonize_GivenStringThatHasGivenCharAtEnd_ShouldMarkThatChar()
+        {
+            throw new NotImplementedException();
+        }
+
+        [Fact]
+        public void Buttonize_GivenStringThatHasGivenCharAtStart_ShouldMarkThatChar()
+        {
+            throw new NotImplementedException();
+        }
+
+        [Fact]
+        public void Buttonize_GivenStringThatHasGivenCharInTheMiddle_ShouldMarkThatChar()
+        {
+            throw new NotImplementedException();
+        }
+
+        [Fact]
+        public void Buttonize_GivenStringThatHasMultipleGivenChars_ShouldMarkTheFirstOfThem()
+        {
+            throw new NotImplementedException();
+        }
+
+        [Fact]
+        public void Buttonize_GivenStringWithDifferentCasingThanGivenChar_ShouldMarkThatCharAnyway()
+        {
+            throw new NotImplementedException();
+        }
+
+        //Tests for Method DisplayCurrentHPs
     }
+
 }
