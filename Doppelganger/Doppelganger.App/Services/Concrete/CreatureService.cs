@@ -5,7 +5,7 @@ using Doppelganger.Domain.Common.Creatures;
 using Doppelganger.Domain.Entity.Creatures;
 using Doppelganger.Domain.Entity.Settings;
 
-namespace Doppelganger.App.Services.Concrete.Concrete
+namespace Doppelganger.App.Services.Concrete
 {
     public class CreatureService : ICreatureService
     {

@@ -2,7 +2,7 @@
 using Doppelganger.App.Services.Abstract;
 using Doppelganger.Domain.Common;
 
-namespace Doppelganger.App.Services.Concrete.Concrete
+namespace Doppelganger.App.Services.Concrete
 {
     public class MenuActionService: IMenuActionService
     {

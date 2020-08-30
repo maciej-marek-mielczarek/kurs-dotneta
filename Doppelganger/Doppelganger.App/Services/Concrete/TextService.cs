@@ -5,7 +5,7 @@ using Doppelganger.Domain.Common;
 using Doppelganger.Domain.Common.Texts;
 using Doppelganger.Domain.Entity.Texts;
 
-namespace Doppelganger.App.Services.Concrete.Concrete
+namespace Doppelganger.App.Services.Concrete
 {
     public class TextService: ITextService
     {
