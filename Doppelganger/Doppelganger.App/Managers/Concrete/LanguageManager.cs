@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Doppelganger.App.Helpers;
 using Doppelganger.App.Managers.Abstract;
-using Doppelganger.App.Services.Abstract.Abstract;
+using Doppelganger.App.Services.Abstract;
 using Doppelganger.Domain.Common;
 using Doppelganger.Domain.Entity.Texts;
 

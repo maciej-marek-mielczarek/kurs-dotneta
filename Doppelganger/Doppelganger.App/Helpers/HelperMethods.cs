@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Doppelganger.App.Services.Abstract.Abstract;
+using Doppelganger.App.Services.Abstract;
 using Doppelganger.Domain.Common.Creatures;
 using Doppelganger.Domain.Entity.Creatures;
 using Doppelganger.Domain.Entity.Settings;

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Doppelganger.Domain.Common.Creatures;
 
-namespace Doppelganger.App.Services.Abstract.Abstract
+namespace Doppelganger.App.Services.Abstract
 {
     public interface ICreatureService
     {

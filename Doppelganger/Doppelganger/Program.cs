@@ -1,7 +1,7 @@
 ﻿using System;
 using Doppelganger.App.Managers.Abstract;
 using Doppelganger.App.Managers.Concrete;
-using Doppelganger.App.Services.Abstract.Abstract;
+using Doppelganger.App.Services.Abstract;
 using Doppelganger.App.Services.Concrete.Concrete;
 using Doppelganger.Domain.Common;
 using Doppelganger.Domain.Entity.Texts;
