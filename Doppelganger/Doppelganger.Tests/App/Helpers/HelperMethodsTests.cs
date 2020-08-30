@@ -120,49 +120,81 @@ namespace Doppelganger.Tests.App.Helpers
         [Fact]
         public void Buttonize_GivenNullString_ShouldThrowArgumentException()
         {
-            throw new NotImplementedException();
+            //Arrange
+            const string inputText = null;
+            const char inputKey = 'a';
+            bool caught = false;
+            //Act
+            try
+            {
+                HelperMethods.Buttonize(inputText, inputKey);
+            }
+            catch (ArgumentException)
+            {
+                caught = true;
+            }
+            //Assert
+            Assert.True(caught);
+        }
+
+        private static void Buttonize_GenericReturnTest(string inputText, char inputKey, string expectedResult)
+        {
+            //Arrange
+            string returned;
+            //Act
+            returned = HelperMethods.Buttonize(inputText, inputKey);
+            //Assert
+            Assert.Equal(expectedResult, returned);
         }
 
         [Fact]
         public void Buttonize_GivenEmptyString_ShouldReturnAMarkedAndButtonizedChar()
         {
-            throw new NotImplementedException();
+            //Delegate
+            Buttonize_GenericReturnTest("", 'a', " [(a)] ");
         }
 
         [Fact]
         public void Buttonize_GivenStringThatHasNoGivenChar_ShouldAddMarkedCharAtTheEndAfterASpace()
         {
-            throw new NotImplementedException();
+            //Delegate
+            Buttonize_GenericReturnTest("abc", 'd', " [abc (d)] ");
         }
 
         [Fact]
         public void Buttonize_GivenStringThatHasGivenCharAtEnd_ShouldMarkThatChar()
         {
-            throw new NotImplementedException();
+            //Delegate
+            Buttonize_GenericReturnTest("abc", 'c', " [ab(c)] ");
         }
 
         [Fact]
         public void Buttonize_GivenStringThatHasGivenCharAtStart_ShouldMarkThatChar()
         {
-            throw new NotImplementedException();
+            //Delegate
+            Buttonize_GenericReturnTest("abc", 'a', " [(a)bc] ");
         }
 
         [Fact]
         public void Buttonize_GivenStringThatHasGivenCharInTheMiddle_ShouldMarkThatChar()
         {
-            throw new NotImplementedException();
+            //Delegate
+            Buttonize_GenericReturnTest("abcde", 'd', " [abc(d)e] ");
         }
 
         [Fact]
         public void Buttonize_GivenStringThatHasMultipleGivenChars_ShouldMarkTheFirstOfThem()
         {
-            throw new NotImplementedException();
+            //Delegate
+            Buttonize_GenericReturnTest("baaba", 'a', " [b(a)aba] ");
         }
 
         [Fact]
         public void Buttonize_GivenStringWithDifferentCasingThanGivenChar_ShouldMarkThatCharAnyway()
         {
-            throw new NotImplementedException();
+            //Delegate
+            Buttonize_GenericReturnTest("AbCD", 'c', " [Ab(C)D] ");
+            Buttonize_GenericReturnTest("abc", 'B', " [a(b)c] ");
         }
 
         //Tests for Method DisplayCurrentHPs
