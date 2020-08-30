@@ -140,9 +140,9 @@ namespace Doppelganger.Tests.App.Helpers
         private static void Buttonize_GenericReturnTest(string inputText, char inputKey, string expectedResult)
         {
             //Arrange
-            string returned;
+            // Setting parameter values is all the arranging needed here.
             //Act
-            returned = HelperMethods.Buttonize(inputText, inputKey);
+            var returned = HelperMethods.Buttonize(inputText, inputKey);
             //Assert
             Assert.Equal(expectedResult, returned);
         }
@@ -179,6 +179,7 @@ namespace Doppelganger.Tests.App.Helpers
         public void Buttonize_GivenStringThatHasGivenCharInTheMiddle_ShouldMarkThatChar()
         {
             //Delegate
+            // ReSharper disable once StringLiteralTypo
             Buttonize_GenericReturnTest("abcde", 'd', " [abc(d)e] ");
         }
 
@@ -186,6 +187,7 @@ namespace Doppelganger.Tests.App.Helpers
         public void Buttonize_GivenStringThatHasMultipleGivenChars_ShouldMarkTheFirstOfThem()
         {
             //Delegate
+            // ReSharper disable once StringLiteralTypo
             Buttonize_GenericReturnTest("baaba", 'a', " [b(a)aba] ");
         }
 
@@ -209,6 +211,7 @@ namespace Doppelganger.Tests.App.Helpers
             //Assert
             Assert.Equal(expected, output);
         }
+        
         [Fact]
         public void Buttonize_ShouldNotModifyItsArguments()
         {
@@ -221,7 +224,5 @@ namespace Doppelganger.Tests.App.Helpers
             //Assert
             Assert.Equal(inputTextCopy, inputText);
         }
-        //Tests for Method DisplayCurrentHPs
     }
-
 }
