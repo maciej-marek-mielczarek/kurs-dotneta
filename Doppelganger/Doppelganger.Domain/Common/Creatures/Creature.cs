@@ -3,18 +3,19 @@ using Doppelganger.Domain.Entity.Settings;
 
 namespace Doppelganger.Domain.Common.Creatures
 {
-    public class Creature
+    public abstract class Creature
     {
         private static readonly Random NumberGenerator = new Random();
 
-        public Creature()
+        protected Creature()
         {
             Attack = (byte)NumberGenerator.Next(BalanceSettings.MinAttack, BalanceSettings.MaxAttack + 1);
             Speed = (byte)NumberGenerator.Next(BalanceSettings.MinSpeed, BalanceSettings.MaxSpeed + 1);
             MaxHP = (byte)NumberGenerator.Next(BalanceSettings.MinHP, BalanceSettings.MaxHP + 1);
+            CurrentHP = MaxHP;
         }
 
-        internal Creature(byte attack, byte speed, byte maxHP, byte currentHP)
+        protected Creature(byte attack, byte speed, byte maxHP, byte currentHP)
         {
             Attack = attack;
             Speed = speed;

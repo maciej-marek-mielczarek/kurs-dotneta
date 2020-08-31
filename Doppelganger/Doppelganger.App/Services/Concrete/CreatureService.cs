@@ -97,16 +97,23 @@ namespace Doppelganger.App.Services.Concrete
         public void SwitchBodiesWith(int chosenOppId)
         {
             VerifyId(chosenOppId);
+            if (IsCreatureFriendly(chosenOppId))
+            {
+                throw new ArgumentException(
+                    "The creature with selected id is already friendly and as such is not a valid target for switching bodies with.");
+            }
             // ReSharper disable once PossibleNullReferenceException
             float previousAllysHPPercent = _creatures.Find(cr => cr is Ally).CurrentHP
                                            // ReSharper disable once PossibleNullReferenceException
                                            / (float) _creatures.Find(cr => cr is Ally).MaxHP;
+            float previousOppsHPPercent = _creatures[chosenOppId].CurrentHP / (float) _creatures[chosenOppId].MaxHP;
             bool leftOldAlly = false, assumedNewShape = false;
             for (int creatureId = 0; creatureId < DisplaySettings.NumberOfOpps; creatureId++)
             {
                 if (!leftOldAlly && _creatures[creatureId] is Ally)
                 {
                     Opponent oldAlly = (Ally) _creatures[creatureId];
+                    oldAlly.CurrentHP = (byte) Math.Ceiling(oldAlly.MaxHP * previousOppsHPPercent);
                     _creatures[creatureId] = oldAlly;
                     leftOldAlly = true;
                 }
