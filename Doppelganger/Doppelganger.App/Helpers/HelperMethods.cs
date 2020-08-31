@@ -79,13 +79,12 @@ namespace Doppelganger.App.Helpers
         } 
         public static void DisplayCurrentHPs(ITextService textService, ICreatureService creatureService, int chosenOppId = -1)
         {
-            List<Creature> creatures = creatureService.GetCrts();
             Console.Write(textService.HP().PadRight(DisplaySettings.FirstColumnWidth));
             for (int i = 0; i < DisplaySettings.NumberOfOpps; ++i)
             {
                 Console.Write(("|"
-                               + creatures[i].CurrentHP
-                               + (creatures[i] is Ally ? "*" : "")
+                               + creatureService.GetCreatureCurrentHPById(i)
+                               + (creatureService.IsCreatureFriendly(i) ? "*" : "")
                                + (i == chosenOppId ? "x" : ""))
                     .PadRight(DisplaySettings.OtherColumnsWidth));
             }

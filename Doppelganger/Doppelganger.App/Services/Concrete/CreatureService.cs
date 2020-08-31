@@ -16,9 +16,41 @@ namespace Doppelganger.App.Services.Concrete
             _creatures = new List<Creature>();
         }
 
-        public List<Creature> GetCrts()
+        public bool IsCreatureFriendly(int creatureId)
         {
-            return _creatures;
+            if (creatureId >= 0 && creatureId < _creatures.Count && _creatures[creatureId] != null)
+            {
+                return _creatures[creatureId] is Ally;
+            }
+            else
+            {
+                throw new ArgumentException("There is no creature with id " + creatureId + ".");
+            }
+        }
+
+        public byte GetCreatureAttackById(int creatureId)
+        {
+            return _creatures[creatureId].Attack;
+        }
+
+        public byte GetCreatureSpeedById(int creatureId)
+        {
+            return _creatures[creatureId].Speed;
+        }
+
+        public byte GetCreatureMaxHPById(int creatureId)
+        {
+            return _creatures[creatureId].MaxHP;
+        }
+
+        public byte GetCreatureCurrentHPById(int creatureId)
+        {
+            return _creatures[creatureId].CurrentHP;
+        }
+
+        public bool IsCreatureDead(int creatureId)
+        {
+            return _creatures[creatureId].CurrentHP <= 0;
         }
 
         public void GenerateNewCrts()
@@ -39,11 +71,6 @@ namespace Doppelganger.App.Services.Concrete
                     _creatures[i] = new Ally(_creatures[i]);
                 }
             }
-        }
-
-        public void ClearCrts()
-        {
-            _creatures = new List<Creature>();
         }
 
         public void RegisterHit(byte damage, int creatureId)

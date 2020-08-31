@@ -1,14 +1,15 @@
-﻿using System.Collections.Generic;
-using Doppelganger.Domain.Common.Creatures;
-
-namespace Doppelganger.App.Services.Abstract
+﻿namespace Doppelganger.App.Services.Abstract
 {
     public interface ICreatureService
     {
-        List<Creature> GetCrts();
+        bool IsCreatureFriendly(int creatureId);
+        byte GetCreatureAttackById(int creatureId);
+        byte GetCreatureSpeedById(int creatureId);
+        byte GetCreatureMaxHPById(int creatureId);
+        byte GetCreatureCurrentHPById(int creatureId);
+        bool IsCreatureDead(int creatureId);
         void GenerateNewCrts();
         void MakeGivenCreatureFriendly(int chosenAlly);
-        void ClearCrts();
         void RegisterHit(byte damage, int creatureId);
         void SwitchBodiesWith(int chosenOppId);
     }

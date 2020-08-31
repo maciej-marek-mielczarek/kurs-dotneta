@@ -1,10 +1,7 @@
 using System;
-using System.Collections.Generic;
 using Doppelganger.App.Helpers;
 using Doppelganger.App.Managers.Abstract;
 using Doppelganger.App.Services.Abstract;
-using Doppelganger.Domain.Common.Creatures;
-using Doppelganger.Domain.Entity.Creatures;
 using Doppelganger.Domain.Entity.Settings;
 
 namespace Doppelganger.App.Managers.Concrete
@@ -12,7 +9,7 @@ namespace Doppelganger.App.Managers.Concrete
     public class FightManager : IFightManager
     {
         private readonly ITextService _textService;
-        public ICreatureService CreatureService { get; }
+        private ICreatureService CreatureService { get; }
 
         public FightManager(ITextService textService, ICreatureService creatureService)
         {
@@ -31,12 +28,11 @@ namespace Doppelganger.App.Managers.Concrete
             }
 
             Console.WriteLine();
-
-            List<Creature> creatures = CreatureService.GetCrts();
+            
             Console.Write(_textService.Attack().PadRight(DisplaySettings.FirstColumnWidth));
             for (int i = 0; i < DisplaySettings.NumberOfOpps; i++)
             {
-                Console.Write(("|" + creatures[i].Attack).PadRight(DisplaySettings.OtherColumnsWidth));
+                Console.Write(("|" + CreatureService.GetCreatureAttackById(i)).PadRight(DisplaySettings.OtherColumnsWidth));
             }
 
             Console.WriteLine();
@@ -44,7 +40,7 @@ namespace Doppelganger.App.Managers.Concrete
             Console.Write(_textService.Speed().PadRight(DisplaySettings.FirstColumnWidth));
             for (int i = 0; i < DisplaySettings.NumberOfOpps; i++)
             {
-                Console.Write(("|" + creatures[i].Speed).PadRight(DisplaySettings.OtherColumnsWidth));
+                Console.Write(("|" + CreatureService.GetCreatureSpeedById(i)).PadRight(DisplaySettings.OtherColumnsWidth));
             }
 
             Console.WriteLine();
@@ -52,7 +48,7 @@ namespace Doppelganger.App.Managers.Concrete
             Console.Write(_textService.MaxHP().PadRight(DisplaySettings.FirstColumnWidth));
             for (int i = 0; i < DisplaySettings.NumberOfOpps; i++)
             {
-                Console.Write(("|" + creatures[i].MaxHP).PadRight(DisplaySettings.OtherColumnsWidth));
+                Console.Write(("|" + CreatureService.GetCreatureMaxHPById(i)).PadRight(DisplaySettings.OtherColumnsWidth));
             }
 
             Console.WriteLine();
@@ -86,7 +82,6 @@ namespace Doppelganger.App.Managers.Concrete
 
         private void PickOppMenu()
         {
-            List<Creature> creatures = CreatureService.GetCrts();
             HelperMethods.DisplayCurrentHPs(_textService, CreatureService);
 
             Console.Write(_textService.FightWhom());
@@ -101,7 +96,7 @@ namespace Doppelganger.App.Managers.Concrete
             if (choice != 'x')
             {
                 int chosenOppId = HelperMethods.CharDigitToInt(choice);
-                if (creatures[chosenOppId].CurrentHP == 0)
+                if (CreatureService.IsCreatureDead(chosenOppId))
                 {
                     PickOppMenu();
                 }
@@ -154,21 +149,20 @@ namespace Doppelganger.App.Managers.Concrete
             }
             else
             {
-                List<Creature> creatures = CreatureService.GetCrts();
                 ++combatTurn;
                 byte playersStrike = 0, oppsStrike = 0;
                 for (int creatureId = 0; creatureId < DisplaySettings.NumberOfOpps; ++creatureId)
                 {
-                    if (creatures[creatureId] is Ally)
+                    if (CreatureService.IsCreatureFriendly(creatureId))
                     {
-                        if (combatTurn % creatures[creatureId].Speed == 0)
+                        if (combatTurn % CreatureService.GetCreatureSpeedById(creatureId) == 0)
                         {
-                            playersStrike = creatures[creatureId].Attack;
+                            playersStrike = CreatureService.GetCreatureAttackById(creatureId);
                         }
                     }
-                    else if (creatureId == chosenOppId && combatTurn % creatures[creatureId].Speed == 0)
+                    else if (creatureId == chosenOppId && combatTurn % CreatureService.GetCreatureSpeedById(creatureId) == 0)
                     {
-                        oppsStrike = creatures[creatureId].Attack;
+                        oppsStrike = CreatureService.GetCreatureAttackById(creatureId);
                     }
                 }
                 
@@ -176,16 +170,15 @@ namespace Doppelganger.App.Managers.Concrete
                 byte deadOppsCount = 0;
                 for (int creatureId = 0; creatureId < DisplaySettings.NumberOfOpps; ++creatureId)
                 {
-                    if (creatures[creatureId] is Ally)
+                    if (CreatureService.IsCreatureFriendly(creatureId))
                     {
                         CreatureService.RegisterHit(oppsStrike, creatureId);
-                        creatures = CreatureService.GetCrts();
-                        if (creatures[creatureId].CurrentHP <= 0)
+                        if (CreatureService.IsCreatureDead(creatureId))
                         {
                             playerDied = true;
                         }
                     }
-                    else if (creatures[creatureId].CurrentHP == 0)
+                    else if (CreatureService.IsCreatureDead(creatureId))
                     {
                         deadOppsCount++;
                     }
@@ -193,12 +186,11 @@ namespace Doppelganger.App.Managers.Concrete
                     if (creatureId == chosenOppId)
                     {
                         CreatureService.RegisterHit(playersStrike, creatureId);
-                        creatures = CreatureService.GetCrts();
-                        if (creatures[creatureId].CurrentHP <= 0)
+                        if (CreatureService.IsCreatureDead(creatureId))
                         {
                             deadOppsCount++;
                             oppDied = true;
-                            if (creatures[creatureId] is Ally)
+                            if (CreatureService.IsCreatureFriendly(creatureId))
                             {
                                 playerDied = true;
                             }
@@ -248,17 +240,10 @@ namespace Doppelganger.App.Managers.Concrete
         public int CalculateScore()
         {
             int score = 0;
-            foreach (var creature in CreatureService.GetCrts())
+            for(int creatureId = 0; creatureId < DisplaySettings.NumberOfOpps; ++creatureId)
             {
-                int creatureScore = 0;
-                if (creature is Ally ally)
-                {
-                    creatureScore = (int)Math.Floor(10m - 10m * ally.CurrentHP / ally.MaxHP);
-                }
-                else if (creature is Opponent opponent)
-                {
-                    creatureScore = (int)Math.Floor(10m - 10m * opponent.CurrentHP / opponent.MaxHP);
-                }
+                int creatureScore = (int) Math.Floor(10m - 10m * CreatureService.GetCreatureCurrentHPById(creatureId) /
+                    CreatureService.GetCreatureMaxHPById(creatureId));
                 score += creatureScore;
             }
             return score;
