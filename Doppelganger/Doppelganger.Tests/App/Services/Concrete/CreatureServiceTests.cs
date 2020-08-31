@@ -1,4 +1,5 @@
 using System;
+using Doppelganger.App.Services.Abstract;
 using Doppelganger.App.Services.Concrete;
 using Doppelganger.Domain.Entity.Settings;
 using Xunit;
@@ -12,7 +13,7 @@ namespace Doppelganger.Tests.App.Services.Concrete
         public void GenerateNewCrts_ShouldMakeEveryoneHostile()
         {
             //Arrange
-            CreatureService creatureService = new CreatureService();
+            ICreatureService creatureService = new CreatureService();
             //Act
             creatureService.GenerateNewCrts();
             //Assert
@@ -26,8 +27,8 @@ namespace Doppelganger.Tests.App.Services.Concrete
         public void GenerateNewCrts_ShouldNotGenerateIdenticalStatsEveryTime()
         {
             //Arrange
-            CreatureService creatureService1 = new CreatureService();
-            CreatureService creatureService2 = new CreatureService();
+            ICreatureService creatureService1 = new CreatureService();
+            ICreatureService creatureService2 = new CreatureService();
             bool statsDiffer = false;
             //Act
             creatureService1.GenerateNewCrts();
@@ -48,7 +49,7 @@ namespace Doppelganger.Tests.App.Services.Concrete
         public void GenerateNewCrts_ShouldGenerateCreaturesAtFullHealth()
         {
             //Arrange
-            CreatureService creatureService = new CreatureService();
+            ICreatureService creatureService = new CreatureService();
             //Act
             creatureService.GenerateNewCrts();
             //Assert
@@ -63,7 +64,7 @@ namespace Doppelganger.Tests.App.Services.Concrete
         public void MakeGivenCreatureFriendly_GivenCorrectId_ShouldNotChangeCreatureStats()
         {
             //Arrange
-            CreatureService creatureService = new CreatureService();
+            ICreatureService creatureService = new CreatureService();
             creatureService.GenerateNewCrts();
             int id = 5;
             var oldMaxHP = creatureService.GetCreatureMaxHPById(id);
@@ -83,7 +84,7 @@ namespace Doppelganger.Tests.App.Services.Concrete
         public void MakeGivenCreatureFriendly_GivenNegativeId_ShouldThrowArgumentException()
         {
             //Arrange
-            CreatureService creatureService = new CreatureService();
+            ICreatureService creatureService = new CreatureService();
             creatureService.GenerateNewCrts();
             bool caught = false;
             //Act
@@ -103,7 +104,7 @@ namespace Doppelganger.Tests.App.Services.Concrete
         public void MakeGivenCreatureFriendly_GivenTooLargeId_ShouldThrowArgumentException()
         {
             //Arrange
-            CreatureService creatureService = new CreatureService();
+            ICreatureService creatureService = new CreatureService();
             creatureService.GenerateNewCrts();
             bool caught = false;
             //Act
@@ -123,7 +124,7 @@ namespace Doppelganger.Tests.App.Services.Concrete
         public void MakeGivenCreatureFriendly_GivenCorrectId_ShouldChangeGivenCreatureToAlly()
         {
             //Arrange
-            CreatureService creatureService = new CreatureService();
+            ICreatureService creatureService = new CreatureService();
             creatureService.GenerateNewCrts();
             const int id = 5;
             // check assumption:
@@ -138,7 +139,7 @@ namespace Doppelganger.Tests.App.Services.Concrete
         public void MakeGivenCreatureFriendly_GivenCorrectId_ShouldNotChangeOtherCreaturesToAlly()
         {
             //Arrange
-            CreatureService creatureService = new CreatureService();
+            ICreatureService creatureService = new CreatureService();
             creatureService.GenerateNewCrts();
             const int id = 0;
             const int otherId = 1;
@@ -155,7 +156,7 @@ namespace Doppelganger.Tests.App.Services.Concrete
         public void RegisterHit_GivenLowDamage_ShouldDecreaseTargetsCurrentHPByGivenDamage()
         {
             //Arrange
-            CreatureService creatureService = new CreatureService();
+            ICreatureService creatureService = new CreatureService();
             creatureService.GenerateNewCrts();
             const byte damage = 2;
             const int targetId = 7;
@@ -170,7 +171,7 @@ namespace Doppelganger.Tests.App.Services.Concrete
         public void RegisterHit_GivenOverkillDamage_ShouldDecreaseTargetsHPToZero()
         {
             //Arrange
-            CreatureService creatureService = new CreatureService();
+            ICreatureService creatureService = new CreatureService();
             creatureService.GenerateNewCrts();
             const byte damage = byte.MaxValue;
             const int targetId = 9;
@@ -184,7 +185,7 @@ namespace Doppelganger.Tests.App.Services.Concrete
         public void RegisterHit_GivenNegativeId_ShouldThrowArgumentException()
         {
             //Arrange
-            CreatureService creatureService = new CreatureService();
+            ICreatureService creatureService = new CreatureService();
             const int targetId = -1;
             const byte damage = 3;
             creatureService.GenerateNewCrts();
@@ -207,7 +208,7 @@ namespace Doppelganger.Tests.App.Services.Concrete
         public void SwitchBodiesWith_GivenCorrectIdDifferentFromPreviousAllysId_ShouldSwitchAllegiancesOfOldAllyAndGivenOpponent()
         {
             //Arrange
-            CreatureService creatureService = new CreatureService();
+            ICreatureService creatureService = new CreatureService();
             creatureService.GenerateNewCrts();
             const int oldAllysId = 1;
             creatureService.MakeGivenCreatureFriendly(oldAllysId);
@@ -223,7 +224,7 @@ namespace Doppelganger.Tests.App.Services.Concrete
         public void SwitchBodiesWith_GivenCorrectIdDifferentFromPreviousAllysId_ShouldPreserveAllysHPLeftPercentageRoundedUp()
         {
             //Arrange
-            CreatureService creatureService = new CreatureService();
+            ICreatureService creatureService = new CreatureService();
             creatureService.GenerateNewCrts();
             const int oldAllysId = 1;
             creatureService.MakeGivenCreatureFriendly(oldAllysId);
@@ -248,7 +249,7 @@ namespace Doppelganger.Tests.App.Services.Concrete
         public void SwitchBodiesWith_GivenCorrectIdDifferentFromPreviousAllysId_ShouldPreserveOpponentsHPLeftPercentageRoundedUp()
         {
             //Arrange
-            CreatureService creatureService = new CreatureService();
+            ICreatureService creatureService = new CreatureService();
             creatureService.GenerateNewCrts();
             const int oldAllysId = 9;
             creatureService.MakeGivenCreatureFriendly(oldAllysId);
@@ -273,7 +274,7 @@ namespace Doppelganger.Tests.App.Services.Concrete
         public void SwitchBodiesWith_GivenCorrectIdDifferentFromPreviousAllysId_ShouldPreserveBothCreaturesOtherStats()
         {
             //Arrange
-            CreatureService creatureService = new CreatureService();
+            ICreatureService creatureService = new CreatureService();
             creatureService.GenerateNewCrts();
             const int oldAllysId = 2;
             creatureService.MakeGivenCreatureFriendly(oldAllysId);
@@ -295,7 +296,7 @@ namespace Doppelganger.Tests.App.Services.Concrete
         public void SwitchBodiesWith_GivenNegativeId_ShouldThrowArgumentException()
         {
             //Arrange
-            CreatureService creatureService = new CreatureService();
+            ICreatureService creatureService = new CreatureService();
             creatureService.GenerateNewCrts();
             const int oldAllysId = 1;
             creatureService.MakeGivenCreatureFriendly(oldAllysId);
@@ -318,7 +319,7 @@ namespace Doppelganger.Tests.App.Services.Concrete
         public void SwitchBodiesWith_GivenTooHighId_ShouldThrowArgumentException()
         {
             //Arrange
-            CreatureService creatureService = new CreatureService();
+            ICreatureService creatureService = new CreatureService();
             creatureService.GenerateNewCrts();
             const int oldAllysId = 1;
             creatureService.MakeGivenCreatureFriendly(oldAllysId);
@@ -341,7 +342,7 @@ namespace Doppelganger.Tests.App.Services.Concrete
         public void SwitchBodiesWith_GivenCurrentAllysId_ShouldThrowArgumentException()
         {
             //Arrange
-            CreatureService creatureService = new CreatureService();
+            ICreatureService creatureService = new CreatureService();
             creatureService.GenerateNewCrts();
             const int oldAllysId = 1;
             creatureService.MakeGivenCreatureFriendly(oldAllysId);
