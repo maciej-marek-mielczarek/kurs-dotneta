@@ -17,7 +17,7 @@ namespace Doppelganger.App.Services.Concrete
 
         private void AddNewAction(char keyToChoose, string actionName, string menuName)
         {
-            MenuAction menuAction = new MenuAction() { KeyToChoose = keyToChoose, ActionName = actionName, MenuName = menuName };
+            MenuAction menuAction = new MenuAction(keyToChoose, actionName, menuName);
             _menuActions.Add(menuAction);
         }
 

@@ -2,8 +2,14 @@
 {
     public class MenuAction
     {
-        public char KeyToChoose { get; set; }
-        public string ActionName { get; set; }
-        public string MenuName { get; set; }
+        public char KeyToChoose { get; }
+        public string ActionName { get; }
+        public string MenuName { get; }
+        public MenuAction(char keyToChoose, string actionName, string menuName)
+        {
+            KeyToChoose = keyToChoose;
+            ActionName = actionName;
+            MenuName = menuName;
+        }
     }
 }
