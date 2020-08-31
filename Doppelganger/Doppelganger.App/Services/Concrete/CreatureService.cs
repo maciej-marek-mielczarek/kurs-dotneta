@@ -16,40 +16,47 @@ namespace Doppelganger.App.Services.Concrete
             _creatures = new List<Creature>();
         }
 
-        public bool IsCreatureFriendly(int creatureId)
+        private void VerifyId(int creatureId)
         {
-            if (creatureId >= 0 && creatureId < _creatures.Count && _creatures[creatureId] != null)
-            {
-                return _creatures[creatureId] is Ally;
-            }
-            else
+            if (!(creatureId >= 0 && creatureId < _creatures.Count && _creatures[creatureId] != null))
             {
                 throw new ArgumentException("There is no creature with id " + creatureId + ".");
             }
         }
 
+        public bool IsCreatureFriendly(int creatureId)
+        {
+            VerifyId(creatureId);
+            return _creatures[creatureId] is Ally;
+        }
+
         public byte GetCreatureAttackById(int creatureId)
         {
+            VerifyId(creatureId);
             return _creatures[creatureId].Attack;
         }
 
         public byte GetCreatureSpeedById(int creatureId)
         {
+            VerifyId(creatureId);
             return _creatures[creatureId].Speed;
         }
 
         public byte GetCreatureMaxHPById(int creatureId)
         {
+            VerifyId(creatureId);
             return _creatures[creatureId].MaxHP;
         }
 
         public byte GetCreatureCurrentHPById(int creatureId)
         {
+            VerifyId(creatureId);
             return _creatures[creatureId].CurrentHP;
         }
 
         public bool IsCreatureDead(int creatureId)
         {
+            VerifyId(creatureId);
             return _creatures[creatureId].CurrentHP <= 0;
         }
 
@@ -64,6 +71,7 @@ namespace Doppelganger.App.Services.Concrete
 
         public void MakeGivenCreatureFriendly(int chosenAlly)
         {
+            VerifyId(chosenAlly);
             for (int i = 0; i < _creatures.Count; i++)
             {
                 if (i == chosenAlly)
@@ -75,6 +83,7 @@ namespace Doppelganger.App.Services.Concrete
 
         public void RegisterHit(byte damage, int creatureId)
         {
+            VerifyId(creatureId);
             if (damage < _creatures[creatureId].CurrentHP)
             {
                 _creatures[creatureId].CurrentHP -= damage;
@@ -87,6 +96,7 @@ namespace Doppelganger.App.Services.Concrete
 
         public void SwitchBodiesWith(int chosenOppId)
         {
+            VerifyId(chosenOppId);
             // ReSharper disable once PossibleNullReferenceException
             float previousAllysHPPercent = _creatures.Find(cr => cr is Ally).CurrentHP
                                            // ReSharper disable once PossibleNullReferenceException
