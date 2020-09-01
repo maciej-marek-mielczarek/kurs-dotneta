@@ -140,95 +140,84 @@ namespace Doppelganger.App.Managers.Concrete
             }
         }
 
-        private void FightSimulation(int chosenOppId, int chosenFightLength, int combatTurn)
+        private byte DamageDealtInCombatTurn(int allysId, int turnNumber)
         {
-            if (chosenFightLength == 0)
+            byte damage = 0;
+            if (turnNumber % CreatureService.GetCreatureSpeedById(allysId) == 0)
             {
-                HelperMethods.ClearLine();
-                FightSubMenu(chosenOppId, combatTurn);
+                damage = CreatureService.GetCreatureAttackById(allysId);
             }
-            else
+            return damage;
+        }
+
+        private byte DamageTakenInCombatTurn(int chosenOppId, int turnNumber)
+        {
+            byte damage = 0;
+            if (turnNumber % CreatureService.GetCreatureSpeedById(chosenOppId) == 0 &&
+                !CreatureService.IsCreatureFriendly(chosenOppId))
             {
-                ++combatTurn;
-                byte playersStrike = 0, oppsStrike = 0;
-                for (int creatureId = 0; creatureId < DisplaySettings.NumberOfOpps; ++creatureId)
-                {
-                    if (CreatureService.IsCreatureFriendly(creatureId))
-                    {
-                        if (combatTurn % CreatureService.GetCreatureSpeedById(creatureId) == 0)
-                        {
-                            playersStrike = CreatureService.GetCreatureAttackById(creatureId);
-                        }
-                    }
-                    else if (creatureId == chosenOppId && combatTurn % CreatureService.GetCreatureSpeedById(creatureId) == 0)
-                    {
-                        oppsStrike = CreatureService.GetCreatureAttackById(creatureId);
-                    }
-                }
-                
-                bool playerDied = false, oppDied = false;
-                byte deadOppsCount = 0;
-                for (int creatureId = 0; creatureId < DisplaySettings.NumberOfOpps; ++creatureId)
-                {
-                    if (CreatureService.IsCreatureFriendly(creatureId))
-                    {
-                        CreatureService.RegisterHit(oppsStrike, creatureId);
-                        if (CreatureService.IsCreatureDead(creatureId))
-                        {
-                            playerDied = true;
-                        }
-                    }
-                    else if (CreatureService.IsCreatureDead(creatureId))
-                    {
-                        deadOppsCount++;
-                    }
+                damage = CreatureService.GetCreatureAttackById(chosenOppId);
+            }
+            return damage;
+        }
 
-                    if (creatureId == chosenOppId)
-                    {
-                        CreatureService.RegisterHit(playersStrike, creatureId);
-                        if (CreatureService.IsCreatureDead(creatureId))
-                        {
-                            deadOppsCount++;
-                            oppDied = true;
-                            if (CreatureService.IsCreatureFriendly(creatureId))
-                            {
-                                playerDied = true;
-                            }
-                        }
-                    }
-                }
+        private void FightSimulation(int chosenOppId, int chosenFightLength, int turnNumber)
+        {
+            int allysId = CreatureService.GetAllysId();
+            bool playerDied = false, oppDied = false;
+            int turnsLeft = chosenFightLength;
+            
+            while (0 < turnsLeft && !playerDied && !oppDied)
+            {
+                //Next turn starts.
+                ++turnNumber;
+                --turnsLeft;
+                //Play out this turn of fight.
+                FightTurnSimulation(chosenOppId, turnNumber, allysId);
+                //See if anyone died.
+                playerDied = CreatureService.IsCreatureDead(allysId);
+                oppDied = CreatureService.IsCreatureDead(chosenOppId);
+            }
 
-                HelperMethods.ClearLine();
-                if (playerDied)
+            byte deadOppsCount = CreatureService.CountDeadOpps();
+            HelperMethods.ClearLine();
+            if (playerDied)
+            {
+                HelperMethods.DisplayCurrentHPs(_textService, CreatureService, chosenOppId);
+                //now return control upwards to end the game
+            }
+            else if (oppDied)
+            {
+                if (deadOppsCount + 1 == DisplaySettings.NumberOfOpps)
                 {
                     HelperMethods.DisplayCurrentHPs(_textService, CreatureService, chosenOppId);
-                    //now return control upwards
-                }
-                else if (oppDied)
-                {
-                    if (deadOppsCount + 1 == DisplaySettings.NumberOfOpps)
-                    {
-                        HelperMethods.DisplayCurrentHPs(_textService, CreatureService, chosenOppId);
-                        //now return control upwards
-                    }
-                    else
-                    {
-                        CreatureService.SwitchBodiesWith(chosenOppId);
-                        PickOppMenu();
-                    }
+                    //now return control upwards to end the game
                 }
                 else
                 {
-                    if (chosenFightLength == 1)
-                    {
-                        FightSubMenu(chosenOppId, combatTurn);
-                    }
-                    else
-                    {
-                        chosenFightLength--;
-                        FightSimulation(chosenOppId, chosenFightLength, combatTurn);
-                    }
+                    CreatureService.SwitchBodiesWith(chosenOppId);
+                    PickOppMenu();
                 }
+            }
+            else
+            {
+                FightSubMenu(chosenOppId, turnNumber);
+            }
+        }
+
+        private void FightTurnSimulation(int chosenOppId, int turnNumber, int allysId)
+        {
+            byte playersStrike = DamageDealtInCombatTurn(allysId, turnNumber);
+            byte oppsStrike = DamageTakenInCombatTurn(chosenOppId, turnNumber);
+
+            if (playersStrike > 0)
+            {
+                CreatureService.RegisterHit(playersStrike, chosenOppId);
+            }
+
+            if (oppsStrike > 0)
+            {
+                CreatureService.RegisterHit(oppsStrike, allysId);
             }
         }
 

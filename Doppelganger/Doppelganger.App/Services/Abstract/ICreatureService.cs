@@ -12,5 +12,7 @@
         void MakeGivenCreatureFriendly(int chosenAlly);
         void RegisterHit(byte damage, int creatureId);
         void SwitchBodiesWith(int chosenOppId);
+        int GetAllysId();
+        byte CountDeadOpps();
     }
 }

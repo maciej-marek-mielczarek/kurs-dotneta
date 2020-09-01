@@ -132,5 +132,15 @@ namespace Doppelganger.App.Services.Concrete
                 }
             }
         }
+
+        public int GetAllysId()
+        {
+            return _creatures.FindIndex(c => c is Ally);
+        }
+
+        public byte CountDeadOpps()
+        {
+            return (byte)_creatures.FindAll(c => c is Opponent && c.CurrentHP == 0).Count;
+        }
     }
 }
