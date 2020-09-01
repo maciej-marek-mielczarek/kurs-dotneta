@@ -28,11 +28,12 @@ namespace Doppelganger.App.Managers.Concrete
             }
 
             Console.WriteLine();
-            
+
             Console.Write(_textService.Attack().PadRight(DisplaySettings.FirstColumnWidth));
             for (int i = 0; i < DisplaySettings.NumberOfOpps; i++)
             {
-                Console.Write(("|" + CreatureService.GetCreatureAttackById(i)).PadRight(DisplaySettings.OtherColumnsWidth));
+                Console.Write(
+                    ("|" + CreatureService.GetCreatureAttackById(i)).PadRight(DisplaySettings.OtherColumnsWidth));
             }
 
             Console.WriteLine();
@@ -40,7 +41,8 @@ namespace Doppelganger.App.Managers.Concrete
             Console.Write(_textService.Speed().PadRight(DisplaySettings.FirstColumnWidth));
             for (int i = 0; i < DisplaySettings.NumberOfOpps; i++)
             {
-                Console.Write(("|" + CreatureService.GetCreatureSpeedById(i)).PadRight(DisplaySettings.OtherColumnsWidth));
+                Console.Write(
+                    ("|" + CreatureService.GetCreatureSpeedById(i)).PadRight(DisplaySettings.OtherColumnsWidth));
             }
 
             Console.WriteLine();
@@ -48,7 +50,8 @@ namespace Doppelganger.App.Managers.Concrete
             Console.Write(_textService.MaxHP().PadRight(DisplaySettings.FirstColumnWidth));
             for (int i = 0; i < DisplaySettings.NumberOfOpps; i++)
             {
-                Console.Write(("|" + CreatureService.GetCreatureMaxHPById(i)).PadRight(DisplaySettings.OtherColumnsWidth));
+                Console.Write(
+                    ("|" + CreatureService.GetCreatureMaxHPById(i)).PadRight(DisplaySettings.OtherColumnsWidth));
             }
 
             Console.WriteLine();
@@ -83,36 +86,46 @@ namespace Doppelganger.App.Managers.Concrete
         private void PickOppMenu()
         {
             HelperMethods.DisplayCurrentHPs(_textService, CreatureService);
-
             Console.Write(_textService.FightWhom());
-            string possibleChoices = "x";
-            for (int i = 0; i < DisplaySettings.NumberOfOpps; i++)
-            {
-                possibleChoices += i;
-            }
+            string possibleChoices = "x" + ValidNewOppNumbers();
 
             char choice = HelperMethods.GetChar(possibleChoices);
             HelperMethods.ClearLine();
-            if (choice != 'x')
+            while (choice != 'x')
             {
                 int chosenOppId = HelperMethods.CharDigitToInt(choice);
-                if (CreatureService.IsCreatureDead(chosenOppId))
+                bool continueGame = FightSubMenu(chosenOppId, 0);
+                if (!continueGame)
                 {
-                    PickOppMenu();
+                    break;
                 }
-                else
-                {
-                    FightSubMenu(chosenOppId, 0);
-                }
-            }
-            else
-            {
+
                 HelperMethods.DisplayCurrentHPs(_textService, CreatureService);
-                //now return control upwards
+                Console.Write(_textService.FightWhom());
+                possibleChoices = "x" + ValidNewOppNumbers();
+                choice = HelperMethods.GetChar(possibleChoices);
+                HelperMethods.ClearLine();
             }
+
+            HelperMethods.DisplayCurrentHPs(_textService, CreatureService);
+            //now return control upwards
         }
 
-        private void FightSubMenu(int chosenOppId, int turnNumber)
+        private string ValidNewOppNumbers()
+        {
+            string validNewOppNumbers = "";
+            for (int id = 0; id < DisplaySettings.NumberOfOpps; id++)
+            {
+                if (!CreatureService.IsCreatureDead(id))
+                {
+                    validNewOppNumbers += id;
+                }
+            }
+
+            return validNewOppNumbers;
+        }
+
+        private bool FightSubMenu(int chosenOppId, int turnNumber)
         {
             HelperMethods.DisplayCurrentHPs(_textService, CreatureService, chosenOppId);
             Console.Write(_textService.StayHowLong());
@@ -124,47 +137,37 @@ namespace Doppelganger.App.Managers.Concrete
 
             char choice = HelperMethods.GetChar(possibleChoices);
             HelperMethods.ClearLine();
-            if (choice == '0')
-            {
-                PickOppMenu();
-            }
-            else if (choice != 'x')
+            bool gameIsOver = false;
+            while (choice != '0' && choice != 'x')
             {
                 int chosenFightLength = HelperMethods.CharDigitToInt(choice);
                 int allysId = CreatureService.GetAllysId();
                 turnNumber = FightSimulation(chosenOppId, allysId, chosenFightLength, turnNumber);
-                bool playerDied = CreatureService.IsCreatureDead(allysId);
-                bool oppDied = CreatureService.IsCreatureDead(chosenOppId);
-                byte deadOppsCount = CreatureService.CountDeadOpps();
                 HelperMethods.ClearLine();
-                if (playerDied)
+                //Player dies - game over.
+                bool playerIsDead = CreatureService.IsCreatureDead(allysId);
+                //No hostile creatures left to hit - also game over.
+                bool allOppsAreDead = CreatureService.CountDeadOpps() + 1 == DisplaySettings.NumberOfOpps;
+                gameIsOver = playerIsDead || allOppsAreDead;
+                if (gameIsOver)
                 {
-                    HelperMethods.DisplayCurrentHPs(_textService, CreatureService, chosenOppId);
-                    //now return control upwards to end the game
+                    break;
                 }
-                else if (oppDied)
+
+                bool oppIsDead = CreatureService.IsCreatureDead(chosenOppId);
+                if (oppIsDead)
                 {
-                    if (deadOppsCount + 1 == DisplaySettings.NumberOfOpps)
-                    {
-                        HelperMethods.DisplayCurrentHPs(_textService, CreatureService, chosenOppId);
-                        //now return control upwards to end the game
-                    }
-                    else
-                    {
-                        CreatureService.SwitchBodiesWith(chosenOppId);
-                        PickOppMenu();
-                    }
+                    CreatureService.SwitchBodiesWith(chosenOppId);
+                    break;
                 }
-                else
-                {
-                    FightSubMenu(chosenOppId, turnNumber);
-                }
-            }
-            else
-            {
+
                 HelperMethods.DisplayCurrentHPs(_textService, CreatureService, chosenOppId);
-                //now return control upwards
+                Console.Write(_textService.StayHowLong());
+                choice = HelperMethods.GetChar(possibleChoices);
+                HelperMethods.ClearLine();
             }
+
+            return !(choice == 'x' || gameIsOver);
         }
 
         private byte DamageDealtInCombatTurn(int allysId, int turnNumber)
@@ -174,6 +177,7 @@ namespace Doppelganger.App.Managers.Concrete
             {
                 damage = CreatureService.GetCreatureAttackById(allysId);
             }
+
             return damage;
         }
 
@@ -185,6 +189,7 @@ namespace Doppelganger.App.Managers.Concrete
             {
                 damage = CreatureService.GetCreatureAttackById(chosenOppId);
             }
+
             return damage;
         }
 
@@ -192,7 +197,7 @@ namespace Doppelganger.App.Managers.Concrete
         {
             bool playerDied = false, oppDied = false;
             int turnsLeft = chosenFightLength;
-            
+
             while (0 < turnsLeft && !playerDied && !oppDied)
             {
                 //Next turn starts.
@@ -204,6 +209,7 @@ namespace Doppelganger.App.Managers.Concrete
                 playerDied = CreatureService.IsCreatureDead(allysId);
                 oppDied = CreatureService.IsCreatureDead(chosenOppId);
             }
+
             return turnNumber;
         }
 
@@ -231,12 +237,13 @@ namespace Doppelganger.App.Managers.Concrete
         public int CalculateScore()
         {
             int score = 0;
-            for(int creatureId = 0; creatureId < DisplaySettings.NumberOfOpps; ++creatureId)
+            for (int creatureId = 0; creatureId < DisplaySettings.NumberOfOpps; ++creatureId)
             {
                 int creatureScore = (int) Math.Floor(10m - 10m * CreatureService.GetCreatureCurrentHPById(creatureId) /
                     CreatureService.GetCreatureMaxHPById(creatureId));
                 score += creatureScore;
             }
+
             return score;
         }
     }
