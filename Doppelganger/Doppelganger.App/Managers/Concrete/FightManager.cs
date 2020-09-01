@@ -112,7 +112,7 @@ namespace Doppelganger.App.Managers.Concrete
             }
         }
 
-        private void FightSubMenu(int chosenOppId, int combatTurn)
+        private void FightSubMenu(int chosenOppId, int turnNumber)
         {
             HelperMethods.DisplayCurrentHPs(_textService, CreatureService, chosenOppId);
             Console.Write(_textService.StayHowLong());
@@ -131,7 +131,34 @@ namespace Doppelganger.App.Managers.Concrete
             else if (choice != 'x')
             {
                 int chosenFightLength = HelperMethods.CharDigitToInt(choice);
-                FightSimulation(chosenOppId, chosenFightLength, combatTurn);
+                int allysId = CreatureService.GetAllysId();
+                turnNumber = FightSimulation(chosenOppId, allysId, chosenFightLength, turnNumber);
+                bool playerDied = CreatureService.IsCreatureDead(allysId);
+                bool oppDied = CreatureService.IsCreatureDead(chosenOppId);
+                byte deadOppsCount = CreatureService.CountDeadOpps();
+                HelperMethods.ClearLine();
+                if (playerDied)
+                {
+                    HelperMethods.DisplayCurrentHPs(_textService, CreatureService, chosenOppId);
+                    //now return control upwards to end the game
+                }
+                else if (oppDied)
+                {
+                    if (deadOppsCount + 1 == DisplaySettings.NumberOfOpps)
+                    {
+                        HelperMethods.DisplayCurrentHPs(_textService, CreatureService, chosenOppId);
+                        //now return control upwards to end the game
+                    }
+                    else
+                    {
+                        CreatureService.SwitchBodiesWith(chosenOppId);
+                        PickOppMenu();
+                    }
+                }
+                else
+                {
+                    FightSubMenu(chosenOppId, turnNumber);
+                }
             }
             else
             {
@@ -161,9 +188,8 @@ namespace Doppelganger.App.Managers.Concrete
             return damage;
         }
 
-        private void FightSimulation(int chosenOppId, int chosenFightLength, int turnNumber)
+        private int FightSimulation(int chosenOppId, int allysId, int chosenFightLength, int turnNumber)
         {
-            int allysId = CreatureService.GetAllysId();
             bool playerDied = false, oppDied = false;
             int turnsLeft = chosenFightLength;
             
@@ -178,31 +204,7 @@ namespace Doppelganger.App.Managers.Concrete
                 playerDied = CreatureService.IsCreatureDead(allysId);
                 oppDied = CreatureService.IsCreatureDead(chosenOppId);
             }
-
-            byte deadOppsCount = CreatureService.CountDeadOpps();
-            HelperMethods.ClearLine();
-            if (playerDied)
-            {
-                HelperMethods.DisplayCurrentHPs(_textService, CreatureService, chosenOppId);
-                //now return control upwards to end the game
-            }
-            else if (oppDied)
-            {
-                if (deadOppsCount + 1 == DisplaySettings.NumberOfOpps)
-                {
-                    HelperMethods.DisplayCurrentHPs(_textService, CreatureService, chosenOppId);
-                    //now return control upwards to end the game
-                }
-                else
-                {
-                    CreatureService.SwitchBodiesWith(chosenOppId);
-                    PickOppMenu();
-                }
-            }
-            else
-            {
-                FightSubMenu(chosenOppId, turnNumber);
-            }
+            return turnNumber;
         }
 
         private void FightTurnSimulation(int chosenOppId, int turnNumber, int allysId)
