@@ -5,7 +5,6 @@ using Doppelganger.App.Managers.Concrete;
 using Doppelganger.App.Services.Abstract;
 using Doppelganger.App.Services.Concrete;
 using Doppelganger.Domain.Common;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Xunit;
 
 namespace Doppelganger.Tests.App.Managers.Concrete
