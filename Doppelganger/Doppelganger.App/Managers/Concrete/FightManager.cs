@@ -2,6 +2,7 @@ using System;
 using Doppelganger.App.Helpers;
 using Doppelganger.App.Managers.Abstract;
 using Doppelganger.App.Services.Abstract;
+using Doppelganger.App.Services.Concrete;
 using Doppelganger.Domain.Entity.Settings;
 
 namespace Doppelganger.App.Managers.Concrete
@@ -9,12 +10,14 @@ namespace Doppelganger.App.Managers.Concrete
     public class FightManager : IFightManager
     {
         private readonly ITextService _textService;
+        private readonly IDamageService _damageService;
         private ICreatureService CreatureService { get; }
 
         public FightManager(ITextService textService, ICreatureService creatureService)
         {
             _textService = textService;
             CreatureService = creatureService;
+            _damageService = new DamageService();
         }
 
         public void FightMenu()
@@ -170,17 +173,6 @@ namespace Doppelganger.App.Managers.Concrete
             return !(choice == 'x' || gameIsOver);
         }
 
-        private byte DamageDealtInCombatTurn(int allysId, int turnNumber)
-        {
-            byte damage = 0;
-            if (turnNumber % CreatureService.GetCreatureSpeedById(allysId) == 0)
-            {
-                damage = CreatureService.GetCreatureAttackById(allysId);
-            }
-
-            return damage;
-        }
-
         private byte DamageTakenInCombatTurn(int chosenOppId, int turnNumber)
         {
             byte damage = 0;
@@ -215,7 +207,7 @@ namespace Doppelganger.App.Managers.Concrete
 
         private void FightTurnSimulation(int chosenOppId, int turnNumber, int allysId)
         {
-            byte playersStrike = DamageDealtInCombatTurn(allysId, turnNumber);
+            byte playersStrike = _damageService.DamageDealtInCombatTurn(allysId, turnNumber, CreatureService);
             byte oppsStrike = DamageTakenInCombatTurn(chosenOppId, turnNumber);
 
             if (playersStrike > 0)

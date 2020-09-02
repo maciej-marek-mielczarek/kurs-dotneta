@@ -6,7 +6,13 @@ namespace Doppelganger.App.Services.Concrete
     {
         public byte DamageDealtInCombatTurn(int allysId, int turnNumber, ICreatureService creatureService)
         {
-            throw new System.NotImplementedException();
+            byte damage = 0;
+            if (turnNumber % creatureService.GetCreatureSpeedById(allysId) == 0)
+            {
+                damage = creatureService.GetCreatureAttackById(allysId);
+            }
+
+            return damage;
         }
     }
 }
