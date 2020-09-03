@@ -173,18 +173,6 @@ namespace Doppelganger.App.Managers.Concrete
             return !(choice == 'x' || gameIsOver);
         }
 
-        private byte DamageTakenInCombatTurn(int chosenOppId, int turnNumber)
-        {
-            byte damage = 0;
-            if (turnNumber % CreatureService.GetCreatureSpeedById(chosenOppId) == 0 &&
-                !CreatureService.IsCreatureFriendly(chosenOppId))
-            {
-                damage = CreatureService.GetCreatureAttackById(chosenOppId);
-            }
-
-            return damage;
-        }
-
         private int FightSimulation(int chosenOppId, int allysId, int chosenFightLength, int turnNumber)
         {
             bool playerDied = false, oppDied = false;
@@ -208,7 +196,7 @@ namespace Doppelganger.App.Managers.Concrete
         private void FightTurnSimulation(int chosenOppId, int turnNumber, int allysId)
         {
             byte playersStrike = _damageService.DamageDealtInCombatTurn(allysId, turnNumber, CreatureService);
-            byte oppsStrike = DamageTakenInCombatTurn(chosenOppId, turnNumber);
+            byte oppsStrike = _damageService.DamageTakenInCombatTurn(chosenOppId, turnNumber, CreatureService);
 
             if (playersStrike > 0)
             {

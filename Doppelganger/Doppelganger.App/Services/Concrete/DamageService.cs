@@ -14,5 +14,17 @@ namespace Doppelganger.App.Services.Concrete
 
             return damage;
         }
+
+        public byte DamageTakenInCombatTurn(int oppsId, int turnNumber, ICreatureService creatureService)
+        {
+            byte damage = 0;
+            if (turnNumber % creatureService.GetCreatureSpeedById(oppsId) == 0 &&
+                !creatureService.IsCreatureFriendly(oppsId))
+            {
+                damage = creatureService.GetCreatureAttackById(oppsId);
+            }
+
+            return damage;
+        }
     }
 }
