@@ -11,6 +11,7 @@ namespace Doppelganger.App.Managers.Concrete
     {
         private readonly ITextService _textService;
         private readonly IDamageService _damageService;
+        private readonly IFightService _fightService;
         private ICreatureService CreatureService { get; }
 
         public FightManager(ITextService textService, ICreatureService creatureService)
@@ -18,6 +19,7 @@ namespace Doppelganger.App.Managers.Concrete
             _textService = textService;
             CreatureService = creatureService;
             _damageService = new DamageService();
+            _fightService = new FightService();
         }
 
         public void FightMenu()
@@ -90,7 +92,7 @@ namespace Doppelganger.App.Managers.Concrete
         {
             HelperMethods.DisplayCurrentHPs(_textService, CreatureService);
             Console.Write(_textService.FightWhom());
-            string possibleChoices = "x" + ValidNewOppNumbers();
+            string possibleChoices = "x" + HelperMethods.ValidNewOppNumbers(CreatureService);
 
             char choice = HelperMethods.GetChar(possibleChoices);
             HelperMethods.ClearLine();
@@ -105,27 +107,13 @@ namespace Doppelganger.App.Managers.Concrete
 
                 HelperMethods.DisplayCurrentHPs(_textService, CreatureService);
                 Console.Write(_textService.FightWhom());
-                possibleChoices = "x" + ValidNewOppNumbers();
+                possibleChoices = "x" + HelperMethods.ValidNewOppNumbers(CreatureService);
                 choice = HelperMethods.GetChar(possibleChoices);
                 HelperMethods.ClearLine();
             }
 
             HelperMethods.DisplayCurrentHPs(_textService, CreatureService);
             //now return control upwards
-        }
-
-        private string ValidNewOppNumbers()
-        {
-            string validNewOppNumbers = "";
-            for (int id = 0; id < DisplaySettings.NumberOfOpps; id++)
-            {
-                if (!CreatureService.IsCreatureDead(id))
-                {
-                    validNewOppNumbers += id;
-                }
-            }
-
-            return validNewOppNumbers;
         }
 
         private bool FightSubMenu(int chosenOppId, int turnNumber)
@@ -145,7 +133,7 @@ namespace Doppelganger.App.Managers.Concrete
             {
                 int chosenFightLength = HelperMethods.CharDigitToInt(choice);
                 int allysId = CreatureService.GetAllysId();
-                turnNumber = FightSimulation(chosenOppId, allysId, chosenFightLength, turnNumber);
+                turnNumber = _fightService.FightSimulation(chosenOppId, allysId, chosenFightLength, turnNumber, _damageService, CreatureService);
                 HelperMethods.ClearLine();
                 //Player dies - game over.
                 bool playerIsDead = CreatureService.IsCreatureDead(allysId);
@@ -171,42 +159,6 @@ namespace Doppelganger.App.Managers.Concrete
             }
 
             return !(choice == 'x' || gameIsOver);
-        }
-
-        private int FightSimulation(int chosenOppId, int allysId, int chosenFightLength, int turnNumber)
-        {
-            bool playerDied = false, oppDied = false;
-            int turnsLeft = chosenFightLength;
-
-            while (0 < turnsLeft && !playerDied && !oppDied)
-            {
-                //Next turn starts.
-                ++turnNumber;
-                --turnsLeft;
-                //Play out this turn of fight.
-                FightTurnSimulation(chosenOppId, turnNumber, allysId);
-                //See if anyone died.
-                playerDied = CreatureService.IsCreatureDead(allysId);
-                oppDied = CreatureService.IsCreatureDead(chosenOppId);
-            }
-
-            return turnNumber;
-        }
-
-        private void FightTurnSimulation(int chosenOppId, int turnNumber, int allysId)
-        {
-            byte playersStrike = _damageService.DamageDealtInCombatTurn(allysId, turnNumber, CreatureService);
-            byte oppsStrike = _damageService.DamageTakenInCombatTurn(chosenOppId, turnNumber, CreatureService);
-
-            if (playersStrike > 0)
-            {
-                CreatureService.RegisterHit(playersStrike, chosenOppId);
-            }
-
-            if (oppsStrike > 0)
-            {
-                CreatureService.RegisterHit(oppsStrike, allysId);
-            }
         }
 
         public void Initialize()

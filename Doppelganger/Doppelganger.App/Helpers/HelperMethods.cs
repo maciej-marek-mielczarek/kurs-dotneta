@@ -86,5 +86,18 @@ namespace Doppelganger.App.Helpers
                     .PadRight(DisplaySettings.OtherColumnsWidth));
             }
         }
+        public static string ValidNewOppNumbers(ICreatureService creatureService)
+        {
+            string validNewOppNumbers = "";
+            for (int id = 0; id < DisplaySettings.NumberOfOpps; id++)
+            {
+                if (!creatureService.IsCreatureDead(id))
+                {
+                    validNewOppNumbers += id;
+                }
+            }
+
+            return validNewOppNumbers;
+        }
     }
 }
