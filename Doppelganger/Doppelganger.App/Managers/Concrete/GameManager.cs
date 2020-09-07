@@ -53,7 +53,7 @@ namespace Doppelganger.App.Managers.Concrete
         private void NewGame()
         {
             _fightManager.Initialize();
-            _fightManager.FightMenu();
+            _fightManager.PickAllyMenu();
             EndGame();
         }
 

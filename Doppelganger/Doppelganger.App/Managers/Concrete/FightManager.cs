@@ -3,70 +3,31 @@ using Doppelganger.App.Helpers;
 using Doppelganger.App.Managers.Abstract;
 using Doppelganger.App.Services.Abstract;
 using Doppelganger.App.Services.Concrete;
+using Doppelganger.App.Views.Abstract;
+using Doppelganger.App.Views.Concrete;
 using Doppelganger.Domain.Entity.Settings;
 
 namespace Doppelganger.App.Managers.Concrete
 {
     public class FightManager : IFightManager
     {
-        private readonly ITextService _textService;
         private readonly IDamageService _damageService;
         private readonly IFightService _fightService;
+        private readonly IFightViews _fightViews;
         private ICreatureService CreatureService { get; }
 
         public FightManager(ITextService textService, ICreatureService creatureService)
         {
-            _textService = textService;
             CreatureService = creatureService;
             _damageService = new DamageService();
             _fightService = new FightService();
+            _fightViews = new FightViews(textService);
         }
 
-        public void FightMenu()
+        public void PickAllyMenu()
         {
-            Console.WriteLine(_textService.WelcomeToFight());
-
-            Console.Write(_textService.Id().PadRight(DisplaySettings.FirstColumnWidth));
-            for (int i = 0; i < DisplaySettings.NumberOfOpps; i++)
-            {
-                Console.Write(("|" + i).PadRight(DisplaySettings.OtherColumnsWidth));
-            }
-
-            Console.WriteLine();
-
-            Console.Write(_textService.Attack().PadRight(DisplaySettings.FirstColumnWidth));
-            for (int i = 0; i < DisplaySettings.NumberOfOpps; i++)
-            {
-                Console.Write(
-                    ("|" + CreatureService.GetCreatureAttackById(i)).PadRight(DisplaySettings.OtherColumnsWidth));
-            }
-
-            Console.WriteLine();
-
-            Console.Write(_textService.Speed().PadRight(DisplaySettings.FirstColumnWidth));
-            for (int i = 0; i < DisplaySettings.NumberOfOpps; i++)
-            {
-                Console.Write(
-                    ("|" + CreatureService.GetCreatureSpeedById(i)).PadRight(DisplaySettings.OtherColumnsWidth));
-            }
-
-            Console.WriteLine();
-
-            Console.Write(_textService.MaxHP().PadRight(DisplaySettings.FirstColumnWidth));
-            for (int i = 0; i < DisplaySettings.NumberOfOpps; i++)
-            {
-                Console.Write(
-                    ("|" + CreatureService.GetCreatureMaxHPById(i)).PadRight(DisplaySettings.OtherColumnsWidth));
-            }
-
-            Console.WriteLine();
-
-            PickAllyMenu();
-        }
-
-        private void PickAllyMenu()
-        {
-            Console.Write(_textService.PickAlly());
+            _fightViews.PickAllyView(CreatureService);
+            
             string possibleChoices = "x";
             for (int i = 0; i < DisplaySettings.NumberOfOpps; i++)
             {
@@ -83,15 +44,14 @@ namespace Doppelganger.App.Managers.Concrete
             }
             else
             {
-                HelperMethods.DisplayCurrentHPs(_textService, CreatureService);
+                _fightViews.DisplayCurrentHPs(CreatureService);
                 //now return control upwards
             }
         }
 
         private void PickOppMenu()
         {
-            HelperMethods.DisplayCurrentHPs(_textService, CreatureService);
-            Console.Write(_textService.FightWhom());
+            _fightViews.PickOppView(CreatureService);
             string possibleChoices = "x" + HelperMethods.ValidNewOppNumbers(CreatureService);
 
             char choice = HelperMethods.GetChar(possibleChoices);
@@ -105,21 +65,20 @@ namespace Doppelganger.App.Managers.Concrete
                     break;
                 }
 
-                HelperMethods.DisplayCurrentHPs(_textService, CreatureService);
-                Console.Write(_textService.FightWhom());
+                _fightViews.PickOppView(CreatureService);
                 possibleChoices = "x" + HelperMethods.ValidNewOppNumbers(CreatureService);
                 choice = HelperMethods.GetChar(possibleChoices);
                 HelperMethods.ClearLine();
             }
 
-            HelperMethods.DisplayCurrentHPs(_textService, CreatureService);
+            _fightViews.DisplayCurrentHPs(CreatureService);
             //now return control upwards
         }
 
         private bool FightSubMenu(int chosenOppId, int turnNumber)
         {
-            HelperMethods.DisplayCurrentHPs(_textService, CreatureService, chosenOppId);
-            Console.Write(_textService.StayHowLong());
+            _fightViews.FightView(CreatureService, chosenOppId);
+            
             string possibleChoices = "x";
             for (int i = 0; i < DisplaySettings.NumberOfOpps; i++)
             {
@@ -152,8 +111,8 @@ namespace Doppelganger.App.Managers.Concrete
                     break;
                 }
 
-                HelperMethods.DisplayCurrentHPs(_textService, CreatureService, chosenOppId);
-                Console.Write(_textService.StayHowLong());
+                _fightViews.FightView(CreatureService, chosenOppId);
+                
                 choice = HelperMethods.GetChar(possibleChoices);
                 HelperMethods.ClearLine();
             }
