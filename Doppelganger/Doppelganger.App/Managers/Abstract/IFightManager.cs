@@ -7,6 +7,6 @@ namespace Doppelganger.App.Managers.Abstract
         int CalculateScore();
         int PickOpp();
         void EndFight();
-        bool FightSubMenu(int chosenOppId, int turnNumber);
+        bool FightSubMenu(int chosenOppId);
     }
 }

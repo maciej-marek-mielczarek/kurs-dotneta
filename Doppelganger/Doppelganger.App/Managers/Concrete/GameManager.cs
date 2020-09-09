@@ -64,7 +64,7 @@ namespace Doppelganger.App.Managers.Concrete
                     {
                         break;
                     }
-                    continueGame = _fightManager.FightSubMenu(chosenOppId, 0);
+                    continueGame = _fightManager.FightSubMenu(chosenOppId);
                 }
             }
             EndGame();

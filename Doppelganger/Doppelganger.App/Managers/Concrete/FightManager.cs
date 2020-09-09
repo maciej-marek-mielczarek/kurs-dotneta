@@ -60,8 +60,9 @@ namespace Doppelganger.App.Managers.Concrete
             return chosenOppId;
         }
 
-        public bool FightSubMenu(int chosenOppId, int turnNumber)
+        public bool FightSubMenu(int chosenOppId)
         {
+            int turnNumber = 0;
             _fightViews.FightView(CreatureService, chosenOppId);
             
             string possibleChoices = "x";
