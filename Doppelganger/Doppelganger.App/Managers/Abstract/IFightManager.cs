@@ -2,8 +2,10 @@ namespace Doppelganger.App.Managers.Abstract
 {
     public interface IFightManager
     {
-        void PickAllyMenu();
+        bool PickAlly();
         void Initialize();
         int CalculateScore();
+        void PickOpp();
+        void EndFight();
     }
 }

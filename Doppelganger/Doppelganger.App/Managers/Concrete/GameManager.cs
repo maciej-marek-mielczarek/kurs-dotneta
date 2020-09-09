@@ -17,8 +17,8 @@ namespace Doppelganger.App.Managers.Concrete
 
         public GameManager(ITextService textService, IMenuActionService menuActionService, ICreatureService creatureService)
         {
-            this._menuActionService = menuActionService;
-            this._textService = textService;
+            _menuActionService = menuActionService;
+            _textService = textService;
             
             _instructionsManager = new InstructionsManager(menuActionService, textService);
             _fightManager = new FightManager(textService, creatureService);
@@ -53,12 +53,17 @@ namespace Doppelganger.App.Managers.Concrete
         private void NewGame()
         {
             _fightManager.Initialize();
-            _fightManager.PickAllyMenu();
+            bool allyPicked = _fightManager.PickAlly();
+            if (allyPicked)
+            {
+                _fightManager.PickOpp();
+            }
             EndGame();
         }
 
         private void EndGame()
         {
+            _fightManager.EndFight();
             Console.WriteLine();
             Console.WriteLine(_textService.YourScoreIs() + _fightManager.CalculateScore() + "%");
             Console.WriteLine();

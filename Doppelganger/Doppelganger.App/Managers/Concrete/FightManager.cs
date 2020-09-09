@@ -24,7 +24,7 @@ namespace Doppelganger.App.Managers.Concrete
             _fightViews = new FightViews(textService);
         }
 
-        public void PickAllyMenu()
+        public bool PickAlly()
         {
             _fightViews.PickAllyView(CreatureService);
             
@@ -36,20 +36,17 @@ namespace Doppelganger.App.Managers.Concrete
 
             char choice = HelperMethods.GetChar(possibleChoices);
             HelperMethods.ClearLine();
-            if (choice != 'x')
+            bool allyPicked = choice != 'x';
+            if (allyPicked)
             {
                 int chosenAlly = HelperMethods.CharDigitToInt(choice);
                 CreatureService.MakeGivenCreatureFriendly(chosenAlly);
-                PickOppMenu();
             }
-            else
-            {
-                _fightViews.DisplayCurrentHPs(CreatureService);
-                //now return control upwards
-            }
+
+            return allyPicked;
         }
 
-        private void PickOppMenu()
+        public void PickOpp()
         {
             _fightViews.PickOppView(CreatureService);
             string possibleChoices = "x" + HelperMethods.ValidNewOppNumbers(CreatureService);
@@ -70,8 +67,6 @@ namespace Doppelganger.App.Managers.Concrete
                 choice = HelperMethods.GetChar(possibleChoices);
                 HelperMethods.ClearLine();
             }
-
-            _fightViews.DisplayCurrentHPs(CreatureService);
             //now return control upwards
         }
 
@@ -136,6 +131,11 @@ namespace Doppelganger.App.Managers.Concrete
             }
 
             return score;
+        }
+
+        public void EndFight()
+        {
+            _fightViews.DisplayCurrentHPs(CreatureService);
         }
     }
 }
