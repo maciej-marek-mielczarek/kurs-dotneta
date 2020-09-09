@@ -5,7 +5,8 @@ namespace Doppelganger.App.Managers.Abstract
         bool PickAlly();
         void Initialize();
         int CalculateScore();
-        void PickOpp();
+        int PickOpp();
         void EndFight();
+        bool FightSubMenu(int chosenOppId, int turnNumber);
     }
 }

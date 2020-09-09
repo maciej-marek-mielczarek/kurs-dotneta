@@ -46,26 +46,21 @@ namespace Doppelganger.App.Managers.Concrete
             return allyPicked;
         }
 
-        public void PickOpp()
+        public int PickOpp()
         {
-            bool continueGame = true;
-            while (continueGame)
+            _fightViews.PickOppView(CreatureService);
+            string possibleChoices = "x" + HelperMethods.ValidNewOppNumbers(CreatureService);
+            char choice = HelperMethods.GetChar(possibleChoices);
+            HelperMethods.ClearLine();
+            int chosenOppId = -1;
+            if (choice != 'x')
             {
-                _fightViews.PickOppView(CreatureService);
-                string possibleChoices = "x" + HelperMethods.ValidNewOppNumbers(CreatureService);
-                char choice = HelperMethods.GetChar(possibleChoices);
-                HelperMethods.ClearLine();
-                if (choice == 'x')
-                {
-                    break;
-                }
-                int chosenOppId = HelperMethods.CharDigitToInt(choice);
-                continueGame = FightSubMenu(chosenOppId, 0);
+                chosenOppId = HelperMethods.CharDigitToInt(choice);
             }
-            //now return control upwards
+            return chosenOppId;
         }
 
-        private bool FightSubMenu(int chosenOppId, int turnNumber)
+        public bool FightSubMenu(int chosenOppId, int turnNumber)
         {
             _fightViews.FightView(CreatureService, chosenOppId);
             

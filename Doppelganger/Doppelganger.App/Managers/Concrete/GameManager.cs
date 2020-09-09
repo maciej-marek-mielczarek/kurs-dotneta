@@ -56,7 +56,16 @@ namespace Doppelganger.App.Managers.Concrete
             bool allyPicked = _fightManager.PickAlly();
             if (allyPicked)
             {
-                _fightManager.PickOpp();
+                bool continueGame = true;
+                while (continueGame)
+                {
+                    int chosenOppId = _fightManager.PickOpp();
+                    if (chosenOppId == -1)
+                    {
+                        break;
+                    }
+                    continueGame = _fightManager.FightSubMenu(chosenOppId, 0);
+                }
             }
             EndGame();
         }
