@@ -142,5 +142,19 @@ namespace Doppelganger.App.Services.Concrete
         {
             return (byte)_creatures.FindAll(c => c is Opponent && c.CurrentHP == 0).Count;
         }
+
+        public string ValidNewOppNumbers()
+        {
+            string validNewOppNumbers = "";
+            for (int id = 0; id < DisplaySettings.NumberOfOpps; id++)
+            {
+                if (!IsCreatureDead(id))
+                {
+                    validNewOppNumbers += id;
+                }
+            }
+
+            return validNewOppNumbers;
+        }
     }
 }

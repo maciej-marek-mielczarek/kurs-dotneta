@@ -49,7 +49,7 @@ namespace Doppelganger.App.Managers.Concrete
         public int PickOpp()
         {
             _fightViews.PickOppView(CreatureService);
-            string possibleChoices = "x" + HelperMethods.ValidNewOppNumbers(CreatureService);
+            string possibleChoices = "x" + CreatureService.ValidNewOppNumbers();
             char choice = HelperMethods.GetChar(possibleChoices);
             HelperMethods.ClearLine();
             int chosenOppId = -1;

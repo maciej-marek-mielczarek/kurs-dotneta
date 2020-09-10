@@ -1,6 +1,4 @@
 ﻿using System;
-using Doppelganger.App.Services.Abstract;
-using Doppelganger.Domain.Entity.Settings;
 
 namespace Doppelganger.App.Helpers
 {
@@ -73,31 +71,6 @@ namespace Doppelganger.App.Helpers
             buttonText = buttonText.Insert(indexOfKey, "(");
 
             return " [" + buttonText + "] ";
-        } 
-        public static void DisplayCurrentHPs(ITextService textService, ICreatureService creatureService, int chosenOppId = -1)
-        {
-            Console.Write(textService.HP().PadRight(DisplaySettings.FirstColumnWidth));
-            for (int i = 0; i < DisplaySettings.NumberOfOpps; ++i)
-            {
-                Console.Write(("|"
-                               + creatureService.GetCreatureCurrentHPById(i)
-                               + (creatureService.IsCreatureFriendly(i) ? "*" : "")
-                               + (i == chosenOppId ? "x" : ""))
-                    .PadRight(DisplaySettings.OtherColumnsWidth));
-            }
-        }
-        public static string ValidNewOppNumbers(ICreatureService creatureService)
-        {
-            string validNewOppNumbers = "";
-            for (int id = 0; id < DisplaySettings.NumberOfOpps; id++)
-            {
-                if (!creatureService.IsCreatureDead(id))
-                {
-                    validNewOppNumbers += id;
-                }
-            }
-
-            return validNewOppNumbers;
         }
     }
 }

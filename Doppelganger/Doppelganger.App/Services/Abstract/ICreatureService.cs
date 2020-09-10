@@ -14,5 +14,6 @@
         void SwitchBodiesWith(int chosenOppId);
         int GetAllysId();
         byte CountDeadOpps();
+        string ValidNewOppNumbers();
     }
 }
