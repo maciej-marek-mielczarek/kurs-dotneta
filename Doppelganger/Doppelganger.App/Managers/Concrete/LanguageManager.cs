@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Doppelganger.App.Helpers;
 using Doppelganger.App.Helpers.Abstract;
 using Doppelganger.App.Helpers.Concrete;
 using Doppelganger.App.Managers.Abstract;
@@ -16,10 +15,10 @@ namespace Doppelganger.App.Managers.Concrete
         private readonly IUserInput _userInput;
         
 
-        public LanguageManager(IMenuActionService menuActionService)
+        public LanguageManager(IMenuActionService menuActionService, IUserInput userInput)
         {
             _menuActionService = menuActionService;
-            _userInput = new UserInput();
+            _userInput = userInput;
         }
         public Language ChooseLanguage()
         {

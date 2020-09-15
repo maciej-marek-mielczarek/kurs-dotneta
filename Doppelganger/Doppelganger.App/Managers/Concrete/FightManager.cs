@@ -1,5 +1,4 @@
 using System;
-using Doppelganger.App.Helpers;
 using Doppelganger.App.Helpers.Abstract;
 using Doppelganger.App.Helpers.Concrete;
 using Doppelganger.App.Managers.Abstract;
@@ -11,7 +10,7 @@ using Doppelganger.Domain.Entity.Settings;
 
 namespace Doppelganger.App.Managers.Concrete
 {
-    public class FightManager : IFightManager//base class for all managers: BaseManager with method UserInputReader
+    public class FightManager : IFightManager
     {
         private readonly IDamageService _damageService;
         private readonly IFightService _fightService;
@@ -19,13 +18,13 @@ namespace Doppelganger.App.Managers.Concrete
         private readonly IUserInput _userInput;
         private ICreatureService CreatureService { get; }
 
-        public FightManager(ITextService textService, ICreatureService creatureService)
+        public FightManager(ITextService textService, ICreatureService creatureService, IUserInput userInput)
         {
             CreatureService = creatureService;
             _damageService = new DamageService();
             _fightService = new FightService();
             _fightViews = new FightViews(textService);
-            _userInput = new UserInput();
+            _userInput = userInput;
         }
 
         public bool PickAlly()

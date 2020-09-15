@@ -14,11 +14,11 @@ namespace Doppelganger.App.Managers.Concrete
         private readonly ITextService _textService;
         private readonly IUserInput _userInput;
 
-        public InstructionsManager(IMenuActionService menuActionService, ITextService textService)
+        public InstructionsManager(IMenuActionService menuActionService, ITextService textService, IUserInput userInput)
         {
             _menuActionService = menuActionService;
             _textService = textService;
-            _userInput = new UserInput();
+            _userInput = userInput;
         }
 
         public void InstructionsMenu()

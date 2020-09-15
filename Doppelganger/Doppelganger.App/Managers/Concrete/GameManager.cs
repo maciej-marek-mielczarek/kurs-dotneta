@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Doppelganger.App.Helpers;
 using Doppelganger.App.Helpers.Abstract;
 using Doppelganger.App.Helpers.Concrete;
 using Doppelganger.App.Managers.Abstract;
@@ -18,15 +17,15 @@ namespace Doppelganger.App.Managers.Concrete
         private readonly IInstructionsManager _instructionsManager;
         private readonly IUserInput _userInput;
 
-        public GameManager(ITextService textService, IMenuActionService menuActionService, ICreatureService creatureService)
+        public GameManager(ITextService textService, IMenuActionService menuActionService, ICreatureService creatureService, IUserInput userInput)
         {
             _menuActionService = menuActionService;
             _textService = textService;
             
-            _instructionsManager = new InstructionsManager(menuActionService, textService);
-            _fightManager = new FightManager(textService, creatureService);
+            _instructionsManager = new InstructionsManager(menuActionService, textService, userInput);
+            _fightManager = new FightManager(textService, creatureService, userInput);
             
-            _userInput = new UserInput();
+            _userInput = userInput;
         }
         public void MainMenu()
         {
