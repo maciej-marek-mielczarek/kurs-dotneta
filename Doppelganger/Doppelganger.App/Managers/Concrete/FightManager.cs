@@ -1,5 +1,7 @@
 using System;
 using Doppelganger.App.Helpers;
+using Doppelganger.App.Helpers.Abstract;
+using Doppelganger.App.Helpers.Concrete;
 using Doppelganger.App.Managers.Abstract;
 using Doppelganger.App.Services.Abstract;
 using Doppelganger.App.Services.Concrete;
@@ -9,11 +11,12 @@ using Doppelganger.Domain.Entity.Settings;
 
 namespace Doppelganger.App.Managers.Concrete
 {
-    public class FightManager : IFightManager
+    public class FightManager : IFightManager//base class for all managers: BaseManager with method UserInputReader
     {
         private readonly IDamageService _damageService;
         private readonly IFightService _fightService;
         private readonly IFightViews _fightViews;
+        private readonly IUserInput _userInput;
         private ICreatureService CreatureService { get; }
 
         public FightManager(ITextService textService, ICreatureService creatureService)
@@ -22,6 +25,7 @@ namespace Doppelganger.App.Managers.Concrete
             _damageService = new DamageService();
             _fightService = new FightService();
             _fightViews = new FightViews(textService);
+            _userInput = new UserInput();
         }
 
         public bool PickAlly()
@@ -34,12 +38,12 @@ namespace Doppelganger.App.Managers.Concrete
                 possibleChoices += i;
             }
 
-            char choice = HelperMethods.GetChar(possibleChoices);
-            HelperMethods.ClearLine();
+            char choice = _userInput.GetChar(possibleChoices);
+            MiscOutput.ClearLine();
             bool allyPicked = choice != 'x';
             if (allyPicked)
             {
-                int chosenAlly = HelperMethods.CharDigitToInt(choice);
+                int chosenAlly = _userInput.CharDigitToInt(choice);
                 CreatureService.MakeGivenCreatureFriendly(chosenAlly);
             }
 
@@ -50,12 +54,12 @@ namespace Doppelganger.App.Managers.Concrete
         {
             _fightViews.PickOppView(CreatureService);
             string possibleChoices = "x" + CreatureService.ValidNewOppNumbers();
-            char choice = HelperMethods.GetChar(possibleChoices);
-            HelperMethods.ClearLine();
+            char choice = _userInput.GetChar(possibleChoices);
+            MiscOutput.ClearLine();
             int chosenOppId = -1;
             if (choice != 'x')
             {
-                chosenOppId = HelperMethods.CharDigitToInt(choice);
+                chosenOppId = _userInput.CharDigitToInt(choice);
             }
             return chosenOppId;
         }
@@ -71,15 +75,15 @@ namespace Doppelganger.App.Managers.Concrete
                 possibleChoices += i;
             }
 
-            char choice = HelperMethods.GetChar(possibleChoices);
-            HelperMethods.ClearLine();
+            char choice = _userInput.GetChar(possibleChoices);
+            MiscOutput.ClearLine();
             bool gameIsOver = false;
             while (choice != '0' && choice != 'x')
             {
-                int chosenFightLength = HelperMethods.CharDigitToInt(choice);
+                int chosenFightLength = _userInput.CharDigitToInt(choice);
                 int allysId = CreatureService.GetAllysId();
                 turnNumber = _fightService.FightSimulation(chosenOppId, allysId, chosenFightLength, turnNumber, _damageService, CreatureService);
-                HelperMethods.ClearLine();
+                MiscOutput.ClearLine();
                 //Player dies - game over.
                 bool playerIsDead = CreatureService.IsCreatureDead(allysId);
                 //No hostile creatures left to hit - also game over.
@@ -99,8 +103,8 @@ namespace Doppelganger.App.Managers.Concrete
 
                 _fightViews.FightView(CreatureService, chosenOppId);
                 
-                choice = HelperMethods.GetChar(possibleChoices);
-                HelperMethods.ClearLine();
+                choice = _userInput.GetChar(possibleChoices);
+                MiscOutput.ClearLine();
             }
 
             return !(choice == 'x' || gameIsOver);

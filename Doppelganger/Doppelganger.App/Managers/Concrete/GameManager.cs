@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Doppelganger.App.Helpers;
+using Doppelganger.App.Helpers.Abstract;
+using Doppelganger.App.Helpers.Concrete;
 using Doppelganger.App.Managers.Abstract;
 using Doppelganger.App.Services.Abstract;
 using Doppelganger.Domain.Common;
@@ -14,6 +16,7 @@ namespace Doppelganger.App.Managers.Concrete
         
         private readonly IFightManager _fightManager;
         private readonly IInstructionsManager _instructionsManager;
+        private readonly IUserInput _userInput;
 
         public GameManager(ITextService textService, IMenuActionService menuActionService, ICreatureService creatureService)
         {
@@ -22,6 +25,8 @@ namespace Doppelganger.App.Managers.Concrete
             
             _instructionsManager = new InstructionsManager(menuActionService, textService);
             _fightManager = new FightManager(textService, creatureService);
+            
+            _userInput = new UserInput();
         }
         public void MainMenu()
         {
@@ -30,12 +35,12 @@ namespace Doppelganger.App.Managers.Concrete
             string possibleChoices = "";
             foreach (var action in actions)
             {
-                Console.Write(HelperMethods.Buttonize(action.ActionName, action.KeyToChoose));
+                Console.Write(MiscOutput.Buttonize(action.ActionName, action.KeyToChoose));
                 possibleChoices += action.KeyToChoose;
             }
 
-            char menuChoice = HelperMethods.GetChar(possibleChoices);
-            HelperMethods.ClearLine();
+            char menuChoice = _userInput.GetChar(possibleChoices);
+            MiscOutput.ClearLine();
             switch (menuChoice)
             {
                 case 'n':

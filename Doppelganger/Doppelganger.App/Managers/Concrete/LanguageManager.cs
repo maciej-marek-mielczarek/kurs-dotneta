@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Doppelganger.App.Helpers;
+using Doppelganger.App.Helpers.Abstract;
+using Doppelganger.App.Helpers.Concrete;
 using Doppelganger.App.Managers.Abstract;
 using Doppelganger.App.Services.Abstract;
 using Doppelganger.Domain.Common;
@@ -11,10 +13,13 @@ namespace Doppelganger.App.Managers.Concrete
     public class LanguageManager : ILanguageManager
     {
         private readonly IMenuActionService _menuActionService;
+        private readonly IUserInput _userInput;
+        
 
         public LanguageManager(IMenuActionService menuActionService)
         {
             _menuActionService = menuActionService;
+            _userInput = new UserInput();
         }
         public Language ChooseLanguage()
         {
@@ -24,12 +29,12 @@ namespace Doppelganger.App.Managers.Concrete
             string possibleChoices = "";
             foreach (var action in actions)
             {
-                Console.Write(HelperMethods.Buttonize(action.ActionName, action.KeyToChoose));
+                Console.Write(MiscOutput.Buttonize(action.ActionName, action.KeyToChoose));
                 possibleChoices += action.KeyToChoose;
             }
 
-            char languageCode = HelperMethods.GetChar(possibleChoices);
-            HelperMethods.ClearLine();
+            char languageCode = _userInput.GetChar(possibleChoices);
+            MiscOutput.ClearLine();
             return languageCode == 'p' ? Language.Polish : Language.English;
         }
     }
