@@ -360,5 +360,55 @@ namespace Doppelganger.Tests.App.Services.Concrete
             //Assert
             Assert.True(caught);
         }
+        
+        //Tests for method ValidNewOppNumbers
+        [Fact]
+        public void ValidNewOppNumbers_Given_Should()
+        {
+            //Arrange
+            //Act
+            //Assert
+            throw new NotImplementedException();
+        }
+        
+        //Tests for method IsCreatureFriendly
+        [Fact]
+        public void IsCreatureFriendly_Given_Should()
+        {
+            //Arrange
+            //Act
+            //Assert
+            throw new NotImplementedException();
+        }
+        
+        //Tests for method IsCreatureDead
+        [Fact]
+        public void IsCreatureDead_Given_Should()
+        {
+            //Arrange
+            //Act
+            //Assert
+            throw new NotImplementedException();
+        }
+        
+        //Tests for method GetAllysId
+        [Fact]
+        public void GetAllysId_Given_Should()
+        {
+            //Arrange
+            //Act
+            //Assert
+            throw new NotImplementedException();
+        }
+
+        //Tests for method CountDeadOpps
+        [Fact]
+        public void CountDeadOpps_Given_Should()
+        {
+            //Arrange
+            //Act
+            //Assert
+            throw new NotImplementedException();
+        }
     }
 }

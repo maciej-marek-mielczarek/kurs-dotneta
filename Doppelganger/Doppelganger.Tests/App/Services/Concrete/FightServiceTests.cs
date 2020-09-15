@@ -1,3 +1,4 @@
+using System;
 using Xunit;
 
 namespace Doppelganger.Tests.App.Services.Concrete
@@ -7,6 +8,7 @@ namespace Doppelganger.Tests.App.Services.Concrete
         [Fact]
         public void FightSimulation_Given_Should()
         {
+            throw new NotImplementedException();
             //Arrange
             //Act
             //Assert
