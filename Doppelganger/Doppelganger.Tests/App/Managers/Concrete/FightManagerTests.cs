@@ -184,7 +184,7 @@ namespace Doppelganger.Tests.App.Managers.Concrete
 
         //Tests for method PickOpp
         [Fact]
-        public void PickOpp_Given_Should()
+        public void PickOpp_GivenX_ShouldReturnMinusOne()
         {
             //Arrange
             //Act
@@ -192,6 +192,24 @@ namespace Doppelganger.Tests.App.Managers.Concrete
             throw new NotImplementedException();
         }
         
+        [Fact]
+        public void PickOpp_GivenValidNumber_ShouldReturnIt()
+        {
+            //Arrange
+            //Act
+            //Assert
+            throw new NotImplementedException();
+        }
+
+        [Fact]
+        public void PickOpp_GivenInvalidNumber_ShouldReturnMinusOne()
+        {
+            //Arrange
+            //Act
+            //Assert
+            throw new NotImplementedException();
+        }
+
         //Tests for method FightSubMenu
         [Fact]
         public void FightSubMenu_Given_Should()
