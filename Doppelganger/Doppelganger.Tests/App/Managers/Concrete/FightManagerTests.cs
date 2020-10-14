@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Doppelganger.App.Helpers.Abstract;
 using Doppelganger.App.Helpers.Concrete;
 using Doppelganger.App.Managers.Abstract;
 using Doppelganger.App.Managers.Concrete;
@@ -111,14 +112,76 @@ namespace Doppelganger.Tests.App.Managers.Concrete
 
         //Tests for method PickAlly
         [Fact]
-        public void PickAlly_Given_Should()
+        public void PickAlly_GivenX_ShouldReturnFalse()
         {
             //Arrange
+            Mock<IUserInput> mock = new Mock<IUserInput>();
+            const string allowedChars = "x0123456789";
+            mock.Setup(m => m.GetChar(allowedChars)).Returns('x');
+            IFightManager fightManager = new FightManager(new TextService(Language.Polish), new CreatureService(), mock.Object);
+            fightManager.Initialize();
+            const bool expected = false;
             //Act
+            bool returned = fightManager.PickAlly();
             //Assert
-            throw new NotImplementedException();
+            Assert.Equal(expected, returned);
         }
-        
+
+        [Fact]
+        public void PickAlly_GivenX_ShouldNotCallCreatureServiceMethodMakeGivenCreatureFriendly()
+        {
+            //Arrange
+            Mock<IUserInput> mock = new Mock<IUserInput>();
+            const string allowedChars = "x0123456789";
+            mock.Setup(m => m.GetChar(allowedChars)).Returns('x');
+            Mock<ICreatureService> mockCrS = new Mock<ICreatureService>();
+            IFightManager fightManager =
+                new FightManager(new TextService(Language.Polish), mockCrS.Object, mock.Object);
+            fightManager.Initialize();
+            //Act
+            fightManager.PickAlly();
+            //Assert
+            foreach (int id in Enumerable.Range(0, DisplaySettings.NumberOfOpps))
+            {
+                mockCrS.Verify(m => m.MakeGivenCreatureFriendly(id), Times.Never);
+            }
+        }
+
+        [Fact]
+        public void PickAlly_GivenNumber_ShouldPassThatNumberToCreatureServiceMethodMakeGivenCreatureFriendly()
+        {
+            Mock<IUserInput> mock = new Mock<IUserInput>();
+            const string allowedChars = "x0123456789";
+            const int chosenId = 3;
+            mock.Setup(m => m.GetChar(allowedChars)).Returns('3');
+            mock.Setup(m => m.CharDigitToInt('3')).Returns(chosenId);
+            Mock<ICreatureService> mockCrS = new Mock<ICreatureService>();
+            IFightManager fightManager =
+                new FightManager(new TextService(Language.Polish), mockCrS.Object, mock.Object);
+            fightManager.Initialize();
+            //Act
+            fightManager.PickAlly();
+            //Assert
+            mockCrS.Verify(m=>m.MakeGivenCreatureFriendly(chosenId));
+        }
+
+        [Fact]
+        public void PickAlly_GivenNumber_ShouldReturnTrue()
+        {
+            //Arrange
+            Mock<IUserInput> mock = new Mock<IUserInput>();
+            const string allowedChars = "x0123456789";
+            mock.Setup(m => m.GetChar(allowedChars)).Returns('0');
+            mock.Setup(m => m.CharDigitToInt('0')).Returns(0);
+            IFightManager fightManager = new FightManager(new TextService(Language.Polish), new CreatureService(), mock.Object);
+            fightManager.Initialize();
+            const bool expected = true;
+            //Act
+            bool returned = fightManager.PickAlly();
+            //Assert
+            Assert.Equal(expected, returned);
+        }
+
         //Tests for method PickOpp
         [Fact]
         public void PickOpp_Given_Should()
