@@ -264,9 +264,160 @@ namespace Doppelganger.Tests.App.Managers.Concrete
 
         //Tests for method FightSubMenu
         [Fact]
-        public void FightSubMenu_Given_Should()
+        public void FightSubMenu_WhenPlayerKeepsHittingSelf_ShouldEventuallyReturnFalse()
         {
             //Arrange
+            Mock<IUserInput> mock = new Mock<IUserInput>();
+            const string allowedChars = "x0123456789";
+            mock.SetupSequence(m => m.GetChar(allowedChars))
+                .Returns('3')
+                .Returns('4');
+            mock.Setup(m => m.CharDigitToInt('3')).Returns(3);
+            mock.Setup(m => m.CharDigitToInt('4')).Returns(4);
+            IFightManager fightManager = new FightManager(new TextService(Language.Polish), new CreatureService(), mock.Object);
+            fightManager.Initialize();
+            fightManager.PickAlly();
+            fightManager.PickOpp();
+            //Act
+            //Assert
+            throw new NotImplementedException();
+        }
+        
+        [Fact]
+        public void FightSubMenu_GivenX_ShouldReturnFalse()
+        {
+            //Arrange
+            Mock<IUserInput> mock = new Mock<IUserInput>();
+            const string allowedChars = "x0123456789";
+            mock.SetupSequence(m => m.GetChar(allowedChars))
+                .Returns('3')
+                .Returns('4');
+            mock.Setup(m => m.CharDigitToInt('3')).Returns(3);
+            mock.Setup(m => m.CharDigitToInt('4')).Returns(4);
+            IFightManager fightManager = new FightManager(new TextService(Language.Polish), new CreatureService(), mock.Object);
+            fightManager.Initialize();
+            fightManager.PickAlly();
+            fightManager.PickOpp();
+            //Act
+            //Assert
+            throw new NotImplementedException();
+        }
+        
+        [Fact]
+        public void FightSubMenu_GivenX_ShouldNotCallFightSimulation()
+        {
+            //Arrange
+            Mock<IUserInput> mock = new Mock<IUserInput>();
+            const string allowedChars = "x0123456789";
+            mock.SetupSequence(m => m.GetChar(allowedChars))
+                .Returns('3')
+                .Returns('4');
+            mock.Setup(m => m.CharDigitToInt('3')).Returns(3);
+            mock.Setup(m => m.CharDigitToInt('4')).Returns(4);
+            IFightManager fightManager = new FightManager(new TextService(Language.Polish), new CreatureService(), mock.Object);
+            fightManager.Initialize();
+            fightManager.PickAlly();
+            fightManager.PickOpp();
+            //Act
+            //Assert
+            throw new NotImplementedException();
+        }
+
+        [Fact]
+        public void FightSubMenu_GivenZero_ShouldReturnTrue()
+        {
+            //Arrange
+            Mock<IUserInput> mock = new Mock<IUserInput>();
+            const string allowedChars = "x0123456789";
+            mock.SetupSequence(m => m.GetChar(allowedChars))
+                .Returns('3')
+                .Returns('4');
+            mock.Setup(m => m.CharDigitToInt('3')).Returns(3);
+            mock.Setup(m => m.CharDigitToInt('4')).Returns(4);
+            IFightManager fightManager = new FightManager(new TextService(Language.Polish), new CreatureService(), mock.Object);
+            fightManager.Initialize();
+            fightManager.PickAlly();
+            fightManager.PickOpp();
+            //Act
+            //Assert
+            throw new NotImplementedException();
+        }
+        
+        [Fact]
+        public void FightSubMenu_GivenZero_ShouldNotCallFightSimulation()
+        {
+            //Arrange
+            Mock<IUserInput> mock = new Mock<IUserInput>();
+            const string allowedChars = "x0123456789";
+            mock.SetupSequence(m => m.GetChar(allowedChars))
+                .Returns('3')
+                .Returns('4');
+            mock.Setup(m => m.CharDigitToInt('3')).Returns(3);
+            mock.Setup(m => m.CharDigitToInt('4')).Returns(4);
+            IFightManager fightManager = new FightManager(new TextService(Language.Polish), new CreatureService(), mock.Object);
+            fightManager.Initialize();
+            fightManager.PickAlly();
+            fightManager.PickOpp();
+            //Act
+            //Assert
+            throw new NotImplementedException();
+        }
+        
+        [Fact]
+        public void FightSubMenu_GivenPositiveNumber_ShouldCallFightSimulation()
+        {
+            //Arrange
+            Mock<IUserInput> mock = new Mock<IUserInput>();
+            const string allowedChars = "x0123456789";
+            mock.SetupSequence(m => m.GetChar(allowedChars))
+                .Returns('3')
+                .Returns('4');
+            mock.Setup(m => m.CharDigitToInt('3')).Returns(3);
+            mock.Setup(m => m.CharDigitToInt('4')).Returns(4);
+            IFightManager fightManager = new FightManager(new TextService(Language.Polish), new CreatureService(), mock.Object);
+            fightManager.Initialize();
+            fightManager.PickAlly();
+            fightManager.PickOpp();
+            //Act
+            //Assert
+            throw new NotImplementedException();
+        }
+        
+        [Fact]
+        public void FightSubMenu_WhenOpponentDoesntDie_ShouldNotCallSwitchBodiesWith()
+        {//mock creature service to check this connection
+            //Arrange
+            Mock<IUserInput> mock = new Mock<IUserInput>();
+            const string allowedChars = "x0123456789";
+            mock.SetupSequence(m => m.GetChar(allowedChars))
+                .Returns('3')
+                .Returns('4');
+            mock.Setup(m => m.CharDigitToInt('3')).Returns(3);
+            mock.Setup(m => m.CharDigitToInt('4')).Returns(4);
+            IFightManager fightManager = new FightManager(new TextService(Language.Polish), new CreatureService(), mock.Object);
+            fightManager.Initialize();
+            fightManager.PickAlly();
+            fightManager.PickOpp();
+            //Act
+            //Assert
+            throw new NotImplementedException();
+        }
+        
+        [Fact]
+        public void FightSubMenu_WhenOpponentDies_ShouldCallSwitchBodiesWith()
+        {//mock creature service to check this connection
+            //Arrange
+            Mock<IUserInput> mock = new Mock<IUserInput>();
+            const string allowedChars = "x0123456789";
+            mock.SetupSequence(m => m.GetChar(allowedChars))
+                .Returns('3')
+                .Returns('4');
+            mock.Setup(m => m.CharDigitToInt('3')).Returns(3);
+            mock.Setup(m => m.CharDigitToInt('4')).Returns(4);
+            IFightManager fightManager = new FightManager(new TextService(Language.Polish), new CreatureService(), mock.Object);
+            fightManager.Initialize();
+            fightManager.PickAlly();
+            fightManager.PickOpp();
             //Act
             //Assert
             throw new NotImplementedException();
