@@ -56,7 +56,7 @@ namespace Doppelganger.App.Managers.Concrete
             char choice = _userInput.GetChar(possibleChoices);
             MiscOutput.ClearLine();
             int chosenOppId = -1;
-            if (choice != 'x')
+            if (choice != 'x' && possibleChoices.Contains(choice))
             {
                 chosenOppId = _userInput.CharDigitToInt(choice);
             }

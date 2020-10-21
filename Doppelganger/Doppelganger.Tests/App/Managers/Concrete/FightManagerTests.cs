@@ -187,27 +187,79 @@ namespace Doppelganger.Tests.App.Managers.Concrete
         public void PickOpp_GivenX_ShouldReturnMinusOne()
         {
             //Arrange
+            Mock<IUserInput> mock = new Mock<IUserInput>();
+            const string allowedChars = "x0123456789";
+            mock.SetupSequence(m => m.GetChar(allowedChars))
+                .Returns('3')
+                .Returns('x');
+            mock.Setup(m => m.CharDigitToInt('3')).Returns(3);
+            IFightManager fightManager = new FightManager(new TextService(Language.Polish), new CreatureService(), mock.Object);
+            fightManager.Initialize();
+            fightManager.PickAlly();
+            const int expected = -1;
             //Act
+            int returned = fightManager.PickOpp();
             //Assert
-            throw new NotImplementedException();
+            Assert.Equal(expected, returned);
         }
         
-        [Fact]
-        public void PickOpp_GivenValidNumber_ShouldReturnIt()
-        {
-            //Arrange
-            //Act
-            //Assert
-            throw new NotImplementedException();
-        }
-
         [Fact]
         public void PickOpp_GivenInvalidNumber_ShouldReturnMinusOne()
         {
             //Arrange
+            Mock<IUserInput> mock = new Mock<IUserInput>();
+            const string allowedChars = "x0123456789";
+            mock.SetupSequence(m => m.GetChar(allowedChars))
+                .Returns('3')
+                .Returns('a');
+            mock.Setup(m => m.CharDigitToInt('3')).Returns(3);
+            IFightManager fightManager = new FightManager(new TextService(Language.Polish), new CreatureService(), mock.Object);
+            fightManager.Initialize();
+            fightManager.PickAlly();
+            const int expected = -1;
             //Act
+            int returned = fightManager.PickOpp();
             //Assert
-            throw new NotImplementedException();
+            Assert.Equal(expected, returned);
+        }
+        
+        [Fact]
+        public void PickOpp_GivenNonAllysNumber_ShouldReturnIt_ToLetPlayerHitOthers()
+        {
+            //Arrange
+            Mock<IUserInput> mock = new Mock<IUserInput>();
+            const string allowedChars = "x0123456789";
+            mock.SetupSequence(m => m.GetChar(allowedChars))
+                .Returns('3')
+                .Returns('4');
+            mock.Setup(m => m.CharDigitToInt('3')).Returns(3);
+            mock.Setup(m => m.CharDigitToInt('4')).Returns(4);
+            IFightManager fightManager = new FightManager(new TextService(Language.Polish), new CreatureService(), mock.Object);
+            fightManager.Initialize();
+            fightManager.PickAlly();
+            const int expected = 4;
+            //Act
+            int returned = fightManager.PickOpp();
+            //Assert
+            Assert.Equal(expected, returned);
+        }
+
+        [Fact]
+        public void PickOpp_GivenAllysNumber_ShouldReturnIt_ToLetPlayerHitSelf()
+        {
+            //Arrange
+            Mock<IUserInput> mock = new Mock<IUserInput>();
+            const string allowedChars = "x0123456789";
+            mock.Setup(m => m.GetChar(allowedChars)).Returns('3');
+            mock.Setup(m => m.CharDigitToInt('3')).Returns(3);
+            IFightManager fightManager = new FightManager(new TextService(Language.Polish), new CreatureService(), mock.Object);
+            fightManager.Initialize();
+            fightManager.PickAlly();
+            const int expected = 3;
+            //Act
+            int returned = fightManager.PickOpp();
+            //Assert
+            Assert.Equal(expected, returned);
         }
 
         //Tests for method FightSubMenu
